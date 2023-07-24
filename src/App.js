@@ -1,4 +1,5 @@
 import './App.css';
+import NewOrderForm from './components/NewOrderForm';
 
 function App() {
   return (
@@ -7,7 +8,8 @@ function App() {
       <main>
         <h1>Boba Order</h1>
         <div className='order-body'>
-          <button className='btn btn-primary'>Show drink!</button>
+          <NewOrderForm></NewOrderForm>
+          {/* <button className='btn btn-primary'>Show drink!</button> */}
         </div>
       </main>
     </div>
