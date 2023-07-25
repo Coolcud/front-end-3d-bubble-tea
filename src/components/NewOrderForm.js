@@ -31,21 +31,25 @@ const NewOrderForm = () => {
 
   // TODO: Fix this. Also conditional if user unselects, need to remove from list
   let toppingsList = [];
-  const onToppingsChange = (event, position) => {
+  const onToppingsChange = (position) => {
 
     const updatedCheckedState = checkedState.map((checkbox, index) =>
-      index === position ? checkbox : !checkbox,
-      toppingsList.push(event),
-      console.log("toppings", toppingsList)
-      );
+      index === position ? !checkbox : checkbox
+    );
       
     setCheckedState(updatedCheckedState);
-    console.log(checkedState)
 
-    setFormFields({
-      ...formFields,
-      toppings: toppingsList
-    });
+    for (let i = 0; i < checkedState.length; i++) {
+      if (checkedState[i]) {
+        toppingsList.push(formOptions.toppings[i]);
+      }
+    }
+
+    console.log(toppingsList)
+    // setFormFields({
+    //   ...formFields,
+    //   toppings: toppingsList
+    // });
   };
 
   const toppingComponents = formOptions.toppings.map((topping, index) => {
