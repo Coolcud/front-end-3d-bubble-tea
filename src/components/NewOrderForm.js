@@ -30,7 +30,6 @@ const NewOrderForm = () => {
   });
 
   // TODO: Fix this. Also conditional if user unselects, need to remove from list
-
   const onToppingsChange = (position) => {
     
     const updatedCheckedState = checkedState.map((checkbox, index) =>
@@ -38,22 +37,6 @@ const NewOrderForm = () => {
     );
       
     setCheckedState(updatedCheckedState)
-
-    // console.log(checkedState)
-    
-
-    // for (let i = 0; i < checkedState.length; i++) {
-    //   if (checkedState[i]) {
-    //     console.log(checkedState[i])
-    //     toppingsList.push(formOptions.toppings[i]);
-    //   }
-    // }
-
-    // console.log(toppingsList)
-    // setFormFields({
-    //   ...formFields,
-    //   toppings: toppingsList
-    // });
   };
 
   useEffect( () => {
