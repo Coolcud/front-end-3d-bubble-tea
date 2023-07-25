@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { formOptions } from "../data/FormOptions";
 
 const NewOrderForm = () => {
@@ -30,27 +30,42 @@ const NewOrderForm = () => {
   });
 
   // TODO: Fix this. Also conditional if user unselects, need to remove from list
-  let toppingsList = [];
-  const onToppingsChange = (position) => {
 
+  const onToppingsChange = (position) => {
+    
     const updatedCheckedState = checkedState.map((checkbox, index) =>
       index === position ? !checkbox : checkbox
     );
       
-    setCheckedState(updatedCheckedState);
+    setCheckedState(updatedCheckedState)
 
-    for (let i = 0; i < checkedState.length; i++) {
-      if (checkedState[i]) {
-        toppingsList.push(formOptions.toppings[i]);
-      }
-    }
+    // console.log(checkedState)
+    
 
-    console.log(toppingsList)
+    // for (let i = 0; i < checkedState.length; i++) {
+    //   if (checkedState[i]) {
+    //     console.log(checkedState[i])
+    //     toppingsList.push(formOptions.toppings[i]);
+    //   }
+    // }
+
+    // console.log(toppingsList)
     // setFormFields({
     //   ...formFields,
     //   toppings: toppingsList
     // });
   };
+
+  useEffect( () => {
+    console.log(checkedState)
+    let toppingsList = [];
+    for (let i = 0; i < checkedState.length; i++) {
+      if (checkedState[i]) {
+        toppingsList.push(formOptions.toppings[i]);
+        console.log(toppingsList)
+      }
+    }
+  }, [checkedState])
 
   const toppingComponents = formOptions.toppings.map((topping, index) => {
     return (
