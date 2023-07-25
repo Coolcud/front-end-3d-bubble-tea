@@ -18,7 +18,7 @@ const NewOrderForm = () => {
   
   const baseComponents = formOptions.bases.map(base => {
     return (
-      <option name={formFields.base} value={formFields.base}></option>
+      <option name={base} value={base}>{base}</option>
     );
   });
 
@@ -27,7 +27,7 @@ const NewOrderForm = () => {
       <div>
         <label htmlFor="drinkBase">
           Select your drink base
-          <select value={this.state.value} onChange={this.handleChange}>
+          <select onChange={onBaseChange}>
             {baseComponents}
           </select>
         </label>
