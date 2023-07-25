@@ -9,7 +9,7 @@ const NewOrderForm = () => {
 
   const [formFields, setFormFields] = useState({
     base: '',
-    toppings: checkedState,
+    toppings: [],
     sweetness: '',
     ice: ''
   });
@@ -30,16 +30,17 @@ const NewOrderForm = () => {
   });
 
   // TODO: Fix this. Also conditional if user unselects, need to remove from list
-  const onToppingsChange = (event, topping, position) => {
-    let toppingsList = [];
+  let toppingsList = [];
+  const onToppingsChange = (event, position) => {
 
     const updatedCheckedState = checkedState.map((checkbox, index) =>
       index === position ? checkbox : !checkbox,
       toppingsList.push(event),
       console.log("toppings", toppingsList)
-    );
-
+      );
+      
     setCheckedState(updatedCheckedState);
+    console.log(checkedState)
 
     setFormFields({
       ...formFields,
@@ -50,14 +51,14 @@ const NewOrderForm = () => {
   const toppingComponents = formOptions.toppings.map((topping, index) => {
     return (
       <div key={index}>
+        <label htmlFor={`checkbox-${index}`}>{topping}</label>
         <input
           type="checkbox"
           name={topping}
           value={topping}
           checked={checkedState[index]}
-          onChange={() => onToppingsChange(topping, index)}
+          onChange={() => onToppingsChange(index)}
         />
-        <label htmlFor={`checkbox-${index}`}>{topping}</label>
       </div>
     );
   });
