@@ -9,7 +9,6 @@ function App() {
         <h1>Boba Order</h1>
         <div className='order-body'>
           <NewOrderForm></NewOrderForm>
-          {/* <button className='btn btn-primary'>Show drink!</button> */}
         </div>
       </main>
     </div>
