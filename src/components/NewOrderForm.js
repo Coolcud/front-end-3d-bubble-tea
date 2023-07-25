@@ -39,7 +39,7 @@ const NewOrderForm = () => {
     setCheckedState(updatedCheckedState)
   };
 
-  useEffect( () => {
+  useEffect((formFields) => {
     console.log(checkedState)
     let toppingsList = [];
     for (let i = 0; i < checkedState.length; i++) {
@@ -48,6 +48,10 @@ const NewOrderForm = () => {
         console.log(toppingsList)
       }
     }
+    setFormFields({
+      ...formFields,
+      toppings: toppingsList
+    })
   }, [checkedState])
 
   const toppingComponents = formOptions.toppings.map((topping, index) => {
