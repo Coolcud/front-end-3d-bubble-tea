@@ -14,11 +14,11 @@ function App() {
         <h1>Boba Order</h1>
         <div className='flex-container'>
           <div className='flex-child model'>
-            <div className='model-body' >
+            <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
               <Canvas>
-                <ambientLight />
-                <OrbitControls />
                 <Suspense fallback={null}>
+                  <pointLight position={[50, 75, 10]} intensity={50} />
+                  <OrbitControls />
                   <Model />
                 </Suspense>
               </Canvas>
