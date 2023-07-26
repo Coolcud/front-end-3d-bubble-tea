@@ -1,10 +1,13 @@
 import './App.css';
-import { Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
+import axios from 'axios';
 import { Canvas } from "@react-three/fiber";
 import NewOrderForm from './components/NewOrderForm';
 
 import Model from './components/Model';
 import { OrbitControls } from '@react-three/drei';
+
+const API = process.env.TEA_API_URL;
 
 function App() {
   return (
