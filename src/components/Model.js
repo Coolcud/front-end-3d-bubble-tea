@@ -9,10 +9,16 @@ Title: bubblletea
 
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
+import { MeshPhongMaterial } from 'three';
 
 export default function Model(props) {
   const group = useRef();
   const { nodes, materials } = useGLTF('/scene.gltf');
+
+  // Set transparency and opacity for the cup material
+  materials.blinn1.transparent = true;
+  materials.blinn1.opacity = 0.1;
+
   return (
     <group ref={group} {...props} dispose={null} scale={0.4}>
       <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
