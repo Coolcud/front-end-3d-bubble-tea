@@ -17,7 +17,8 @@ function App() {
             <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
               <Canvas>
                 <Suspense fallback={null}>
-                  <pointLight position={[50, 75, 10]} intensity={50} />
+                  <ambientLight intensity={0.5} />
+                  <directionalLight position={[10, 10, 5]} intensity={6} />
                   <OrbitControls />
                   <Model />
                 </Suspense>
