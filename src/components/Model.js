@@ -7,14 +7,14 @@ Source: https://sketchfab.com/3d-models/bubblletea-7a6c126ee76c4c10bf405494a3e19
 Title: bubblletea
 */
 
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useRef } from 'react';
+import { useGLTF } from '@react-three/drei';
 
 export default function Model(props) {
-  const groupRef = useRef()
-  const { nodes, materials } = useGLTF('/scene.gltf')
+  const group = useRef();
+  const { nodes, materials } = useGLTF('/scene.gltf');
   return (
-    <group ref={groupRef} {...props} dispose={null} scale={3}>
+    <group ref={group} {...props} dispose={null} scale={0.4}>
       <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh geometry={nodes.gobelet_blinn1_0.geometry} material={materials.blinn1} position={[0, 2.957, 0]} scale={0.148} />
@@ -65,7 +65,7 @@ export default function Model(props) {
         </group>
       </group>
     </group>
-  )
-}
+  );
+};
 
-useGLTF.preload('/scene.gltf')
+useGLTF.preload('/scene.gltf');
