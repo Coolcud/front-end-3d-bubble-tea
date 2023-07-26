@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import NewOrderForm from './components/NewOrderForm';
 
 import Model from './components/Model';
+import { OrbitControls } from '@react-three/drei';
 
 function App() {
   return (
@@ -11,8 +12,10 @@ function App() {
       <header>3d Bubble Tea</header>
       <main>
         <h1>Boba Order</h1>
-        <div>
+        <div className='model-body'>
           <Canvas>
+            <ambientLight />
+            <OrbitControls />
             <Suspense fallback={null}>
               <Model />
             </Suspense>
