@@ -14,6 +14,7 @@ const NewOrderForm = () => {
     ice: ''
   });
 
+  // Set state base based on user selection
   const onBaseChange = (event) => {
     setFormFields({
       ...formFields,
@@ -21,6 +22,7 @@ const NewOrderForm = () => {
     })
   }
 
+  // Display each base in the dropdown menu
   const baseComponents = formOptions.bases.map((base, index) => {
     return (
       <option key={index} name={base} value={base}>
@@ -29,9 +31,8 @@ const NewOrderForm = () => {
     );
   });
 
-  // TODO: Fix this. Also conditional if user unselects, need to remove from list
-  const onToppingsChange = (position) => {
-    
+  // Check and toggle boolean of checkbox array
+  const onToppingsChange = (position) => { 
     const updatedCheckedState = checkedState.map((checkbox, index) =>
       index === position ? !checkbox : checkbox
     );
@@ -39,6 +40,7 @@ const NewOrderForm = () => {
     setCheckedState(updatedCheckedState)
   };
 
+  // Add topping of checked boxes to list and update state with effect
   useEffect((formFields) => {
     console.log(checkedState)
     let toppingsList = [];
@@ -54,6 +56,7 @@ const NewOrderForm = () => {
     })
   }, [checkedState])
 
+  // Display each topping in a list of checkboxes
   const toppingComponents = formOptions.toppings.map((topping, index) => {
     return (
       <div key={index}>
