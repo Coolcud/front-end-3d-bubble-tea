@@ -43,7 +43,7 @@ export const formOptions = {
     "30%",
     "No sugar"
   ],
-  ice: [
+  temps: [
     "More ice",
     "Standard",
     "80%",
