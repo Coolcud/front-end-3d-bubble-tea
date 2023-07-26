@@ -10,8 +10,8 @@ const NewOrderForm = () => {
   const [formFields, setFormFields] = useState({
     base: '',
     toppings: [],
-    sweetness: '',
-    ice: ''
+    temp: '',
+    sweetness: ''
   });
 
   // Set state base based on user selection
@@ -28,6 +28,22 @@ const NewOrderForm = () => {
       <option key={index} name={base} value={base}>
         {base}
       </option>
+    );
+  });
+
+  // Display each topping in a list of checkboxes
+  const toppingComponents = formOptions.toppings.map((topping, index) => {
+    return (
+      <div key={index}>
+        <label htmlFor={`checkbox-${index}`}>{topping}</label>
+        <input
+          type="checkbox"
+          name={topping}
+          value={topping}
+          checked={checkedState[index]}
+          onChange={() => onToppingsChange(index)}
+        />
+      </div>
     );
   });
 
@@ -56,19 +72,20 @@ const NewOrderForm = () => {
     })
   }, [checkedState])
 
-  // Display each topping in a list of checkboxes
-  const toppingComponents = formOptions.toppings.map((topping, index) => {
+  // Set state base based on user selection
+  const onBaseChange = (event) => {
+    setFormFields({
+      ...formFields,
+      base: event.target
+    })
+  }
+
+  // Display each base in the dropdown menu
+  const baseComponents = formOptions.bases.map((base, index) => {
     return (
-      <div key={index}>
-        <label htmlFor={`checkbox-${index}`}>{topping}</label>
-        <input
-          type="checkbox"
-          name={topping}
-          value={topping}
-          checked={checkedState[index]}
-          onChange={() => onToppingsChange(index)}
-        />
-      </div>
+      <option key={index} name={base} value={base}>
+        {base}
+      </option>
     );
   });
 
