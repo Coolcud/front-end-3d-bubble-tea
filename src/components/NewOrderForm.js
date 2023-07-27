@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { formOptions } from "../data/FormOptions";
 import './NewOrderForm.css';
 
-const INITIAL_FORM_DATA = {
+const EMPTY_FORM = {
   base: '',
   toppings: [],
   sweetness: '',
@@ -12,7 +12,7 @@ const INITIAL_FORM_DATA = {
 
 const NewOrderForm = ({ addOrder }) => {
   // Store and set form field values
-  const [formFields, setFormFields] = useState(INITIAL_FORM_DATA);
+  const [formFields, setFormFields] = useState(EMPTY_FORM);
   const [baseValue, setBaseValue] = useState("default base");
   const [toppingsValues, setToppingsValues] = useState([]);
   const [sweetValue, setSweetValue] = useState("default sweet");
@@ -115,6 +115,7 @@ const NewOrderForm = ({ addOrder }) => {
     });
     console.log("sweetness set:", formFields.sweetness);
   }, [sweetValue])
+
 //~~~~~~~~~~~~~~~~~~~~~~TEMP FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
   // Display each temp in the dropdown menu
@@ -129,10 +130,6 @@ const NewOrderForm = ({ addOrder }) => {
   // Set state temp based on user selection
   const onTempChange = (event) => {
     setTempValue(event.target.value);
-    setFormFields({
-      ...formFields,
-      temp: tempValue
-    });
   };
 
   useEffect(() => {
@@ -147,12 +144,7 @@ const NewOrderForm = ({ addOrder }) => {
 
 //~~~~~~~~~~~~~~~~~~~~~~OTHER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
   
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    addOrder(formFields);
-    setFormFields(INITIAL_FORM_DATA);
-  }
-
+  // Return string to show user's current selections
   const writePreview = () => {
     let preview = '';
 
@@ -200,10 +192,29 @@ const NewOrderForm = ({ addOrder }) => {
     tempPreview = tempPreview.toLowerCase();
     return tempPreview
   }
+
+  // Submit user's order to db and alert success message
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addOrder(formFields);
+    setFormFields(EMPTY_FORM);
+    return alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
+  }
+
+  // Reset form fields to default
+  const resetForm = () => {
+    document.getElementById("create-order-form").reset();
+    setFormFields(EMPTY_FORM);
+    setBaseValue("default base");
+    setCheckedState(new Array(formOptions.toppings.length).fill(false));
+    setSweetValue("default sweet");
+    setTempValue("default temp");
+  }
+
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
   return (
-    <form className="new-order-form" onSubmit={handleSubmit}>
-      <div className="base__container">
+    <form id="create-order-form" className="new-order-form" onSubmit={handleSubmit}>
+      <div>
         <label htmlFor="base">
           <h3>Select your drink base</h3>
           <select defaultValue={baseValue} onChange={onBaseChange}>
@@ -249,6 +260,11 @@ const NewOrderForm = ({ addOrder }) => {
         disabled={writePreview().includes("default") || Object.values(formFields).includes("")}
         type="submit"
         value="Submit Drink!"
+      />
+      <input
+        type="button"
+        value="Reset Form"
+        onClick={resetForm}
       />
     </form>
   );
