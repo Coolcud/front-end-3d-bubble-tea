@@ -2,22 +2,27 @@
     display: grid;
     gap: 0.5em;
 }
-
+/* 
 .base__container {
     border: 5px solid rgb(217, 177, 91);
-}
+} */
 
 .all_toppings__container {
-    border: 5px solid rgb(0, 255, 72);
+    /* border: 5px solid rgb(0, 255, 72); */
     display: grid;
     grid-template-columns: 1fr;
 }
 
 .each_toppings__container {
-    border: 2px solid red;
+    border-right: 2px solid rgb(116, 91, 49);
+    border-left: 2px solid rgb(116, 91, 49);
     display: inline-block;
     margin: 0.25em 0.25em;
     padding: 0.25em;
+    border-top-left-radius: 80px 80px;
+    border-top-right-radius: 80px 80px;
+    border-bottom-left-radius: 80px 80px;
+    border-bottom-right-radius: 80px 80px;
 }
 
 .each_toppings__container label {
@@ -26,14 +31,14 @@
 
 .each_toppings__container input[type="checkbox"] {
     /* Add if not using autoprefixer */
-    -webkit-appearance: none;
-    appearance: none;
+    /* -webkit-appearance: none; */
+    /* appearance: none; */
     /* For iOS < 15 to remove gradient background */
-    background-color: #fff;
+    /* background-color: #fff; */
     /* Not removed via appearance */
     margin: 0;
     font: inherit;
-    color: seagreen;
+    color: pink;
     width: 1.15em;
     height: 1.15em;
     border: 0.15em solid pink;
@@ -45,7 +50,7 @@
     bottom: 1px;
 }
 
-.sweetness__container {
+/* .sweetness__container {
     border: 5px solid rgb(209, 152, 203);
 }
 
@@ -55,7 +60,7 @@
 
 .preview_text {
     border: 5px solid rgb(187, 158, 162);
-}
+} */
 
 .preview_text ul {
     list-style-type: none;
