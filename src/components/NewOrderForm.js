@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import { formOptions } from "../data/FormOptions";
+import './NewOrderForm.css';
 
 const EMPTY_FORM = {
   base: '',
@@ -51,7 +52,7 @@ const NewOrderForm = ({ addOrder }) => {
   // Display each topping in a list of checkboxes
   const toppingComponents = formOptions.toppings.map((topping, index) => {
     return (
-      <div key={index}>
+      <div key={index} className="each_toppings__container">
         <label htmlFor={`checkbox-${index}`}>{topping}</label>
         <input
           type="checkbox"
@@ -160,6 +161,38 @@ const NewOrderForm = ({ addOrder }) => {
     return preview;
   }
 
+  const writeBasePreview = () => {
+    let basePreview = '';
+    basePreview += `${baseValue} milk tea `;
+    basePreview = basePreview.toLowerCase();
+    return basePreview
+  }
+
+  const writeToppingsPreview = () => {
+    let toppingsPreview = '';
+    if (toppingsValues.length >= 1) {
+      toppingsPreview += `with ${toppingsValues.join(', ')} toppings`;
+    } else {
+      toppingsPreview += 'with no toppings';
+    }
+    toppingsPreview = toppingsPreview.toLowerCase();
+    return toppingsPreview;
+  }
+
+  const writeSweetPreview = () => {
+    let sweetPreview = '';
+    sweetPreview += `${sweetValue}`;
+    sweetPreview = sweetPreview.toLowerCase();
+    return sweetPreview;
+  }
+
+  const writeTempPreview = () => {
+    let tempPreview = '';
+    tempPreview += tempValue;
+    tempPreview = tempPreview.toLowerCase();
+    return tempPreview
+  }
+
   // Submit user's order to db and alert success message
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -183,38 +216,46 @@ const NewOrderForm = ({ addOrder }) => {
     <form id="create-order-form" className="new-order-form" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="base">
-          Select your drink base
+          <h3>Select your drink base</h3>
           <select defaultValue={baseValue} onChange={onBaseChange}>
             <option disabled hidden value="default base">--Choose a base--</option>
             {baseComponents}
           </select>
         </label>
       </div>
-      <div>
+      <div className = "all_toppings__container">
         <label htmlFor="toppings">
-          Select your toppings
+          <h3>Select your toppings</h3>
           {toppingComponents}
         </label>
       </div>
-      <div>
+      <div className = "sweetness__container">
         <label htmlFor="sweetness">
-          Select your sweetness
+          <h3>Select your sweetness</h3>
           <select defaultValue={sweetValue} onChange={onSweetnessChange}>
           <option disabled hidden value="default sweet">--Choose a sugar level--</option>
             {sweetnessComponents}
           </select>
         </label>
       </div>
-      <div>
+      <div className= "temp__container">
         <label htmlFor="temp">
-          Select your ice level
+          <h3>Select your ice level</h3>
           <select defaultValue={tempValue} onChange={onTempChange}>
           <option disabled hidden value="default temp">--Choose an ice level--</option>
             {tempComponents}
           </select>
         </label>
       </div>
-      <p>Preview: {writePreview()}</p>
+      <div className="preview_text">
+        <h3>Current order preview:</h3>
+        <ul>
+          <li>Base: <span>{writeBasePreview()}</span></li>
+          <li>Toppings: <span>{writeToppingsPreview()}</span></li>
+          <li>Sweetness: <span>{writeSweetPreview()}</span></li>
+          <li>Temp: <span>{writeTempPreview()}</span></li>
+        </ul>
+      </div>
       <input
         disabled={writePreview().includes("default") || Object.values(formFields).includes("")}
         type="submit"

@@ -46,7 +46,7 @@ function App() {
       <main>
         <h1>Boba Order</h1>
         <div className='flex-container'>
-          <div className='flex-child model'>
+          <div className='flex-child-model'>
             <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
               <Canvas>
                 <Suspense fallback={null}>
