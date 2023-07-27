@@ -24,7 +24,7 @@ export const formOptions = {
     "Lava boba milk"
   ],
   toppings: [
-    "Pearl (boba)",
+    "Boba",
     "Red bean",
     "Honey",
     "Lychee jelly",
