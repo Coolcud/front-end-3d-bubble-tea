@@ -37,18 +37,18 @@ export const formOptions = {
   ],
   sweetness: [
     "More sugar",
-    "Standard",
-    "80%",
-    "50%",
-    "30%",
+    "Standard sugar",
+    "80% sweet",
+    "50% sweet",
+    "30% sweet",
     "No sugar"
   ],
   temps: [
     "More ice",
-    "Standard",
-    "80%",
-    "50%",
-    "30%",
+    "Standard ice",
+    "80% ice",
+    "50% ice",
+    "30% ice",
     "No ice"
   ]
 };
