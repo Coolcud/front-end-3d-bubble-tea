@@ -19,9 +19,9 @@ export const formOptions = {
     "Hojicha latte",
     "Genmaicha latte",
     "Rooibos",
-    "Black sugar boba milk",
-    "Coffee milk tea",
-    "Lava boba milk"
+    "Black sugar boba",
+    "Coffee",
+    "Lava boba"
   ],
   toppings: [
     "Boba",
