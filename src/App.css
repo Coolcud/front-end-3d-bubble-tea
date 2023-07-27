@@ -6,7 +6,7 @@
   color: #61dafb;
 }
 
-/* .flex-container {
+.flex-container {
   display: flex;
   flex-direction: row;
 }
@@ -15,7 +15,7 @@
   flex: 1em;
   border: 2px solid rgb(199, 196, 196);
   max-width: 75%;
-} */
+}
 
 .flex-child:first-child {
   margin-right: 20px;
