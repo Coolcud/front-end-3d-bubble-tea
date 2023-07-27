@@ -9,7 +9,7 @@ const INITIAL_FORM_DATA = {
   temp: ''
 }
 
-const NewOrderForm = ({ orders, addOrder }) => {
+const NewOrderForm = ({ addOrder }) => {
   // Store and set form field values
   const [formFields, setFormFields] = useState(INITIAL_FORM_DATA);
   const [baseValue, setBaseValue] = useState("default base");
@@ -38,11 +38,12 @@ const NewOrderForm = ({ orders, addOrder }) => {
     setBaseValue(event.target.value);
   };
   
-  useEffect((formFields) => {
+  useEffect(() => {
     setFormFields({
       ...formFields,
       base: baseValue
     });
+    console.log("base set:", formFields.base);
   }, [baseValue]);
 
 //~~~~~~~~~~~~~~~~~~~~~~TOPPINGS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
@@ -73,7 +74,7 @@ const NewOrderForm = ({ orders, addOrder }) => {
   };
 
   // Add topping of checked boxes to list and update state with effect
-  useEffect((formFields) => {
+  useEffect(() => {
     console.log(checkedState)
     let toppingsList = [];
     for (let i = 0; i < checkedState.length; i++) {
@@ -105,14 +106,14 @@ const NewOrderForm = ({ orders, addOrder }) => {
   const onSweetnessChange = (event) => {
     setSweetValue(event.target.value);
   };
-
-  useEffect((formFields) => {
+  
+  useEffect(() => {
     setFormFields({
       ...formFields,
       sweetness: sweetValue
     });
-  }, [sweetValue]);
-
+    console.log("sweetness set:", formFields.sweetness);
+  }, [sweetValue])
 //~~~~~~~~~~~~~~~~~~~~~~TEMP FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
   // Display each temp in the dropdown menu
@@ -127,22 +128,23 @@ const NewOrderForm = ({ orders, addOrder }) => {
   // Set state temp based on user selection
   const onTempChange = (event) => {
     setTempValue(event.target.value);
-  };
-
-  useEffect((formFields) => {
     setFormFields({
       ...formFields,
       temp: tempValue
     });
-  }, [tempValue]);
+  };
 
   useEffect(() => {
+    setFormFields({
+      ...formFields,
+      temp: tempValue
+    });
+    console.log("temp set:", formFields.temp);
+  }, [tempValue]);
 
-  })
   console.log("formFields:", formFields);
 
 //~~~~~~~~~~~~~~~~~~~~~~OTHER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
-  
   
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -154,7 +156,11 @@ const NewOrderForm = ({ orders, addOrder }) => {
     let preview = '';
 
     preview += `${baseValue} milk tea `;
-    preview += `with ${toppingsValues.join(', ')} toppings, `;
+    if (toppingsValues.length >= 1) {
+      preview += `with ${toppingsValues.join(', ')} toppings, `;
+    } else {
+      preview += 'with no toppings, ';
+    }
     preview += `${sweetValue}, and `;
     preview += tempValue;
     preview = preview.toLowerCase();
@@ -163,7 +169,6 @@ const NewOrderForm = ({ orders, addOrder }) => {
   }
 
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
-  const prev = writePreview();
   return (
     <form className="new-order-form" onSubmit={handleSubmit}>
       <div>
@@ -199,9 +204,9 @@ const NewOrderForm = ({ orders, addOrder }) => {
           </select>
         </label>
       </div>
-      <p>Preview: {prev}</p>
+      <p>Preview: {writePreview()}</p>
       <input
-        disabled={writePreview().includes("default")}
+        disabled={writePreview().includes("default") || Object.values(formFields).includes("")}
         type="submit"
         value="Submit Drink!"
       />
