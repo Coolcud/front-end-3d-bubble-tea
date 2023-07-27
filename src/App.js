@@ -6,17 +6,17 @@ import NewOrderForm from './components/NewOrderForm';
 import Model from './components/Model';
 import { OrbitControls } from '@react-three/drei';
 
-const API = "https://threed-bubble-tea-api.onrender.com/orders";
+const API = process.env.REACT_APP_TEA_API_URL;
 
 function App() {
   const [orderData, setOrderData] = useState([]);
 
   const getOrders = () => {
     axios
-      .get(API)
+      .get(`${API}/orders`)
       .then((response) => {
-        // setOrderData(response.data);
-        console.log(response.data)
+        console.log("orders:", response.data);
+        setOrderData(response.data);
       })
       .catch((error) => {
         console.log('Error:', error);
@@ -30,7 +30,7 @@ function App() {
 
   const postOrder = (newOrder) => {
     axios
-      .post(API, newOrder)
+      .post(`${API}/orders`, newOrder)
       .then(() => {
         getOrders();
       })
@@ -60,7 +60,7 @@ function App() {
           </div>
           <div className='flex-child form'>
             <div className='form-body'>
-              <NewOrderForm orders={orderData} addOrder={postOrder}/>
+              <NewOrderForm addOrder={postOrder}/>
             </div>
           </div>
         </div>
