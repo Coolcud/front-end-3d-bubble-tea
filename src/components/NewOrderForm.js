@@ -143,13 +143,6 @@ const NewOrderForm = ({ addOrder }) => {
 
 //~~~~~~~~~~~~~~~~~~~~~~OTHER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
   
-  // Submit user's order to db
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    addOrder(formFields);
-    setFormFields(EMPTY_FORM);
-  }
-
   // Return string to show user's current selections
   const writePreview = () => {
     let preview = '';
@@ -165,6 +158,14 @@ const NewOrderForm = ({ addOrder }) => {
     preview = preview.toLowerCase();
 
     return preview;
+  }
+
+  // Submit user's order to db and alert success message
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addOrder(formFields);
+    setFormFields(EMPTY_FORM);
+    return alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
   }
 
   // Reset form fields to default
