@@ -1,0 +1,66 @@
+.new_order_form {
+    display: grid;
+    gap: 0.5em;
+}
+
+.base__container {
+    border: 5px solid rgb(217, 177, 91);
+}
+
+.all_toppings__container {
+    border: 5px solid rgb(0, 255, 72);
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.each_toppings__container {
+    border: 2px solid red;
+    display: inline-block;
+    margin: 0.25em 0.25em;
+    padding: 0.25em;
+}
+
+.each_toppings__container label {
+    margin: 5px 8px 2px;
+}
+
+.each_toppings__container input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    color: seagreen;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid pink;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    vertical-align: middle;
+    position: relative;
+    margin: 0.25em 0.25em;
+    bottom: 1px;
+}
+
+.sweetness__container {
+    border: 5px solid rgb(209, 152, 203);
+}
+
+.temp__container {
+    border: 5px solid rgb(148, 241, 233);
+}
+
+.preview_text {
+    border: 5px solid rgb(187, 158, 162);
+}
+
+.preview_text ul {
+    list-style-type: none;
+}
+
+.preview_text span {
+    font-weight: 600
+}
