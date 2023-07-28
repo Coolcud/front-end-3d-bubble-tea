@@ -143,52 +143,31 @@ const NewOrderForm = ({ addOrder }) => {
   console.log("formFields:", formFields);
 
 //~~~~~~~~~~~~~~~~~~~~~~OTHER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
-  
-  // Return string to show user's current selections
-  const writePreview = () => {
-    let preview = '';
-
-    preview += `${baseValue} milk tea `;
-    if (toppingsValues.length >= 1) {
-      preview += `with ${toppingsValues.join(', ')} toppings, `;
-    } else {
-      preview += 'with no toppings, ';
-    }
-    preview += `${sweetValue}, and `;
-    preview += tempValue;
-    preview = preview.toLowerCase();
-
-    return preview;
-  }
 
   const writeBasePreview = () => {
     let basePreview = '';
-    basePreview += `${baseValue} milk tea `;
+    basePreview += baseValue !== 'default base' ? `${baseValue} milk tea` : 'none';
     basePreview = basePreview.toLowerCase();
     return basePreview
   }
 
   const writeToppingsPreview = () => {
     let toppingsPreview = '';
-    if (toppingsValues.length >= 1) {
-      toppingsPreview += `with ${toppingsValues.join(', ')} toppings`;
-    } else {
-      toppingsPreview += 'with no toppings';
-    }
+    toppingsPreview += toppingsValues.length >= 1 ? `${toppingsValues.join(', ')}` : 'none';
     toppingsPreview = toppingsPreview.toLowerCase();
     return toppingsPreview;
   }
 
   const writeSweetPreview = () => {
     let sweetPreview = '';
-    sweetPreview += `${sweetValue}`;
+    sweetPreview += sweetValue !== 'default sweet' ? sweetValue : 'none';
     sweetPreview = sweetPreview.toLowerCase();
     return sweetPreview;
   }
 
   const writeTempPreview = () => {
     let tempPreview = '';
-    tempPreview += tempValue;
+    tempPreview += tempValue !== 'default temp' ? tempValue : 'none';
     tempPreview = tempPreview.toLowerCase();
     return tempPreview
   }
@@ -197,7 +176,7 @@ const NewOrderForm = ({ addOrder }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     addOrder(formFields);
-    setFormFields(EMPTY_FORM);
+    resetForm();
     return alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
   }
 
@@ -257,7 +236,7 @@ const NewOrderForm = ({ addOrder }) => {
         </ul>
       </div>
       <input
-        disabled={writePreview().includes("default") || Object.values(formFields).includes("")}
+        disabled={Object.values(formFields).includes("")}
         type="submit"
         value="Submit Drink!"
       />
