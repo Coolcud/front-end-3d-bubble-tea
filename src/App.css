@@ -11,6 +11,13 @@
   flex-direction: row;
 }
 
+/* Stack containers when resizing window */
+@media (max-width: 1100px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
 .flex-child {
   flex: 1em;
   border: 2px solid rgb(199, 196, 196);
