@@ -10,10 +10,9 @@ const EMPTY_FORM = {
   temp: ''
 }
 
-const NewOrderForm = ({ addOrder, baseVal, setBaseVal }) => {
+const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsVal }) => {
   // Store and set form field values
   const [formFields, setFormFields] = useState(EMPTY_FORM);
-  const [toppingsValues, setToppingsValues] = useState([]);
   const [sweetValue, setSweetValue] = useState("default sweet");
   const [tempValue, setTempValue] = useState("default temp");
 
@@ -84,7 +83,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal }) => {
       }
     }
 
-    setToppingsValues(toppingsList);
+    setToppingsVal(toppingsList);
     setFormFields({
       ...formFields,
       toppings: toppingsList
@@ -152,7 +151,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal }) => {
 
   const writeToppingsPreview = () => {
     let toppingsPreview = '';
-    toppingsPreview += toppingsValues.length >= 1 ? `${toppingsValues.join(', ')}` : 'none';
+    toppingsPreview += toppingsVal.length >= 1 ? `${toppingsVal.join(', ')}` : 'none';
     toppingsPreview = toppingsPreview.toLowerCase();
     return toppingsPreview;
   }
