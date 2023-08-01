@@ -66,11 +66,11 @@ function App() {
   return (
     <div className="App">
       <header>3d Bubble Tea</header>
-      <button onClick={() => {setClicked(!clicked)}}>Test Button</button>
+      {/* <button onClick={() => {setClicked(!clicked)}}>Test Button</button> */}
       <main>
         <h1>Boba Order</h1>
         <div className='flex-container'>
-          <div className='flex-child-model'>
+          {/* <div className='flex-child-model'>
             <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
               <Canvas>
                 <Suspense fallback={null}>
@@ -80,7 +80,7 @@ function App() {
                 </Suspense>
               </Canvas>
             </div>
-          </div>
+          </div> */}
           <div className='flex-child form'>
             <div className='form-body'>
               <NewOrderForm
