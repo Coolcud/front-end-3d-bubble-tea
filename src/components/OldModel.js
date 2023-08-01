@@ -19,7 +19,7 @@ export default function OldModel(props) {
   materials.blinn1.opacity = 0.1;
 
   return (
-    <group ref={group} {...props} dispose={null} scale={0.4}>
+    <group ref={group} {...props} dispose={null} scale={0.04}>
       <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh geometry={nodes.gobelet_blinn1_0.geometry} material={materials.blinn1} position={[0, 2.957, 0]} scale={0.148} />
@@ -69,6 +69,8 @@ export default function OldModel(props) {
           <mesh geometry={nodes.polySurface21_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
         </group>
       </group>
+      <ambientLight intensity={0.5} />
+      <directionalLight intensity={1.2} position={[5, 10, 5]} />
     </group>
   );
 };
