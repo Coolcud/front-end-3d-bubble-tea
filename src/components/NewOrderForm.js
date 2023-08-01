@@ -10,10 +10,9 @@ const EMPTY_FORM = {
   temp: ''
 }
 
-const NewOrderForm = ({ addOrder }) => {
+const NewOrderForm = ({ addOrder, baseVal, setBaseVal }) => {
   // Store and set form field values
   const [formFields, setFormFields] = useState(EMPTY_FORM);
-  const [baseValue, setBaseValue] = useState("default base");
   const [toppingsValues, setToppingsValues] = useState([]);
   const [sweetValue, setSweetValue] = useState("default sweet");
   const [tempValue, setTempValue] = useState("default temp");
@@ -36,16 +35,16 @@ const NewOrderForm = ({ addOrder }) => {
 
   // Set state base based on user selection
   const onBaseChange = (event) => {
-    setBaseValue(event.target.value);
+    setBaseVal(event.target.value);
   };
   
   useEffect(() => {
     setFormFields({
       ...formFields,
-      base: baseValue
+      base: baseVal
     });
     console.log("base set:", formFields.base);
-  }, [baseValue]);
+  }, [baseVal]);
 
 //~~~~~~~~~~~~~~~~~~~~~~TOPPINGS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
@@ -146,7 +145,7 @@ const NewOrderForm = ({ addOrder }) => {
 
   const writeBasePreview = () => {
     let basePreview = '';
-    basePreview += baseValue !== 'default base' ? `${baseValue} milk tea` : 'none';
+    basePreview += baseVal !== 'default base' ? `${baseVal} milk tea` : 'none';
     basePreview = basePreview.toLowerCase();
     return basePreview
   }
@@ -184,7 +183,7 @@ const NewOrderForm = ({ addOrder }) => {
   const resetForm = () => {
     document.getElementById("create-order-form").reset();
     setFormFields(EMPTY_FORM);
-    setBaseValue("default base");
+    setBaseVal("default base");
     setCheckedState(new Array(formOptions.toppings.length).fill(false));
     setSweetValue("default sweet");
     setTempValue("default temp");
@@ -196,7 +195,7 @@ const NewOrderForm = ({ addOrder }) => {
       <div>
         <label htmlFor="base">
           <h3>Select your drink base</h3>
-          <select defaultValue={baseValue} onChange={onBaseChange}>
+          <select defaultValue={baseVal} onChange={onBaseChange}>
             <option disabled hidden value="default base">--Choose a base--</option>
             {baseComponents}
           </select>
@@ -250,7 +249,9 @@ const NewOrderForm = ({ addOrder }) => {
 };
 
 NewOrderForm.propTypes = {
-  addOrder: PropTypes.func.isRequired
+  addOrder: PropTypes.func.isRequired,
+  baseVal: PropTypes.string.isRequired,
+  setBaseVal: PropTypes.func.isRequired
 };
 
 export default NewOrderForm;
