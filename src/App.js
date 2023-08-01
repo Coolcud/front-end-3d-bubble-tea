@@ -68,7 +68,7 @@ function App() {
               <Canvas>
                 <Suspense fallback={null}>
                   <OrbitControls />
-                  <Model />
+                  <OldModel />
                 </Suspense>
               </Canvas>
             </div>
