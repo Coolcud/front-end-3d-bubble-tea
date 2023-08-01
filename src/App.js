@@ -1,13 +1,14 @@
 import './App.css';
 import axios from 'axios';
 import NewOrderForm from './components/NewOrderForm';
-import { OrbitControls } from '@react-three/drei';
 import { useState, useEffect, Suspense } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import Scene from './components/OldModel';
-import Model from './components/Model';
+import { formOptions } from "../src/data/FormOptions";
+// import { OrbitControls } from '@react-three/drei';
+// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+// import Model from './components/Model';
 
 const API = process.env.REACT_APP_TEA_API_URL;
 
@@ -37,7 +38,7 @@ function App() {
     axios
       .get(`${API}/orders`)
       .then((response) => {
-        console.log("orders:", response.data);
+        // console.log("orders:", response.data);
         setOrderData(response.data);
       })
       .catch((error) => {
