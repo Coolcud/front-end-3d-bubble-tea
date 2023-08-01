@@ -6,7 +6,7 @@ import { useState, useEffect, Suspense } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-import OldModel from './components/OldModel';
+import Scene from './components/OldModel';
 import Model from './components/Model';
 
 const API = process.env.REACT_APP_TEA_API_URL;
@@ -27,6 +27,7 @@ const API = process.env.REACT_APP_TEA_API_URL;
 
 function App() {
   const [orderData, setOrderData] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const getOrders = () => {
     axios
@@ -60,6 +61,7 @@ function App() {
   return (
     <div className="App">
       <header>3d Bubble Tea</header>
+      <button onClick={() => {setClicked(!clicked)}}>Test Button</button>
       <main>
         <h1>Boba Order</h1>
         <div className='flex-container'>
@@ -67,8 +69,9 @@ function App() {
             <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
               <Canvas>
                 <Suspense fallback={null}>
-                  <OrbitControls />
-                  <OldModel />
+                  <Scene 
+                  clicked={clicked}
+                  />
                 </Suspense>
               </Canvas>
             </div>
