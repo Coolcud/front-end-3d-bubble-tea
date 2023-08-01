@@ -30,6 +30,8 @@ function App() {
   const [clicked, setClicked] = useState(false);
   const [baseValue, setBaseValue] = useState("default base");
   const [toppingsValues, setToppingsValues] = useState([]);
+  const [sweetValue, setSweetValue] = useState("default sweet");
+  const [tempValue, setTempValue] = useState("default temp");
 
   const getOrders = () => {
     axios
@@ -86,6 +88,10 @@ function App() {
                 setBaseVal={setBaseValue}
                 toppingsVal={toppingsValues}
                 setToppingsVal={setToppingsValues}
+                sweetVal={sweetValue}
+                setSweetVal={setSweetValue}
+                tempVal={tempValue}
+                setTempVal={setTempValue}
               />
             </div>
           </div>
