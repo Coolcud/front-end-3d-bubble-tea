@@ -27,8 +27,9 @@ const API = process.env.REACT_APP_TEA_API_URL;
 
 function App() {
   const [orderData, setOrderData] = useState([]);
-  const [baseValue, setBaseValue] = useState("default base");
   const [clicked, setClicked] = useState(false);
+  const [baseValue, setBaseValue] = useState("default base");
+  const [toppingsValues, setToppingsValues] = useState([]);
 
   const getOrders = () => {
     axios
@@ -83,6 +84,8 @@ function App() {
                 addOrder={postOrder}
                 baseVal={baseValue}
                 setBaseVal={setBaseValue}
+                toppingsVal={toppingsValues}
+                setToppingsVal={setToppingsValues}
               />
             </div>
           </div>
