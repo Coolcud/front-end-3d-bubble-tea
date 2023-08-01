@@ -13,13 +13,12 @@ const EMPTY_FORM = {
 const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsVal, sweetVal, setSweetVal, tempVal, setTempVal }) => {
   // Store and set form field values
   const [formFields, setFormFields] = useState(EMPTY_FORM);
-
   // Array of booleans to track topping checkboxes
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
 
-//~~~~~~~~~~~~~~~~~~~~~~BASE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~DISPLAY OPTIONS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
   // Display each base in the dropdown menu
   const baseComponents = formOptions.bases.map((base, index) => {
@@ -29,21 +28,6 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
       </option>
     );
   });
-
-  // Set state base based on user selection
-  const onBaseChange = (event) => {
-    setBaseVal(event.target.value);
-  };
-  
-  useEffect(() => {
-    setFormFields({
-      ...formFields,
-      base: baseVal
-    });
-    console.log("base set:", formFields.base);
-  }, [baseVal]);
-
-//~~~~~~~~~~~~~~~~~~~~~~TOPPINGS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
   // Display each topping in a list of checkboxes
   const toppingComponents = formOptions.toppings.map((topping, index) => {
@@ -61,35 +45,6 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     );
   });
 
-  // Check and toggle boolean of checkbox array
-  const onToppingsChange = (position) => { 
-    const updatedCheckedState = checkedState.map((checkbox, index) =>
-      index === position ? !checkbox : checkbox
-    );
-      
-    setCheckedState(updatedCheckedState);
-  };
-
-  // Add topping of checked boxes to list and update state with effect
-  useEffect(() => {
-    console.log(checkedState)
-    let toppingsList = [];
-    for (let i = 0; i < checkedState.length; i++) {
-      if (checkedState[i]) {
-        toppingsList.push(formOptions.toppings[i]);
-        console.log(toppingsList)
-      }
-    }
-
-    setToppingsVal(toppingsList);
-    setFormFields({
-      ...formFields,
-      toppings: toppingsList
-    });
-  }, [checkedState]);
-
-//~~~~~~~~~~~~~~~~~~~~~~SWEETNESS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
-
   // Display each sugar level in the dropdown menu
   const sweetnessComponents = formOptions.sweetness.map((sugar, index) => {
     return (
@@ -98,21 +53,6 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
       </option>
     );
   });
-
-  // Set state sweetness based on user selection
-  const onSweetnessChange = (event) => {
-    setSweetVal(event.target.value);
-  };
-  
-  useEffect(() => {
-    setFormFields({
-      ...formFields,
-      sweetness: sweetVal
-    });
-    console.log("sweetness set:", formFields.sweetness);
-  }, [sweetVal])
-
-//~~~~~~~~~~~~~~~~~~~~~~TEMP FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
   // Display each temp in the dropdown menu
   const tempComponents = formOptions.temps.map((temp, index) => {
@@ -123,23 +63,31 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     );
   });
 
-  // Set state temp based on user selection
-  const onTempChange = (event) => {
-    setTempVal(event.target.value);
+//~~~~~~~~~~~~~~~~~~~~~~TOPPINGS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+
+  // Check and toggle boolean of checkbox array
+  const onToppingsChange = (position) => { 
+    const updatedCheckedState = checkedState.map((checkbox, index) =>
+      index === position ? !checkbox : checkbox
+    );
+      
+    setCheckedState(updatedCheckedState);
   };
 
-  useEffect(() => {
-    setFormFields({
-      ...formFields,
-      temp: tempVal
-    });
-    console.log("temp set:", formFields.temp);
-  }, [tempVal]);
+  // Add topping of checked boxes to list and update state with effect
+  let toppingsList = [];
+  const makeToppingsList = () => {
+    for (let i = 0; i < checkedState.length; i++) {
+      if (checkedState[i]) {
+        toppingsList.push(formOptions.toppings[i]);
+      }
+    }
+    console.log(toppingsList);
+  };
 
-  console.log("formFields:", formFields);
+//~~~~~~~~~~~~~~~~~~~~~~PREVIEW FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
-//~~~~~~~~~~~~~~~~~~~~~~OTHER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
-
+  // Create string preview of base
   const writeBasePreview = () => {
     let basePreview = '';
     basePreview += baseVal !== 'default base' ? `${baseVal} milk tea` : 'none';
@@ -147,13 +95,15 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     return basePreview
   }
 
+  // Create string preview of toppings
   const writeToppingsPreview = () => {
     let toppingsPreview = '';
-    toppingsPreview += toppingsVal.length >= 1 ? `${toppingsVal.join(', ')}` : 'none';
+    toppingsPreview += formFields.toppings.length >= 1 ? `${formFields.toppings.join(', ')}` : 'none';
     toppingsPreview = toppingsPreview.toLowerCase();
     return toppingsPreview;
   }
 
+  // Create string preview of sweetness
   const writeSweetPreview = () => {
     let sweetPreview = '';
     sweetPreview += sweetVal !== 'default sweet' ? sweetVal : 'none';
@@ -161,12 +111,15 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     return sweetPreview;
   }
 
+  // Create string preview of temp/ice level
   const writeTempPreview = () => {
     let tempPreview = '';
     tempPreview += tempVal !== 'default temp' ? tempVal : 'none';
     tempPreview = tempPreview.toLowerCase();
     return tempPreview
   }
+
+//~~~~~~~~~~~~~~~~~~~~~~FORM BUTTON FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
   // Submit user's order to db and alert success message
   const handleSubmit = (event) => {
@@ -186,39 +139,84 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     setTempVal("default temp");
   }
 
-  // Make a random order
+  // Create a random order
   const makeRandomOrder = () => {
-    const formBases = formOptions.bases;
-    const formToppings = formOptions.toppings;
-    const formSweetness = formOptions.sweetness;
-    const formTemps = formOptions.temps;
-
-    const randomBase = formBases[Math.floor(Math.random() * formBases.length)];
+    // Select and set random base
+    const randomBase = formOptions.bases[Math.floor(Math.random() * formOptions.bases.length)];
     setBaseVal(randomBase);
     
-    const randomToppings = new Set();
-    const randomNumToppings = Math.floor(Math.random() * (formToppings.length - 1) + 1);
-    for (let i = 0; i < randomNumToppings; i++) {
-      let randomTopping = formToppings[Math.floor(Math.random() * formToppings.length)];
-      randomToppings.add(randomTopping);
+    // Select and set random toppings
+    const randomToppings = [];
+    for (let i = 0; i < formOptions.toppings.length; i++) {
+      randomToppings.push(Math.random() < 0.5);
     }
-    setToppingsVal(Array.from(randomToppings));
+    setCheckedState(randomToppings);
+    makeToppingsList();
+    setToppingsVal(toppingsList);
     
-    const randomSweetness = formSweetness[Math.floor(Math.random() * formSweetness.length)];
+    // Select and set random sweetness
+    const randomSweetness = formOptions.sweetness[Math.floor(Math.random() * formOptions.sweetness.length)];
     setSweetVal(randomSweetness);
     
-    const randomTemp = formTemps[Math.floor(Math.random() * formTemps.length)];
+    // Select and set random temp
+    const randomTemp = formOptions.temps[Math.floor(Math.random() * formOptions.temps.length)];
     setTempVal(randomTemp);
 
+    // Set form fields with random values
     setFormFields({
       base: randomBase,
-      toppings: Array.from(randomToppings),
+      toppings: toppingsList,
       sweetness: randomSweetness,
       temp: randomTemp
     });
   };
 
+//~~~~~~~~~~~~~~~~~~~~~~USE EFFECT FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+
+  // Set base form field
+  useEffect(() => {
+    setFormFields({
+      ...formFields,
+      base: baseVal
+    });
+    console.log("base set:", formFields.base);
+  }, [baseVal]);
+
+  // Set sweetness form field
+  useEffect(() => {
+    setFormFields({
+      ...formFields,
+      sweetness: sweetVal
+    });
+    console.log("sweetness set:", formFields.sweetness);
+  }, [sweetVal])
+  
+  // Set temp form field
+  useEffect(() => {
+    setFormFields({
+      ...formFields,
+      temp: tempVal
+    });
+    console.log("temp set:", formFields.temp);
+  }, [tempVal]);
+  
+  // Set toppings form field (SET LAST!!)
+  useEffect(() => {
+    console.log(checkedState)
+    makeToppingsList();
+    setToppingsVal(toppingsList);
+
+    setFormFields({
+      ...formFields,
+      toppings: toppingsList
+    });
+    console.log("toppings set:", formFields.toppings);
+  }, [checkedState]);
+
+  console.log("formFields:", formFields);
+
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
+
   return (
     <form id="create-order-form" className="new-order-form" onSubmit={handleSubmit}>
       <input
@@ -229,7 +227,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
       <div>
         <label htmlFor="base">
           <h3>Select your drink base</h3>
-          <select defaultValue={baseVal} onChange={onBaseChange}>
+          <select defaultValue={baseVal} onChange={(e) => setBaseVal(e.target.value)}>
             <option disabled hidden value="default base">--Choose a base--</option>
             {baseComponents}
           </select>
@@ -244,7 +242,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
       <div className = "sweetness__container">
         <label htmlFor="sweetness">
           <h3>Select your sweetness</h3>
-          <select defaultValue={sweetVal} onChange={onSweetnessChange}>
+          <select defaultValue={sweetVal} onChange={(e) => setSweetVal(e.target.value)}>
           <option disabled hidden value="default sweet">--Choose a sugar level--</option>
             {sweetnessComponents}
           </select>
@@ -253,7 +251,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
       <div className= "temp__container">
         <label htmlFor="temp">
           <h3>Select your ice level</h3>
-          <select defaultValue={tempVal} onChange={onTempChange}>
+          <select defaultValue={tempVal} onChange={(e) => setTempVal(e.target.value)}>
           <option disabled hidden value="default temp">--Choose an ice level--</option>
             {tempComponents}
           </select>
