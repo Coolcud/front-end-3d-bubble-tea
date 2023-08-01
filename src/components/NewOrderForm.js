@@ -10,11 +10,9 @@ const EMPTY_FORM = {
   temp: ''
 }
 
-const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsVal }) => {
+const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsVal, sweetVal, setSweetVal, tempVal, setTempVal }) => {
   // Store and set form field values
   const [formFields, setFormFields] = useState(EMPTY_FORM);
-  const [sweetValue, setSweetValue] = useState("default sweet");
-  const [tempValue, setTempValue] = useState("default temp");
 
   // Array of booleans to track topping checkboxes
   const [checkedState, setCheckedState] = useState(
@@ -103,16 +101,16 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
 
   // Set state sweetness based on user selection
   const onSweetnessChange = (event) => {
-    setSweetValue(event.target.value);
+    setSweetVal(event.target.value);
   };
   
   useEffect(() => {
     setFormFields({
       ...formFields,
-      sweetness: sweetValue
+      sweetness: sweetVal
     });
     console.log("sweetness set:", formFields.sweetness);
-  }, [sweetValue])
+  }, [sweetVal])
 
 //~~~~~~~~~~~~~~~~~~~~~~TEMP FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
@@ -127,16 +125,16 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
 
   // Set state temp based on user selection
   const onTempChange = (event) => {
-    setTempValue(event.target.value);
+    setTempVal(event.target.value);
   };
 
   useEffect(() => {
     setFormFields({
       ...formFields,
-      temp: tempValue
+      temp: tempVal
     });
     console.log("temp set:", formFields.temp);
-  }, [tempValue]);
+  }, [tempVal]);
 
   console.log("formFields:", formFields);
 
@@ -158,14 +156,14 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
 
   const writeSweetPreview = () => {
     let sweetPreview = '';
-    sweetPreview += sweetValue !== 'default sweet' ? sweetValue : 'none';
+    sweetPreview += sweetVal !== 'default sweet' ? sweetVal : 'none';
     sweetPreview = sweetPreview.toLowerCase();
     return sweetPreview;
   }
 
   const writeTempPreview = () => {
     let tempPreview = '';
-    tempPreview += tempValue !== 'default temp' ? tempValue : 'none';
+    tempPreview += tempVal !== 'default temp' ? tempVal : 'none';
     tempPreview = tempPreview.toLowerCase();
     return tempPreview
   }
@@ -184,8 +182,8 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     setFormFields(EMPTY_FORM);
     setBaseVal("default base");
     setCheckedState(new Array(formOptions.toppings.length).fill(false));
-    setSweetValue("default sweet");
-    setTempValue("default temp");
+    setSweetVal("default sweet");
+    setTempVal("default temp");
   }
 
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
@@ -209,7 +207,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
       <div className = "sweetness__container">
         <label htmlFor="sweetness">
           <h3>Select your sweetness</h3>
-          <select defaultValue={sweetValue} onChange={onSweetnessChange}>
+          <select defaultValue={sweetVal} onChange={onSweetnessChange}>
           <option disabled hidden value="default sweet">--Choose a sugar level--</option>
             {sweetnessComponents}
           </select>
@@ -218,7 +216,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
       <div className= "temp__container">
         <label htmlFor="temp">
           <h3>Select your ice level</h3>
-          <select defaultValue={tempValue} onChange={onTempChange}>
+          <select defaultValue={tempVal} onChange={onTempChange}>
           <option disabled hidden value="default temp">--Choose an ice level--</option>
             {tempComponents}
           </select>
@@ -250,7 +248,13 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
 NewOrderForm.propTypes = {
   addOrder: PropTypes.func.isRequired,
   baseVal: PropTypes.string.isRequired,
-  setBaseVal: PropTypes.func.isRequired
+  setBaseVal: PropTypes.func.isRequired,
+  toppingsVal: PropTypes.array.isRequired,
+  setToppingsVal: PropTypes.func.isRequired,
+  sweetVal: PropTypes.string.isRequired,
+  setSweetVal: PropTypes.func.isRequired,
+  tempVal: PropTypes.string.isRequired,
+  setTempVal: PropTypes.func.isRequired
 };
 
 export default NewOrderForm;
