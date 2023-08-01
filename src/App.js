@@ -27,6 +27,7 @@ const API = process.env.REACT_APP_TEA_API_URL;
 
 function App() {
   const [orderData, setOrderData] = useState([]);
+  const [baseValue, setBaseValue] = useState("default base");
   const [clicked, setClicked] = useState(false);
 
   const getOrders = () => {
@@ -70,7 +71,7 @@ function App() {
               <Canvas>
                 <Suspense fallback={null}>
                   <Scene 
-                  clicked={clicked}
+                    clicked={clicked}
                   />
                 </Suspense>
               </Canvas>
@@ -78,7 +79,11 @@ function App() {
           </div>
           <div className='flex-child form'>
             <div className='form-body'>
-              <NewOrderForm addOrder={postOrder}/>
+              <NewOrderForm
+                addOrder={postOrder}
+                baseVal={baseValue}
+                setBaseVal={setBaseValue}
+              />
             </div>
           </div>
         </div>
