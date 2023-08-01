@@ -186,9 +186,46 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     setTempVal("default temp");
   }
 
+  // Make a random order
+  const makeRandomOrder = () => {
+    const formBases = formOptions.bases;
+    const formToppings = formOptions.toppings;
+    const formSweetness = formOptions.sweetness;
+    const formTemps = formOptions.temps;
+
+    const randomBase = formBases[Math.floor(Math.random() * formBases.length)];
+    setBaseVal(randomBase);
+    
+    const randomToppings = new Set();
+    const randomNumToppings = Math.floor(Math.random() * (formToppings.length - 1) + 1);
+    for (let i = 0; i < randomNumToppings; i++) {
+      let randomTopping = formToppings[Math.floor(Math.random() * formToppings.length)];
+      randomToppings.add(randomTopping);
+    }
+    setToppingsVal(Array.from(randomToppings));
+    
+    const randomSweetness = formSweetness[Math.floor(Math.random() * formSweetness.length)];
+    setSweetVal(randomSweetness);
+    
+    const randomTemp = formTemps[Math.floor(Math.random() * formTemps.length)];
+    setTempVal(randomTemp);
+
+    setFormFields({
+      base: randomBase,
+      toppings: Array.from(randomToppings),
+      sweetness: randomSweetness,
+      temp: randomTemp
+    });
+  };
+
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
   return (
     <form id="create-order-form" className="new-order-form" onSubmit={handleSubmit}>
+      <input
+        type="button"
+        value="Create Random Order! 🪄"
+        onClick={makeRandomOrder}
+      />
       <div>
         <label htmlFor="base">
           <h3>Select your drink base</h3>
