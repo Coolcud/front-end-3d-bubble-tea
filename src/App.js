@@ -1,29 +1,11 @@
 import './App.css';
 import axios from 'axios';
 import NewOrderForm from './components/NewOrderForm';
-import { useState, useEffect, Suspense } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { useState, useEffect, Suspense, useRef } from "react";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import Scene from './components/OldModel';
-import { formOptions } from "../src/data/FormOptions";
-// import { OrbitControls } from '@react-three/drei';
-// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-// import Model from './components/Model';
 
 const API = process.env.REACT_APP_TEA_API_URL;
-
-// Renders $2 model with mtl and obj files in public/
-// Requires <Scene /> not <Model /> in App to view
-// function Scene(props) {
-//   const materials = useLoader(MTLLoader, 'Cup of drink.mtl');
-//   const obj = useLoader(OBJLoader, 'Cup of drink.obj', (loader) => {
-//     materials.preload();
-//     loader.setMaterials(materials);
-//   });
-
-//   console.log(obj);
-//   return <primitive object={obj} scale={0.4} {...props}/>
-// };
 
 
 function App() {
@@ -33,12 +15,18 @@ function App() {
   const [toppingsValues, setToppingsValues] = useState([]);
   const [sweetValue, setSweetValue] = useState("default sweet");
   const [tempValue, setTempValue] = useState("default temp");
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleFormSubmitted = (isFormSubmitted) => {
+    setFormSubmitted(!isFormSubmitted);
+  };
+
+//~~~~~~~~~~~~~~~~~~~~~~AXIOS CALLS~~~~~~~~~~~~~~~~~~~~~~
 
   const getOrders = () => {
     axios
       .get(`${API}/orders`)
       .then((response) => {
-        // console.log("orders:", response.data);
         setOrderData(response.data);
       })
       .catch((error) => {
@@ -63,6 +51,8 @@ function App() {
       });
   };
 
+//~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
+
   return (
     <div className="App">
       <header>3d Bubble Tea</header>
@@ -76,6 +66,7 @@ function App() {
                 <Suspense fallback={null}>
                   <Scene 
                     clicked={clicked}
+                    formSubmitted={formSubmitted}
                   />
                 </Suspense>
               </Canvas>
@@ -93,6 +84,7 @@ function App() {
                 setSweetVal={setSweetValue}
                 tempVal={tempValue}
                 setTempVal={setTempValue}
+                onFormSubmitted={handleFormSubmitted}
               />
             </div>
           </div>
