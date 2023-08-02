@@ -77,30 +77,29 @@ function OldModel(props) {
 }
 
 const Scene = (props) => {
+  const [rotation, setRotation] = useState(0);
+
   const vec = new THREE.Vector3();
 
-  useFrame(state => {
-    if (props.clicked) {
-      // state.camera.lookAt(markerRef.current.position)
-      state.camera.position.lerp(vec.set(0, -0.5, 2), .01)
-      state.camera.updateProjectionMatrix()
+  useFrame((state, delta) => {
+    if (props.clicked || props.formSubmitted) {
+      setRotation((prevRotation) => prevRotation + delta * 0.5);
+      state.camera.position.lerp(vec.set(0, -0.5, 2), .01);
+      state.camera.updateProjectionMatrix();
+    } else {
+      state.camera.position.lerp(vec.set(0, 0, 5), .01);
     }
-    else {
-      state.camera.position.lerp(vec.set(0, 0, 5), .01)
-    }
-    return null;
-  })
-
+  });
   
   return (
     <>
       <ambientLight />
-      <OldModel>
-      </OldModel>
+      <group rotation={[0, rotation, 0]}>
+        <OldModel/>
+      </group>
     </>
   )
-  };
-
+};
 
 // useGLTF.preload('/scene.gltf');
 export default Scene;
