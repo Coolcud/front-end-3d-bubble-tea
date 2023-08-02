@@ -10,13 +10,14 @@ const EMPTY_FORM = {
   temp: ''
 }
 
-const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsVal, sweetVal, setSweetVal, tempVal, setTempVal }) => {
+const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsVal, sweetVal, setSweetVal, tempVal, setTempVal, onFormSubmitted }) => {
   // Store and set form field values
   const [formFields, setFormFields] = useState(EMPTY_FORM);
   // Array of booleans to track topping checkboxes
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
 //~~~~~~~~~~~~~~~~~~~~~~DISPLAY OPTIONS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
@@ -125,8 +126,10 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
   const handleSubmit = (event) => {
     event.preventDefault();
     addOrder(formFields);
+    setFormSubmitted(true);
+    onFormSubmitted(formSubmitted);
+    alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
     resetForm();
-    return alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
   }
 
   // Reset form fields to default
@@ -137,6 +140,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     setCheckedState(new Array(formOptions.toppings.length).fill(false));
     setSweetVal("default sweet");
     setTempVal("default temp");
+    setFormSubmitted(!formSubmitted);
   }
 
   // Create a random order
