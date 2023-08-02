@@ -10,6 +10,13 @@ import { formOptions } from "../src/data/FormOptions";
 // import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 // import Model from './components/Model';
 
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route }
+    from 'react-router-dom';
+import Home from './pages';
+import About from './pages/about';
+import Analytics from './pages/analytics';
+
 const API = process.env.REACT_APP_TEA_API_URL;
 
 // Renders $2 model with mtl and obj files in public/
@@ -67,6 +74,7 @@ function App() {
     <div className="App">
       <header>3d Bubble Tea</header>
       {/* <button onClick={() => {setClicked(!clicked)}}>Test Button</button> */}
+
       <main>
         <h1>Boba Order</h1>
         <div className='flex-container'>
@@ -98,6 +106,13 @@ function App() {
           </div>
         </div>
       </main>
+      <Router>
+        <Navbar />
+          <Routes>
+            <Route path='/about' element={<About />} />
+            <Route path='/analytics' element={<Analytics />} />
+          </Routes>
+      </Router>
     </div>
   );
 }
