@@ -43,8 +43,8 @@ function App() {
     axios
       .post(`${API}/orders`, newOrder)
       .then(() => {
-        getOrders();
         alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
+        getOrders();
       })
       .catch((error) => {
         console.log('Error:', error);
