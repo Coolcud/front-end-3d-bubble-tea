@@ -44,6 +44,7 @@ function App() {
       .post(`${API}/orders`, newOrder)
       .then(() => {
         getOrders();
+        alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
       })
       .catch((error) => {
         console.log('Error:', error);
@@ -64,7 +65,7 @@ function App() {
             <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
               <Canvas>
                 <Suspense fallback={null}>
-                  <Scene 
+                  <Scene
                     clicked={clicked}
                     formSubmitted={formSubmitted}
                   />
