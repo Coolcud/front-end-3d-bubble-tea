@@ -1,8 +1,8 @@
 import './App.css';
 import axios from 'axios';
 import NewOrderForm from './components/NewOrderForm';
-import { useState, useEffect, Suspense, useRef } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { useState, useEffect, Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 import Scene from './components/OldModel';
 
 const API = process.env.REACT_APP_TEA_API_URL;
