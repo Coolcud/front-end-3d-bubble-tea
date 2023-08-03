@@ -67,11 +67,11 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
 //~~~~~~~~~~~~~~~~~~~~~~TOPPINGS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
   // Check and toggle boolean of checkbox array
-  const onToppingsChange = (position) => { 
+  const onToppingsChange = (position) => {
     const updatedCheckedState = checkedState.map((checkbox, index) =>
       index === position ? !checkbox : checkbox
     );
-      
+
     setCheckedState(updatedCheckedState);
   };
 
@@ -128,7 +128,6 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     addOrder(formFields);
     setFormSubmitted(true);
     onFormSubmitted(formSubmitted);
-    alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
     resetForm();
   }
 
@@ -148,7 +147,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     // Select and set random base
     const randomBase = formOptions.bases[Math.floor(Math.random() * formOptions.bases.length)];
     setBaseVal(randomBase);
-    
+
     // Select and set random toppings
     const randomToppings = [];
     for (let i = 0; i < formOptions.toppings.length; i++) {
@@ -157,11 +156,11 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     setCheckedState(randomToppings);
     makeToppingsList();
     setToppingsVal(toppingsList);
-    
+
     // Select and set random sweetness
     const randomSweetness = formOptions.sweetness[Math.floor(Math.random() * formOptions.sweetness.length)];
     setSweetVal(randomSweetness);
-    
+
     // Select and set random temp
     const randomTemp = formOptions.temps[Math.floor(Math.random() * formOptions.temps.length)];
     setTempVal(randomTemp);
@@ -194,7 +193,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     });
     console.log("sweetness set:", formFields.sweetness);
   }, [sweetVal])
-  
+
   // Set temp form field
   useEffect(() => {
     setFormFields({
@@ -203,7 +202,7 @@ const NewOrderForm = ({ addOrder, baseVal, setBaseVal, toppingsVal, setToppingsV
     });
     console.log("temp set:", formFields.temp);
   }, [tempVal]);
-  
+
   // Set toppings form field (SET LAST!!)
   useEffect(() => {
     console.log(checkedState)
