@@ -167,19 +167,21 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
       />
       <FormField
         heading="Select your milk tea base"
-        label="your base"
+        label="a base"
         name="base"
         options={formOptions.bases}
         value={formFields.base}
         onChange={handleChange}
       />
       <div className = "all_toppings__container">
-        <h3>Select your toppings</h3>
-        {toppingComponents}
+        <label htmlFor="toppings">
+          <h3>Select your toppings</h3>
+          {toppingComponents}
+        </label>
       </div>
       <FormField
-        heading="Select your sugar level"
-        label="your sweetness"
+        heading="Select your sweetness"
+        label="a sugar level"
         name="sweetness"
         options={formOptions.sweetness}
         value={formFields.sweetness}
@@ -187,7 +189,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
       />
       <FormField
         heading="Select your ice level"
-        label="your ice level"
+        label="an ice level"
         name="temp"
         options={formOptions.temps}
         value={formFields.temp}
