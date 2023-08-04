@@ -199,8 +199,8 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
       <div>
         <label htmlFor="base">
           <h3>Select your drink base</h3>
-          <select name="base" defaultValue={"base selection"} onChange={handleChange}>
-            <option disabled hidden value="base selection">--Choose a base--</option>
+          <select name="base" value={formFields.base} onChange={handleChange}>
+            <option disabled hidden value="">--Choose a base--</option>
             {baseComponents}
           </select>
         </label>
@@ -212,8 +212,8 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
       <div className = "sweetness__container">
         <label htmlFor="sweetness">
           <h3>Select your sweetness</h3>
-          <select name="sweetness" defaultValue={"sweet selection"} onChange={handleChange}>
-          <option disabled hidden value="sweet selection">--Choose a sugar level--</option>
+          <select name="sweetness" value={formFields.sweetness} onChange={handleChange}>
+          <option disabled hidden value="">--Choose a sugar level--</option>
             {sweetnessComponents}
           </select>
         </label>
@@ -221,8 +221,8 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
       <div className= "temp__container">
         <label htmlFor="temp">
           <h3>Select your ice level</h3>
-          <select name="temp" defaultValue={"temp selection"} onChange={handleChange}>
-          <option disabled hidden value="temp selection">--Choose an ice level--</option>
+          <select name="temp" value={formFields.temp} onChange={handleChange}>
+          <option disabled hidden value="">--Choose an ice level--</option>
             {tempComponents}
           </select>
         </label>
