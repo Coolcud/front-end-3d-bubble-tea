@@ -10,6 +10,26 @@ const EMPTY_FORM = {
   temp: ""
 }
 
+// Reusable JSX for form fields
+const FormField = ({ heading, label, name, options, value, onChange }) => {
+  return (
+    <div className="form-field">
+      <label htmlFor={name}>
+        <h3>{heading}</h3>
+        <select name={name} value={value} onChange={onChange}>
+          <option disabled hidden value="">
+            ---Choose {label}--
+          </option>
+          {options.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+    </div>
+)};
+
 const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
   // Store and set form field values
   const [formFields, setFormFields] = useState(EMPTY_FORM);
@@ -20,16 +40,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
   // Store and set if form has been submitted or not
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-//~~~~~~~~~~~~~~~~~~~~~~DISPLAY OPTIONS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
-
-  // Display each base in the dropdown menu
-  const baseComponents = formOptions.bases.map((base, index) => {
-    return (
-      <option key={index} value={base}>
-        {base}
-      </option>
-    );
-  });
+//~~~~~~~~~~~~~~~~~~~~~~TOPPINGS OPTIONS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
   // Display each topping in a list of checkboxes
   const toppingComponents = formOptions.toppings.map((topping, index) => {
@@ -41,97 +52,59 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
           id={`checkbox-${index}`}
           value={topping}
           checked={checkedState[index]}
-          onChange={() => onToppingsChange(index)}
+          onChange={() => handleToppingsChange(index)}
         />
       </div>
     );
   });
 
-  // Display each sugar level in the dropdown menu
-  const sweetnessComponents = formOptions.sweetness.map((sugar, index) => {
-    return (
-      <option key={index} value={sugar}>
-        {sugar}
-      </option>
-    );
-  });
-
-  // Display each temp in the dropdown menu
-  const tempComponents = formOptions.temps.map((temp, index) => {
-    return (
-      <option key={index} value={temp}>
-        {temp}
-      </option>
-    );
-  });
-
-//~~~~~~~~~~~~~~~~~~~~~~TOPPINGS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
-
   // Check and toggle boolean of checkbox array
-  const onToppingsChange = (position) => {
+  const handleToppingsChange = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
-    index === position ? !item : item
+      index === position ? !item : item
     );
-
     setCheckedState(updatedCheckedState);
   };
 
   // Add topping of checked boxes to list and update state with effect
   const makeToppingsList = () => {
-    let toppingsList = [];
-    for (let i = 0; i < checkedState.length; i++) {
-      if (checkedState[i]) {
-        toppingsList.push(formOptions.toppings[i]);
+    return checkedState.reduce((toppingsList, isChecked, index) => {
+      if (isChecked) {
+        toppingsList.push(formOptions.toppings[index]);
       }
-    }
-
-    return toppingsList;
+      return toppingsList;
+    }, []);
   };
 
 //~~~~~~~~~~~~~~~~~~~~~~PREVIEW FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+  // Create string preview of base, toppings, sweetness, and ice choices
 
-  // Create string preview of base
   const writeBasePreview = () => {
-    let basePreview = "";
-    basePreview += formFields.base !== "" ? `${formFields.base} milk tea` : "none";
-    basePreview = basePreview.toLowerCase();
-    return basePreview
-  }
+    return formFields.base !== "" ? `${formFields.base} milk tea` : "none";
+  };
 
-  // Create string preview of toppings
   const writeToppingsPreview = () => {
-    let toppingsPreview = "";
     const newToppingsList = makeToppingsList();
-    toppingsPreview += newToppingsList.length >= 1 ? `${newToppingsList.join(", ")}` : "none";
-    toppingsPreview = toppingsPreview.toLowerCase();
-    return toppingsPreview;
-  }
+    return newToppingsList.length >= 1 ? newToppingsList.join(", ") : "none";
+  };
 
-  // Create string preview of sweetness
   const writeSweetPreview = () => {
-    let sweetPreview = "";
-    sweetPreview += formFields.sweetness !== "" ? formFields.sweetness : "none";
-    sweetPreview = sweetPreview.toLowerCase();
-    return sweetPreview;
-  }
+    return formFields.sweetness !== "" ? formFields.sweetness : "none";
+  };
 
-  // Create string preview of temp/ice level
   const writeTempPreview = () => {
-    let tempPreview = "";
-    tempPreview += formFields.temp !== "" ? formFields.temp : "none";
-    tempPreview = tempPreview.toLowerCase();
-    return tempPreview
-  }
+    return formFields.temp !== "" ? formFields.temp : "none";
+  };
 
-//~~~~~~~~~~~~~~~~~~~~~~FORM BUTTON FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~FORM CHANGE & BUTTON FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
+  // Set form values when form changes
   const handleChange = (event) => {
-    const newFormData = {
+    const { name, value } = event.target;
+    setFormFields((formFields) => ({
       ...formFields,
-      [event.target.name]: event.target.value
-    };
-
-    setFormFields(newFormData);
+      [name]: value
+    }));
   };
 
   // Submit user order to db and alert success message
@@ -151,30 +124,23 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
     setFormSubmitted(!formSubmitted);
   }
 
-  // Create a random order
+  // Create a random boba order
   const makeRandomOrder = () => {
-    // Select and set random base
+    // Select random base, toppings, sweetness, and temp
     const randomBase = formOptions.bases[Math.floor(Math.random() * formOptions.bases.length)];
-
-    // Select random toppings
-    const randomBoolToppings = [];
-    for (let i = 0; i < formOptions.toppings.length; i++) {
-      randomBoolToppings.push(Math.random() < 0.5);
-    }
-    setCheckedState(randomBoolToppings);
-
-    // Select and set random sweetness
+    const randomBoolToppings = formOptions.toppings.map(() => Math.random() < 0.5);
     const randomSweetness = formOptions.sweetness[Math.floor(Math.random() * formOptions.sweetness.length)];
-
-    // Select and set random temp
     const randomTemp = formOptions.temps[Math.floor(Math.random() * formOptions.temps.length)];
-
+    
     // Set form fields with random values
     setFormFields({
       base: randomBase,
       sweetness: randomSweetness,
       temp: randomTemp
     });
+
+    // Set checkedState with random boolean array of toppings
+    setCheckedState(randomBoolToppings);
   };
 
   // Use useEffect to update toppings when checkedState changes
@@ -187,6 +153,9 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
 
   console.log("formFields:", formFields);
 
+  // Check array of formFields's values for no emptiness to activate submit button
+  const isFormIncomplete = Object.values(formFields).some((value) => value === "");
+
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
 
   return (
@@ -196,37 +165,34 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
         value="Create Random Order! 🪄"
         onClick={makeRandomOrder}
       />
-      <div>
-        <label htmlFor="base">
-          <h3>Select your drink base</h3>
-          <select name="base" value={formFields.base} onChange={handleChange}>
-            <option disabled hidden value="">--Choose a base--</option>
-            {baseComponents}
-          </select>
-        </label>
-      </div>
+      <FormField
+        heading="Select your milk tea base"
+        label="your base"
+        name="base"
+        options={formOptions.bases}
+        value={formFields.base}
+        onChange={handleChange}
+      />
       <div className = "all_toppings__container">
         <h3>Select your toppings</h3>
         {toppingComponents}
       </div>
-      <div className = "sweetness__container">
-        <label htmlFor="sweetness">
-          <h3>Select your sweetness</h3>
-          <select name="sweetness" value={formFields.sweetness} onChange={handleChange}>
-          <option disabled hidden value="">--Choose a sugar level--</option>
-            {sweetnessComponents}
-          </select>
-        </label>
-      </div>
-      <div className= "temp__container">
-        <label htmlFor="temp">
-          <h3>Select your ice level</h3>
-          <select name="temp" value={formFields.temp} onChange={handleChange}>
-          <option disabled hidden value="">--Choose an ice level--</option>
-            {tempComponents}
-          </select>
-        </label>
-      </div>
+      <FormField
+        heading="Select your sugar level"
+        label="your sweetness"
+        name="sweetness"
+        options={formOptions.sweetness}
+        value={formFields.sweetness}
+        onChange={handleChange}
+      />
+      <FormField
+        heading="Select your ice level"
+        label="your ice level"
+        name="temp"
+        options={formOptions.temps}
+        value={formFields.temp}
+        onChange={handleChange}
+      />
       <div className="preview_text">
         <h3>Current order preview:</h3>
         <ul>
@@ -237,7 +203,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
         </ul>
       </div>
       <input
-        disabled={Object.values(formFields).includes("")}
+        disabled={isFormIncomplete}
         type="submit"
         value="Submit Drink!"
       />
