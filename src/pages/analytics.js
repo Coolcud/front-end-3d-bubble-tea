@@ -85,7 +85,7 @@ const Analytics = () => {
                     Most popular sugar level: <span>{maxSweetness}</span>
                 </li>
                 <li>
-                    Most popular sugar level: <span>{maxTemp}</span>
+                    Most popular ice level: <span>{maxTemp}</span>
                 </li>
             </ul>
         </div>
