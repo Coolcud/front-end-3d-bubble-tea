@@ -1,48 +1,31 @@
 import './App.css';
 import axios from 'axios';
-import NewOrderForm from './components/NewOrderForm';
-import { useState, useEffect, Suspense } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { useState, useEffect, Suspense, useCallback } from "react";
+import { Canvas } from "@react-three/fiber";
 import Scene from './components/OldModel';
-import { formOptions } from "../src/data/FormOptions";
-// import { OrbitControls } from '@react-three/drei';
-// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-// import Model from './components/Model';
+import NewOrderForm from './components/NewOrderForm';
 
 const API = process.env.REACT_APP_TEA_API_URL;
-
-// Renders $2 model with mtl and obj files in public/
-// Requires <Scene /> not <Model /> in App to view
-// function Scene(props) {
-//   const materials = useLoader(MTLLoader, 'Cup of drink.mtl');
-//   const obj = useLoader(OBJLoader, 'Cup of drink.obj', (loader) => {
-//     materials.preload();
-//     loader.setMaterials(materials);
-//   });
-
-//   console.log(obj);
-//   return <primitive object={obj} scale={0.4} {...props}/>
-// };
-
 
 function App() {
   const [orderData, setOrderData] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [baseValue, setBaseValue] = useState("default base");
-  const [toppingsValues, setToppingsValues] = useState([]);
-  const [sweetValue, setSweetValue] = useState("default sweet");
-  const [tempValue, setTempValue] = useState("default temp");
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const handleFormSubmitted = useCallback((isFormSubmitted) => {
+    setFormSubmitted(!isFormSubmitted);
+  }, []);
 
+//~~~~~~~~~~~~~~~~~~~~~~AXIOS CALLS~~~~~~~~~~~~~~~~~~~~~~
+
+  // Retrieve all orders from the database
   const getOrders = () => {
     axios
       .get(`${API}/orders`)
       .then((response) => {
-        // console.log("orders:", response.data);
         setOrderData(response.data);
       })
       .catch((error) => {
-        console.log('Error:', error);
+        console.log('Error while fetching orders:', error);
         alert('Unable to retrieve orders.');
       });
   };
@@ -51,17 +34,21 @@ function App() {
     getOrders();
   }, []);
 
+  // Add an order to the database
   const postOrder = (newOrder) => {
     axios
       .post(`${API}/orders`, newOrder)
       .then(() => {
+        alert("Form successfully submitted! ฅ^•ﻌ•^ฅ🧋");
         getOrders();
       })
       .catch((error) => {
-        console.log('Error:', error);
+        console.log('Error while posting order:', error);
         alert('Unable to create a new order.');
       });
   };
+
+//~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
 
   return (
     <div className="App">
@@ -74,8 +61,9 @@ function App() {
             <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
               <Canvas>
                 <Suspense fallback={null}>
-                  <Scene 
+                  <Scene
                     clicked={clicked}
+                    formSubmitted={formSubmitted}
                   />
                 </Suspense>
               </Canvas>
@@ -85,14 +73,7 @@ function App() {
             <div className='form-body'>
               <NewOrderForm
                 addOrder={postOrder}
-                baseVal={baseValue}
-                setBaseVal={setBaseValue}
-                toppingsVal={toppingsValues}
-                setToppingsVal={setToppingsValues}
-                sweetVal={sweetValue}
-                setSweetVal={setSweetValue}
-                tempVal={tempValue}
-                setTempVal={setTempValue}
+                onFormSubmitted={handleFormSubmitted}
               />
             </div>
           </div>
