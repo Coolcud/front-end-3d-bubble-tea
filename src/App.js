@@ -1,24 +1,23 @@
 import './App.css';
 import axios from 'axios';
-import NewOrderForm from './components/NewOrderForm';
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import Scene from './components/OldModel';
+import NewOrderForm from './components/NewOrderForm';
 
 const API = process.env.REACT_APP_TEA_API_URL;
-
 
 function App() {
   const [orderData, setOrderData] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const handleFormSubmitted = (isFormSubmitted) => {
+  const handleFormSubmitted = useCallback((isFormSubmitted) => {
     setFormSubmitted(!isFormSubmitted);
-  };
+  }, []);
 
 //~~~~~~~~~~~~~~~~~~~~~~AXIOS CALLS~~~~~~~~~~~~~~~~~~~~~~
 
+  // Retrieve all orders from the database
   const getOrders = () => {
     axios
       .get(`${API}/orders`)
@@ -26,7 +25,7 @@ function App() {
         setOrderData(response.data);
       })
       .catch((error) => {
-        console.log('Error:', error);
+        console.log('Error while fetching orders:', error);
         alert('Unable to retrieve orders.');
       });
   };
@@ -35,6 +34,7 @@ function App() {
     getOrders();
   }, []);
 
+  // Add an order to the database
   const postOrder = (newOrder) => {
     axios
       .post(`${API}/orders`, newOrder)
@@ -43,7 +43,7 @@ function App() {
         getOrders();
       })
       .catch((error) => {
-        console.log('Error:', error);
+        console.log('Error while posting order:', error);
         alert('Unable to create a new order.');
       });
   };
