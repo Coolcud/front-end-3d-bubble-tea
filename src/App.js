@@ -11,11 +11,7 @@ const API = process.env.REACT_APP_TEA_API_URL;
 function App() {
   const [orderData, setOrderData] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [baseValue, setBaseValue] = useState("default base");
-  const [toppingsValues, setToppingsValues] = useState([]);
-  const [sweetValue, setSweetValue] = useState("default sweet");
-  const [tempValue, setTempValue] = useState("default temp");
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(true);
 
   const handleFormSubmitted = (isFormSubmitted) => {
     setFormSubmitted(!isFormSubmitted);
@@ -43,7 +39,7 @@ function App() {
     axios
       .post(`${API}/orders`, newOrder)
       .then(() => {
-        alert("Form successfully submitted! ฅ^•ﻌ•^ฅ");
+        alert("Form successfully submitted! ฅ^•ﻌ•^ฅ🧋");
         getOrders();
       })
       .catch((error) => {
@@ -77,14 +73,6 @@ function App() {
             <div className='form-body'>
               <NewOrderForm
                 addOrder={postOrder}
-                baseVal={baseValue}
-                setBaseVal={setBaseValue}
-                toppingsVal={toppingsValues}
-                setToppingsVal={setToppingsValues}
-                sweetVal={sweetValue}
-                setSweetVal={setSweetValue}
-                tempVal={tempValue}
-                setTempVal={setTempValue}
                 onFormSubmitted={handleFormSubmitted}
               />
             </div>
