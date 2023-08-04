@@ -11,7 +11,7 @@ const API = process.env.REACT_APP_TEA_API_URL;
 function App() {
   const [orderData, setOrderData] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleFormSubmitted = (isFormSubmitted) => {
     setFormSubmitted(!isFormSubmitted);
