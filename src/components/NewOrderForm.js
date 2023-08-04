@@ -31,14 +31,11 @@ const FormField = ({ heading, label, name, options, value, onChange }) => {
 )};
 
 const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
-  // Store and set form field values
   const [formFields, setFormFields] = useState(EMPTY_FORM);
-  // Array of booleans to track topping checkboxes
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
-  // Store and set if form has been submitted or not
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
 //~~~~~~~~~~~~~~~~~~~~~~TOPPINGS OPTIONS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
@@ -153,7 +150,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
 
   console.log("formFields:", formFields);
 
-  // Check array of formFields's values for no emptiness to activate submit button
+  // Check array of formFields's values for no "" to activate submit button
   const isFormIncomplete = Object.values(formFields).some((value) => value === "");
 
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
