@@ -18,21 +18,21 @@ function App() {
 //~~~~~~~~~~~~~~~~~~~~~~AXIOS CALLS~~~~~~~~~~~~~~~~~~~~~~
 
   // Retrieve all orders from the database
-  const getOrders = () => {
-    axios
-      .get(`${API}/orders`)
-      .then((response) => {
-        setOrderData(response.data);
-      })
-      .catch((error) => {
-        console.log('Error while fetching orders:', error);
-        alert('Unable to retrieve orders.');
-      });
-  };
+  // const getOrders = () => {
+  //   axios
+  //     .get(`${API}/orders`)
+  //     .then((response) => {
+  //       setOrderData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error while fetching orders:', error);
+  //       alert('Unable to retrieve orders.');
+  //     });
+  // };
 
-  useEffect(() => {
-    getOrders();
-  }, []);
+  // useEffect(() => {
+  //   getOrders();
+  // }, []);
 
   // Add an order to the database
   const postOrder = (newOrder) => {
