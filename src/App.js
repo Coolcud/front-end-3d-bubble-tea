@@ -40,7 +40,6 @@ function App() {
       .post(`${API}/orders`, newOrder)
       .then(() => {
         alert("Form successfully submitted! ฅ^•ﻌ•^ฅ🧋");
-        getOrders();
       })
       .catch((error) => {
         console.log('Error while posting order:', error);
