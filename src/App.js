@@ -11,6 +11,8 @@ function App() {
   const [orderData, setOrderData] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  
+  // useCallback to prevent unnecessary re-renders
   const handleFormSubmitted = useCallback((isFormSubmitted) => {
     setFormSubmitted(!isFormSubmitted);
   }, []);
