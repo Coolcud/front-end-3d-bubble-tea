@@ -104,7 +104,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
     }));
   };
 
-  // Submit user order to db and alert success message
+  // Submit user order to db and reset form
   const handleSubmit = (event) => {
     event.preventDefault();
     addOrder(formFields);
