@@ -10,7 +10,7 @@ Title: Jelly Cube
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function jellyCube(props) {
+export function JellyCube(props) {
   const { nodes, materials } = useGLTF('/scene.gltf')
   return (
     <group {...props} dispose={null}>

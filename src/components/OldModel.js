@@ -12,6 +12,7 @@ import { useGLTF } from '@react-three/drei';
 import { useEffect, useState } from 'react';
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+// import { JellyCube } from './Scene';
 
 function OldModel(props) {
   const group = useRef();
@@ -73,6 +74,16 @@ function OldModel(props) {
           </group>
         </group>
       </group>
+  )
+}
+
+function JellyCube(props) {
+  const { nodes, materials } = useGLTF('/scene.gltf')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Object_4.geometry} material={materials.Material} position={[-0.053, 15.811, 1.135]} rotation={[-0.277, 0.4, 1.47]} />
+      <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} />
+    </group>
   )
 }
 
