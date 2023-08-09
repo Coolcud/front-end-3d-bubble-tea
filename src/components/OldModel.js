@@ -30,59 +30,134 @@ function OldModel(props) {
             <mesh geometry={nodes.liquide_bifrostLiquidMaterial1_0.geometry} material={materials.bifrostLiquidMaterial1} position={[0, 2.957, 0]} scale={0.148} />
             <mesh geometry={nodes.paille_blinn2_0.geometry} material={materials.blinn2} position={[0, 2.957, 0]} scale={0.148} />
             <mesh geometry={nodes.couvercle_blinn1_0.geometry} material={materials.blinn1} />
-            <mesh geometry={nodes.polySurface42_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface41_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface40_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface27_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface26_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface23_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface22_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface19_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface18_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface28_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface36_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface35_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface34_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface33_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface32_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface31_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface30_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface29_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface39_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface38_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface37_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface7_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface5_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface6_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface1_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface3_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface4_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface2_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface17_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface16_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface14_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface15_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface13_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface11_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface12_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface8_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface10_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface9_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface25_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface24_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.polySurface21_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+            {/* <mesh geometry={nodes.polySurface42_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface41_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface40_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface27_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface26_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface23_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface22_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface19_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface18_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface28_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface36_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface35_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface34_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface33_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface32_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface31_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface30_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface29_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface39_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface38_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface37_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface7_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface5_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface6_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface1_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface3_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface4_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface2_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface17_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface16_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface14_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface15_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface13_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface11_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface12_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface8_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface10_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface9_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface25_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface24_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
+            {/* <mesh geometry={nodes.polySurface21_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} /> */}
           </group>
         </group>
       </group>
   )
 }
 
-function JellyCube(props) {
-  const { nodes, materials } = useGLTF('/scene.gltf')
+function Boba(props) {
+  const group = useRef();
+  const { nodes, materials } = useGLTF('/scene.gltf');
+
   return (
-    <group {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null} scale={0.04}>
+      <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <mesh geometry={nodes.polySurface42_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface41_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface40_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface27_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface26_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface23_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface22_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface19_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface18_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface28_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface36_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface35_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface34_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface33_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface32_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface31_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface30_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface29_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface39_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface38_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface37_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface7_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface5_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface6_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface1_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface3_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface4_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface2_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface17_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface16_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface14_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface15_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface13_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface11_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface12_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface8_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface10_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface9_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface25_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface24_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          <mesh geometry={nodes.polySurface21_lambert1_0.geometry} material={materials.lambert1} position={[0, 2.957, 0]} scale={0.148} />
+          </group>
+        </group>
+      </group>
+  )
+};
+
+function JellyCube(props) {
+  const { nodes, materials } = useGLTF('/jelly.gltf')
+  return (
+    <group {...props} dispose={null} scale={0.1}>
       <mesh geometry={nodes.Object_4.geometry} material={materials.Material} position={[-0.053, 15.811, 1.135]} rotation={[-0.277, 0.4, 1.47]} />
-      <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} />
+      {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
+    </group>
+  )
+}
+
+function JellyCube2(props) {
+  const { nodes, materials } = useGLTF('/jelly.gltf')
+  return (
+    <group {...props} dispose={null} scale={0.08} >
+      <mesh geometry={nodes.Object_4.geometry} material={materials.Material} position={[-8.553, 19.811, 2.135]} rotation={[-0.477, 0.4, 1.87]} />
+      {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
+    </group>
+  )
+}
+
+function JellyCube3(props) {
+  const { nodes, materials } = useGLTF('/jelly.gltf')
+  return (
+    <group {...props} dispose={null} scale={0.13} >
+      <mesh geometry={nodes.Object_4.geometry} material={materials.Material} position={[-4.553, 17.311, 0.135]} rotation={[-0.077, -0.6, 1.87]} />
+      {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
     </group>
   )
 }
@@ -108,6 +183,10 @@ const Scene = (props) => {
       <group rotation={[0, rotation, 0]}>
         <OldModel/>
       </group>
+      <Boba />
+      <JellyCube />
+      <JellyCube2 />
+      <JellyCube3 />
     </>
   )
 };
