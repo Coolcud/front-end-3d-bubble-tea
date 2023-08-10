@@ -30,7 +30,7 @@ const FormField = ({ heading, label, name, options, value, onChange }) => {
     </div>
 )};
 
-const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, showJelly, setShowJelly }) => {
+const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, setShowJelly, setShowChia }) => {
   // const [formFields, setFormFields] = useState(EMPTY_FORM);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [checkedState, setCheckedState] = useState(
@@ -69,11 +69,19 @@ const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, sh
       if (isChecked) {
         toppingsList.push(formOptions.toppings[index]);
       }
+
       if (isChecked && index === 4) {
         setShowJelly(true);
       } else {
-        setShowJelly(false)
+        setShowJelly(false);
       }
+      
+      if (isChecked && index === 6) {
+        setShowChia(true);
+      } else {
+        setShowChia(false);
+      }
+
       return toppingsList;
     }, []);
   };

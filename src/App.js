@@ -20,6 +20,7 @@ function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formFields, setFormFields] = useState(EMPTY_FORM);
   const [showJelly, setShowJelly] = useState(false);
+  const [showChia, setShowChia] = useState(false);
   
   // useCallback to prevent unnecessary re-renders
   const handleFormSubmitted = useCallback((isFormSubmitted) => {
@@ -56,6 +57,7 @@ function App() {
                     clicked={clicked}
                     formSubmitted={formSubmitted}
                     showJelly={showJelly}
+                    showChia={showChia}
                   />
                 </Suspense>
               </Canvas>
@@ -68,8 +70,8 @@ function App() {
                 onFormSubmitted={handleFormSubmitted}
                 formFields={formFields}
                 setFormFields={setFormFields}
-                showJelly={showJelly}
                 setShowJelly={setShowJelly}
+                setShowChia={setShowChia}
               />
             </div>
           </div>
