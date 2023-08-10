@@ -72,14 +72,10 @@ const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, se
 
       if (isChecked && index === 4) {
         setShowJelly(true);
-      } else {
-        setShowJelly(false);
       }
       
       if (isChecked && index === 6) {
         setShowChia(true);
-      } else {
-        setShowChia(false);
       }
 
       return toppingsList;
