@@ -44,12 +44,12 @@ function App() {
   return (
     <div className="App">
       <header className="bubble-tea-header">3D BUBBLE TEA</header>
-      {/* <button onClick={() => {setClicked(!clicked)}}>Test Button</button> */}
+      <button onClick={() => {setClicked(!clicked)}}>Test Button</button>
       <main>
         <h1>Boba Order</h1>
         <div className='flex-row'>
           <div className='section-container'>
-            <div className='model-body' style={{ position: "relative", width: 650, height: 1000 }}>
+            <div className='model-section'>
               <Canvas>
                 <Suspense fallback={null}>
                   <Scene
@@ -70,6 +70,7 @@ function App() {
                 showJelly={showJelly}
                 setShowJelly={setShowJelly}
               />
+
           </div>
         </div>
       </main>

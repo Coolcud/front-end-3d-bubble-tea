@@ -55,8 +55,6 @@ const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, sh
       }
       if (isChecked && index === 4) {
         setShowJelly(true);
-      } else {
-        setShowJelly(false)
       }
       return toppingsList;
     }, []);
