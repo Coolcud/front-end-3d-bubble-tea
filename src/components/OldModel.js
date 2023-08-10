@@ -14,8 +14,6 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 // import { JellyCube } from './Scene';
 
-
-
 function OldModel(props) {
   const group = useRef();
   const { nodes, materials } = useGLTF('/scene.gltf');
@@ -243,9 +241,9 @@ const Scene = (props) => {
       <Boba />
       {/* <ChiaSeeds /> */}
       <group>
-        <JellyCube />
-        <JellyCube2 />
-        <JellyCube3 />
+        { props.showJelly && <JellyCube /> }
+        { props.showJelly && <JellyCube2 /> }
+        { props.showJelly && <JellyCube3 /> }
       </group>
     </>
   )

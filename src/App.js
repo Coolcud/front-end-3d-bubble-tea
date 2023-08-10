@@ -7,10 +7,19 @@ import NewOrderForm from './components/NewOrderForm';
 
 const API = process.env.REACT_APP_TEA_API_URL;
 
+const EMPTY_FORM = {
+  base: "",
+  toppings: [],
+  sweetness: "",
+  temp: ""
+}
+
 function App() {
   const [orderData, setOrderData] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formFields, setFormFields] = useState(EMPTY_FORM);
+  const [showJelly, setShowJelly] = useState(false);
   
   // useCallback to prevent unnecessary re-renders
   const handleFormSubmitted = useCallback((isFormSubmitted) => {
@@ -46,6 +55,7 @@ function App() {
                   <Scene
                     clicked={clicked}
                     formSubmitted={formSubmitted}
+                    showJelly={showJelly}
                   />
                 </Suspense>
               </Canvas>
@@ -56,6 +66,10 @@ function App() {
               <NewOrderForm
                 addOrder={postOrder}
                 onFormSubmitted={handleFormSubmitted}
+                formFields={formFields}
+                setFormFields={setFormFields}
+                showJelly={showJelly}
+                setShowJelly={setShowJelly}
               />
             </div>
           </div>
