@@ -33,14 +33,12 @@ function App() {
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
 
   return (
-    <div className="App">
-      <header>3d Bubble Tea</header>
-      <button onClick={() => {setClicked(!clicked)}}>Test Button</button>
-      <main>
-        <h1>Boba Order</h1>
-        <div className='flex-container'>
-          <div className='flex-child-model'>
-            <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
+    <div className='App'>
+      <header className="bubble-tea-header">3D BUBBLE TEA</header>
+      {/* <button onClick={() => {setClicked(!clicked)}}>Test Button</button> */}
+        <div className="flex-row">
+          <div className="section-container">
+            <div className='model-section'>
               <Canvas>
                 <Suspense fallback={null}>
                   <Scene
@@ -51,16 +49,13 @@ function App() {
               </Canvas>
             </div>
           </div>
-          <div className='flex-child form'>
-            <div className='form-body'>
-              <NewOrderForm
-                addOrder={postOrder}
-                onFormSubmitted={handleFormSubmitted}
-              />
-            </div>
+          <div className="flex-form">
+            <NewOrderForm
+              addOrder={postOrder}
+              onFormSubmitted={handleFormSubmitted}
+            />
           </div>
         </div>
-      </main>
     </div>
   );
 }
