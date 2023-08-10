@@ -11,11 +11,11 @@ const EMPTY_FORM = {
 }
 
 // Reusable JSX for form fields
-const FormField = ({ heading, label, name, options, value, onChange }) => {
+const FormField = ({ className, heading, label, name, options, value, onChange }) => {
   return (
-    <div className="form-field">
+    <div className={className}>
       <label htmlFor={name}>
-        <h3>{heading}</h3>
+        <h4>{heading}</h4>
         <select name={name} value={value} onChange={onChange}>
           <option disabled hidden value="">
             ---Choose {label}--
@@ -38,22 +38,6 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
   );
 
 //~~~~~~~~~~~~~~~~~~~~~~TOPPINGS OPTIONS FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
-
-  // Display each topping in a list of checkboxes
-  const toppingComponents = formOptions.toppings.map((topping, index) => {
-    return (
-      <div key={index} className="each_toppings__container">
-        <label htmlFor={`checkbox-${index}`}>{topping}</label>
-        <input
-          type="checkbox"
-          id={`checkbox-${index}`}
-          value={topping}
-          checked={checkedState[index]}
-          onChange={() => handleToppingsChange(index)}
-        />
-      </div>
-    );
-  });
 
   // Check and toggle boolean of checkbox array
   const handleToppingsChange = (position) => {
@@ -104,7 +88,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
     }));
   };
 
-  // Submit user order to db and alert success message
+  // Submit user order to db and reset form
   const handleSubmit = (event) => {
     event.preventDefault();
     addOrder(formFields);
@@ -157,27 +141,33 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
 
   return (
     <form id="create-order-form" className="new-order-form" onSubmit={handleSubmit}>
-      <input
-        type="button"
-        value="Create Random Order! 🪄"
-        onClick={makeRandomOrder}
-      />
       <FormField
-        heading="Select your milk tea base"
+        className="base-form-field"
+        heading="Milk tea base"
         label="a base"
         name="base"
         options={formOptions.bases}
         value={formFields.base}
         onChange={handleChange}
       />
-      <div className = "all_toppings__container">
-        <label htmlFor="toppings">
-          <h3>Select your toppings</h3>
-          {toppingComponents}
-        </label>
+      <h4>Toppings</h4>
+      <div className="toppings-container">
+        {formOptions.toppings.map((topping, index) => (
+          <div key={index} className="each-toppings__container">
+            <label htmlFor={`checkbox-${index}`}>{topping}</label>
+            <input
+              type="checkbox"
+              id={`checkbox-${index}`}
+              value={topping}
+              checked={checkedState[index]}
+              onChange={() => handleToppingsChange(index)}
+            />
+          </div>
+        ))}
       </div>
       <FormField
-        heading="Select your sweetness"
+        className="sweet-form-field"
+        heading="Sweetness"
         label="a sugar level"
         name="sweetness"
         options={formOptions.sweetness}
@@ -185,32 +175,42 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
         onChange={handleChange}
       />
       <FormField
-        heading="Select your ice level"
+        className="ice-form-field"
+        heading="Ice"
         label="an ice level"
         name="temp"
         options={formOptions.temps}
         value={formFields.temp}
         onChange={handleChange}
       />
-      <div className="preview_text">
-        <h3>Current order preview:</h3>
+      <div className="preview-section">
+        <h4 className="receipt">
+          <strong>RECEIPT</strong>
+        </h4>
         <ul>
-          <li>Base: <span>{writeBasePreview()}</span></li>
-          <li>Toppings: <span>{writeToppingsPreview()}</span></li>
-          <li>Sweetness: <span>{writeSweetPreview()}</span></li>
-          <li>Temp: <span>{writeTempPreview()}</span></li>
+          <li><strong>Base: </strong>{writeBasePreview()}</li>
+          <li><strong>Toppings: </strong>{writeToppingsPreview()}</li>
+          <li><strong>Sweetness: </strong>{writeSweetPreview()}</li>
+          <li><strong>Ice: </strong>{writeTempPreview()}</li>
         </ul>
       </div>
-      <input
-        disabled={isFormIncomplete}
-        type="submit"
-        value="Submit Drink!"
-      />
-      <input
-        type="button"
-        value="Reset Form"
-        onClick={resetForm}
-      />
+      <div className="button-container">
+        <input
+          type="button"
+          value="Random! 🪄"
+          onClick={makeRandomOrder}
+        />
+        <input
+          disabled={isFormIncomplete}
+          type="submit"
+          value="Submit Drink!"
+        />
+        <input
+          type="button"
+          value="Reset Form"
+          onClick={resetForm}
+        />
+      </div>
     </form>
   );
 };

@@ -11,27 +11,10 @@ function App() {
   const [orderData, setOrderData] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  
+  // useCallback to prevent unnecessary re-renders
   const handleFormSubmitted = useCallback((isFormSubmitted) => {
     setFormSubmitted(!isFormSubmitted);
-  }, []);
-
-//~~~~~~~~~~~~~~~~~~~~~~AXIOS CALLS~~~~~~~~~~~~~~~~~~~~~~
-
-  // Retrieve all orders from the database
-  const getOrders = () => {
-    axios
-      .get(`${API}/orders`)
-      .then((response) => {
-        setOrderData(response.data);
-      })
-      .catch((error) => {
-        console.log('Error while fetching orders:', error);
-        alert('Unable to retrieve orders.');
-      });
-  };
-
-  useEffect(() => {
-    getOrders();
   }, []);
 
   // Add an order to the database
@@ -50,14 +33,12 @@ function App() {
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
 
   return (
-    <div className="App">
-      <header>3d Bubble Tea</header>
+    <div className='App'>
+      <header className="bubble-tea-header">3D BUBBLE TEA</header>
       {/* <button onClick={() => {setClicked(!clicked)}}>Test Button</button> */}
-      <main>
-        <h1>Boba Order</h1>
-        <div className='flex-container'>
-          {/* <div className='flex-child-model'>
-            <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
+        <div className="flex-row">
+          {/* <div className="section-container">
+            <div className='model-section'>
               <Canvas>
                 <Suspense fallback={null}>
                   <Scene
@@ -68,16 +49,13 @@ function App() {
               </Canvas>
             </div>
           </div> */}
-          <div className='flex-child form'>
-            <div className='form-body'>
-              <NewOrderForm
-                addOrder={postOrder}
-                onFormSubmitted={handleFormSubmitted}
-              />
-            </div>
+          <div className="flex-form">
+            <NewOrderForm
+              addOrder={postOrder}
+              onFormSubmitted={handleFormSubmitted}
+            />
           </div>
         </div>
-      </main>
     </div>
   );
 }

@@ -84,11 +84,12 @@ const Scene = (props) => {
   useFrame((state, delta) => {
     if (props.clicked || props.formSubmitted) {
       setRotation((prevRotation) => prevRotation + delta * 0.5);
-      state.camera.position.lerp(vec.set(0, -0.5, 2), .01);
-      state.camera.updateProjectionMatrix();
-    } else {
-      state.camera.position.lerp(vec.set(0, 0, 5), .01);
-    }
+      // state.camera.position.lerp(vec.set(0, -0.5, 2), .01);
+      // state.camera.updateProjectionMatrix();
+    } 
+    // else {
+    //   state.camera.position.lerp(vec.set(0, 0, 5), .01);
+    // }
   });
   
   return (
