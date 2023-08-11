@@ -115,6 +115,9 @@ function Boba(props) {
 
 //~~~~~~~~~~~~~~~~~~~~~~CHIA SEED FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
+// TODO: Stretch goal: Fix distribution of seeds throughout shape
+// Pick a height (y pos), calculate radius of circle at that height
+// Generate random angle and radius, use trig to get x and y (SOH CAH TOA)
 function distributeChiaSeeds(liquidVolume, numSeeds) {
   const chiaSeedPositions = [];
 
@@ -205,7 +208,7 @@ function Pudding(props) {
 
 //~~~~~~~~~~~~~~~~~~~~~~JELLY CUBE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
-function JellyCube(props) {
+function Jelly(props) {
   const { nodes, materials } = useGLTF('/jelly.gltf')
 
   // Set transparency and opacity for the cup material
@@ -213,44 +216,31 @@ function JellyCube(props) {
   materials.Material.opacity = 0.2;
 
   return (
-    <group {...props} dispose={null} scale={0.1}>
-      <mesh
-        geometry={nodes.Object_4.geometry}
-        material={materials.Material}
-        position={[-0.053, 15.811, 2.135]}
-        rotation={[-0.277, 0.4, 1.47]}
-      />
-      {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
-    </group>
-  )
-}
-
-function JellyCube2(props) {
-  const { nodes, materials } = useGLTF('/jelly.gltf')
-  return (
-    <group {...props} dispose={null} scale={0.08} >
-      <mesh
-        geometry={nodes.Object_4.geometry}
-        material={materials.Material}
-        position={[-8.553, 19.811, 2.135]}
-        rotation={[-0.477, 0.4, 1.87]}
-      />
-      {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
-    </group>
-  )
-}
-
-function JellyCube3(props) {
-  const { nodes, materials } = useGLTF('/jelly.gltf')
-  return (
-    <group {...props} dispose={null} scale={0.13} >
-      <mesh
-        geometry={nodes.Object_4.geometry}
-        material={materials.Material}
-        position={[-4.553, 17.311, 0.135]}
-        rotation={[-0.077, -0.6, 1.87]}
-      />
-      {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
+    <group>
+      <group {...props} dispose={null} scale={0.1}>
+        <mesh
+          geometry={nodes.Object_4.geometry}
+          material={materials.Material}
+          position={[-0.053, 15.811, 2.135]}
+          rotation={[-0.277, 0.4, 1.47]}
+        />
+      </group>
+      <group {...props} dispose={null} scale={0.08} >
+        <mesh
+          geometry={nodes.Object_4.geometry}
+          material={materials.Material}
+          position={[-8.553, 19.811, 2.135]}
+          rotation={[-0.477, 0.4, 1.87]}
+        />
+      </group>
+      <group {...props} dispose={null} scale={0.13} >
+        <mesh
+          geometry={nodes.Object_4.geometry}
+          material={materials.Material}
+          position={[-4.553, 17.311, 0.135]}
+          rotation={[-0.077, -0.6, 1.87]}
+        />
+      </group>
     </group>
   )
 }
@@ -327,14 +317,12 @@ const Scene = (props) => {
       <ambientLight />
       <group rotation={[0, rotation, 0]} position={[0, -0.9, 0]}>
         <Model/>
-        <IceCubes />
-        { props.showPudding && <Pudding /> }
         { props.showLiquid && <Liquid /> }
+        { props.showIce && <IceCubes /> }
         { props.showBoba && <Boba /> }
+        { props.showJelly && <Jelly /> }
         { props.showChia && <ChiaSeeds /> }
-        { props.showJelly && <JellyCube /> }
-        { props.showJelly && <JellyCube2 /> }
-        { props.showJelly && <JellyCube3 /> }
+        { props.showPudding && <Pudding /> }
       </group>
     </>
   )
