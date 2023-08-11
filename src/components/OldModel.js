@@ -14,7 +14,8 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 // import { JellyCube } from './Scene';
 
-function OldModel(props) {
+// Model with empty cup and straw
+function Model(props) {
   const group = useRef();
   const { nodes, materials } = useGLTF('/scene.gltf');
 
@@ -26,15 +27,57 @@ function OldModel(props) {
       <group ref={group} {...props} dispose={null} scale={0.04}>
         <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
           <group rotation={[Math.PI / 2, 0, 0]}>
-            <mesh geometry={nodes.gobelet_blinn1_0.geometry} material={materials.blinn1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.liquide_bifrostLiquidMaterial1_0.geometry} material={materials.bifrostLiquidMaterial1} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.paille_blinn2_0.geometry} material={materials.blinn2} position={[0, 2.957, 0]} scale={0.148} />
-            <mesh geometry={nodes.couvercle_blinn1_0.geometry} material={materials.blinn1} />
+            <mesh
+              geometry={nodes.gobelet_blinn1_0.geometry}
+              material={materials.blinn1}
+              position={[0, 2.957, 0]}
+              scale={0.148}
+            />
+            {/* <mesh
+              geometry={nodes.liquide_bifrostLiquidMaterial1_0.geometry}
+              material={materials.bifrostLiquidMaterial1}
+              position={[0, 2.957, 0]}
+              scale={0.148}
+            /> */}
+            <mesh
+              geometry={nodes.paille_blinn2_0.geometry}
+              material={materials.blinn2}
+              position={[0, 2.957, 0]}
+              scale={0.148}
+            />
+            <mesh
+              geometry={nodes.couvercle_blinn1_0.geometry}
+              material={materials.blinn1}
+            />
           </group>
         </group>
       </group>
   )
 }
+
+//~~~~~~~~~~~~~~~~~~~~~~LIQUID FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+
+function Liquid(props) {
+  const group = useRef();
+  const { nodes, materials } = useGLTF('/scene.gltf');
+
+  return (
+    <group ref={group} {...props} dispose={null} scale={0.04}>
+      <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <mesh
+            geometry={nodes.liquide_bifrostLiquidMaterial1_0.geometry}
+            material={materials.bifrostLiquidMaterial1}
+            position={[0, 2.957, 0]}
+            scale={0.148}
+          />
+        </group>
+      </group>
+    </group>
+  );
+};
+
+//~~~~~~~~~~~~~~~~~~~~~~BOBA FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
 function Boba(props) {
   const group = useRef();
@@ -66,6 +109,8 @@ function Boba(props) {
     </group>
   )
 };
+
+//~~~~~~~~~~~~~~~~~~~~~~CHIA SEED FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
 function distributeChiaSeeds(liquidVolume, numSeeds) {
   const chiaSeedPositions = [];
@@ -112,7 +157,6 @@ function ChiaSeeds(props) {
           key={i}
           geometry={nodes[meshName].geometry}
           material={materials.lambert1}
-          material-color="black"
           position={[
             chiaSeedsPositions[i].x,
             chiaSeedsPositions[i].y,
@@ -135,11 +179,23 @@ function ChiaSeeds(props) {
   );
 };
 
+//~~~~~~~~~~~~~~~~~~~~~~JELLY CUBE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+
 function JellyCube(props) {
   const { nodes, materials } = useGLTF('/jelly.gltf')
+
+  // Set transparency and opacity for the cup material
+  materials.Material.transparent = true;
+  materials.Material.opacity = 0.2;
+
   return (
     <group {...props} dispose={null} scale={0.1}>
-      <mesh geometry={nodes.Object_4.geometry} material={materials.Material} position={[-0.053, 15.811, 2.135]} rotation={[-0.277, 0.4, 1.47]} />
+      <mesh
+        geometry={nodes.Object_4.geometry}
+        material={materials.Material}
+        position={[-0.053, 15.811, 2.135]}
+        rotation={[-0.277, 0.4, 1.47]}
+      />
       {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
     </group>
   )
@@ -149,7 +205,12 @@ function JellyCube2(props) {
   const { nodes, materials } = useGLTF('/jelly.gltf')
   return (
     <group {...props} dispose={null} scale={0.08} >
-      <mesh geometry={nodes.Object_4.geometry} material={materials.Material} position={[-8.553, 19.811, 2.135]} rotation={[-0.477, 0.4, 1.87]} />
+      <mesh
+        geometry={nodes.Object_4.geometry}
+        material={materials.Material}
+        position={[-8.553, 19.811, 2.135]}
+        rotation={[-0.477, 0.4, 1.87]}
+      />
       {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
     </group>
   )
@@ -159,24 +220,35 @@ function JellyCube3(props) {
   const { nodes, materials } = useGLTF('/jelly.gltf')
   return (
     <group {...props} dispose={null} scale={0.13} >
-      <mesh geometry={nodes.Object_4.geometry} material={materials.Material} position={[-4.553, 17.311, 0.135]} rotation={[-0.077, -0.6, 1.87]} />
+      <mesh
+        geometry={nodes.Object_4.geometry}
+        material={materials.Material}
+        position={[-4.553, 17.311, 0.135]}
+        rotation={[-0.077, -0.6, 1.87]}
+      />
       {/* <mesh geometry={nodes.Object_6.geometry} material={materials.material_0} scale={8.763} /> */}
     </group>
   )
 }
 
+//~~~~~~~~~~~~~~~~~~~~~~SCENE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+
 const Scene = (props) => {
   const [rotation, setRotation] = useState(0);
+
+  useEffect(() => {
+    if (props.formSubmitted) {
+      setRotation(0);
+    }
+  }, [props.formSubmitted]);
 
   const vec = new THREE.Vector3();
 
   useFrame((state, delta) => {
     if (props.clicked || props.formSubmitted) {
-      // setRotation((prevRotation) => prevRotation + delta * 0.9);
       state.camera.position.lerp(vec.set(0, 0, 2), .01);
       state.camera.updateProjectionMatrix();
-    } 
-    else {
+    } else {
       state.camera.position.lerp(vec.set(0, 0, 5), .01);
     }
   });
@@ -185,10 +257,9 @@ const Scene = (props) => {
     <>
       <ambientLight />
       <group rotation={[0, rotation, 0]}>
-        <OldModel/>
-      </group>
-      <Boba />
-      <group>
+        <Model/>
+        { props.showLiquid && <Liquid /> }
+        { props.showBoba && <Boba /> }
         { props.showChia && <ChiaSeeds /> }
         { props.showJelly && <JellyCube /> }
         { props.showJelly && <JellyCube2 /> }
