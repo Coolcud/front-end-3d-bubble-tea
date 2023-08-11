@@ -61,6 +61,9 @@ function Liquid(props) {
   const group = useRef();
   const { nodes, materials } = useGLTF('/scene.gltf');
 
+  // Liquid opacity
+  materials.bifrostLiquidMaterial1.opacity = 0.7;
+
   return (
     <group ref={group} {...props} dispose={null} scale={0.04}>
       <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
@@ -185,14 +188,14 @@ function Pudding(props) {
   const { nodes, materials } = useGLTF('/pudding.gltf');
 
   return (
-    <group {...props} dispose={null} scale={1}>
+    <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh
             geometry={nodes.Pudding_lambert2_0.geometry}
             material={materials.lambert2}
-            position={[0, 0.05, 0]}
-            scale={[0.0047, 0.0055, 0.0045]}
+            position={[0, 0.0001, 0]}
+            scale={[0.00465, 0.0045, 0.0045]}
           />
         </group>
       </group>
@@ -252,6 +255,27 @@ function JellyCube3(props) {
   )
 }
 
+function IceCubes(props) {
+  const group = useRef();
+  const { nodes, materials } = useGLTF('/cup-of-drink.glb');
+
+  // Set transparency for cube material
+  materials['Ice.001'].transparent = true;
+  materials['Ice.002'].transparent = true;
+  materials['Ice.003'].transparent = true;
+
+  return (
+    <group ref={group} {...props} dispose={null}>
+      <group scale={[2.257, 5.702, 1.711]}>
+        <mesh geometry={nodes.Ice_cube.geometry} material={materials.Ice} position={[-0.333, 0.452, 0]} rotation={[0, 0, 0.635]} scale={[0.105, 0.081, 0.163]} />
+        <mesh geometry={nodes.Ice_cube001.geometry} material={materials['Ice.001']} position={[-0.122, 0.356, -0.338]} rotation={[-0.265, -0.887, 0.419]} scale={[0.085, 0.065, 0.104]} />
+        <mesh geometry={nodes.Ice_cube002.geometry} material={materials['Ice.002']} position={[0.325, 0.452, 0.242]} rotation={[-0.047, -1.306, -0.384]} scale={[0.153, 0.054, 0.123]} />
+        <mesh geometry={nodes.Ice_cube003.geometry} material={materials['Ice.003']} position={[-0.332, 0.278, 0.298]} rotation={[2.217, -1.29, 2.876]} scale={[0.083, 0.062, 0.083]} />
+      </group>
+    </group>
+  );
+};
+
 //~~~~~~~~~~~~~~~~~~~~~~SCENE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
 const Scene = (props) => {
@@ -280,7 +304,8 @@ const Scene = (props) => {
       <ambientLight />
       <group rotation={[0, rotation, 0]}>
         <Model/>
-        <Pudding />
+        <IceCubes />
+        { props.showPudding && <Pudding /> }
         { props.showLiquid && <Liquid /> }
         { props.showBoba && <Boba /> }
         { props.showChia && <ChiaSeeds /> }
