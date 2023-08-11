@@ -20,15 +20,11 @@ function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formFields, setFormFields] = useState(EMPTY_FORM);
   const [showLiquid, setShowLiquid] = useState(false);
+  const [showIce, setShowIce] = useState(false);
   const [showBoba, setShowBoba] = useState(false);
   const [showJelly, setShowJelly] = useState(false);
   const [showChia, setShowChia] = useState(false);
   const [showPudding, setShowPudding] = useState(false);
-
-  // useCallback to prevent unnecessary re-renders
-  // const handleFormSubmitted = useCallback((isFormSubmitted) => {
-  //   setFormSubmitted(isFormSubmitted);
-  // }, []);
 
   // Add an order to the database
   const postOrder = (newOrder) => {
@@ -61,6 +57,7 @@ function App() {
                     clicked={clicked}
                     formSubmitted={formSubmitted}
                     showLiquid={showLiquid}
+                    showIce={showIce}
                     showBoba={showBoba}
                     showJelly={showJelly}
                     showChia={showChia}
@@ -77,6 +74,7 @@ function App() {
               formFields={formFields}
               setFormFields={setFormFields}
               setShowLiquid={setShowLiquid}
+              setShowIce={setShowIce}
               setShowBoba={setShowBoba}
               setShowJelly={setShowJelly}
               setShowChia={setShowChia}

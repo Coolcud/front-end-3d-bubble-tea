@@ -30,7 +30,7 @@ const FormField = ({ className, heading, label, name, options, value, onChange }
     </div>
 )};
 
-const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowBoba, setShowJelly, setShowChia, setShowPudding }) => {
+const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowIce, setShowBoba, setShowJelly, setShowChia, setShowPudding }) => {
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
@@ -107,9 +107,11 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
     setCheckedState(new Array(formOptions.toppings.length).fill(false));
     setFormSubmitted(false);
     setShowLiquid(false);
+    setShowIce(false);
     setShowBoba(false);
     setShowJelly(false);
     setShowChia(false);
+    setShowPudding(false);
   }
 
   // Create a random boba order
@@ -141,10 +143,16 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
 
   useMemo(() => {
     if (formFields.base !== "") {
-      console.log('inside setShowLiquid')
+      console.log('inside setShowLiquid');
       setShowLiquid(true);
     }
-  }, [formFields])
+
+    // TODO: FIX BC BROKEN DOES NOT WORK
+    if (formFields.temp !== "" || formFields.temp !== "No ice") {
+      console.log('inside setShowIce');
+      setShowIce(true);
+    }
+  }, [formFields]);
 
   // console.log("formFields:", formFields);
 
@@ -234,10 +242,12 @@ NewOrderForm.propTypes = {
   setFormSubmitted: PropTypes.func.isRequired,
   formFields: PropTypes.object.isRequired,
   setFormFields: PropTypes.func.isRequired,
+  setShowLiquid: PropTypes.func.isRequired,
+  setShowIce: PropTypes.func.isRequired,
+  setShowBoba: PropTypes.func.isRequired,
   setShowJelly: PropTypes.func.isRequired,
   setShowChia: PropTypes.func.isRequired,
-  setShowBoba: PropTypes.func.isRequired,
-  setShowLiquid: PropTypes.func.isRequired,
+  setShowPudding: PropTypes.func.isRequired
 };
 
 export default NewOrderForm;
