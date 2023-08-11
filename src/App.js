@@ -20,10 +20,11 @@ function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formFields, setFormFields] = useState(EMPTY_FORM);
   const [showLiquid, setShowLiquid] = useState(false);
+  const [showBoba, setShowBoba] = useState(false);
   const [showJelly, setShowJelly] = useState(false);
   const [showChia, setShowChia] = useState(false);
-  const [showBoba, setShowBoba] = useState(false);
-  
+  const [showPudding, setShowPudding] = useState(false);
+
   // useCallback to prevent unnecessary re-renders
   // const handleFormSubmitted = useCallback((isFormSubmitted) => {
   //   setFormSubmitted(isFormSubmitted);
@@ -63,6 +64,7 @@ function App() {
                     showBoba={showBoba}
                     showJelly={showJelly}
                     showChia={showChia}
+                    showPudding={showPudding}
                   />
                 </Suspense>
               </Canvas>
@@ -78,6 +80,7 @@ function App() {
               setShowBoba={setShowBoba}
               setShowJelly={setShowJelly}
               setShowChia={setShowChia}
+              setShowPudding={setShowPudding}
             />
           </div>
         </div>

@@ -30,7 +30,7 @@ const FormField = ({ className, heading, label, name, options, value, onChange }
     </div>
 )};
 
-const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, setShowJelly, setShowChia, setShowBoba, setShowLiquid }) => {
+const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowBoba, setShowJelly, setShowChia, setShowPudding }) => {
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
@@ -55,6 +55,7 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
       toppingsList.includes("Boba") ? setShowBoba(true) : setShowBoba(false);
       toppingsList.includes("Ai-yu jelly") ? setShowJelly(true) : setShowJelly(false);
       toppingsList.includes("Chia seeds") ? setShowChia(true) : setShowChia(false);
+      toppingsList.includes("Pudding") ? setShowPudding(true) : setShowPudding(false);
 
       return toppingsList;
     }, []);
