@@ -52,23 +52,9 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
         toppingsList.push(formOptions.toppings[index]);
       }
 
-      if (toppingsList.includes("Boba")) {
-        setShowBoba(true);
-      } else {
-        setShowBoba(false);
-      }
-
-      if (toppingsList.includes("Ai-yu jelly")) {
-        setShowJelly(true);
-      } else {
-        setShowJelly(false);
-      }
-
-      if (toppingsList.includes("Chia seeds")) {
-        setShowChia(true);
-      } else {
-        setShowChia(false);
-      }
+      toppingsList.includes("Boba") ? setShowBoba(true) : setShowBoba(false);
+      toppingsList.includes("Ai-yu jelly") ? setShowJelly(true) : setShowJelly(false);
+      toppingsList.includes("Chia seeds") ? setShowChia(true) : setShowChia(false);
 
       return toppingsList;
     }, []);
@@ -132,7 +118,7 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
     const randomBoolToppings = formOptions.toppings.map(() => Math.random() < 0.5);
     const randomSweetness = formOptions.sweetness[Math.floor(Math.random() * formOptions.sweetness.length)];
     const randomTemp = formOptions.temps[Math.floor(Math.random() * formOptions.temps.length)];
-    
+
     // Set form fields with random values
     setFormFields({
       base: randomBase,
