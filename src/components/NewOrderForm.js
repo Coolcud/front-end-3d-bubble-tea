@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { formOptions } from "../data/FormOptions";
 import "./NewOrderForm.css";
 
@@ -52,16 +52,22 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
         toppingsList.push(formOptions.toppings[index]);
       }
 
-      if (isChecked && index === 0) {
+      if (toppingsList.includes("Boba")) {
         setShowBoba(true);
+      } else {
+        setShowBoba(false);
       }
 
-      if (isChecked && index === 4) {
+      if (toppingsList.includes("Ai-yu jelly")) {
         setShowJelly(true);
+      } else {
+        setShowJelly(false);
       }
-      
-      if (isChecked && index === 6) {
+
+      if (toppingsList.includes("Chia seeds")) {
         setShowChia(true);
+      } else {
+        setShowChia(false);
       }
 
       return toppingsList;
@@ -139,18 +145,21 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
   };
 
   // Use useEffect to update toppings when checkedState changes
-  useEffect(() => {
+  useCallback(() => {
     setFormFields({
       ...formFields,
       toppings: makeToppingsList(),
     });
   }, [checkedState]);
 
-  if (formFields.base !== "") {
-    setShowLiquid(true);
-  }
+  useMemo(() => {
+    if (formFields.base !== "") {
+      console.log('inside setShowLiquid')
+      setShowLiquid(true);
+    }
+  }, [formFields])
 
-  console.log("formFields:", formFields);
+  // console.log("formFields:", formFields);
 
   // Check array of formFields's values for no "" to activate submit button
   const isFormIncomplete = Object.values(formFields).some((value) => value === "");
