@@ -30,9 +30,7 @@ const FormField = ({ className, heading, label, name, options, value, onChange }
     </div>
 )};
 
-const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, setShowJelly, setShowChia }) => {
-  // const [formFields, setFormFields] = useState(EMPTY_FORM);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, setShowJelly, setShowChia, setShowBoba, setShowLiquid }) => {
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
@@ -52,6 +50,10 @@ const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, se
     return checkedState.reduce((toppingsList, isChecked, index) => {
       if (isChecked) {
         toppingsList.push(formOptions.toppings[index]);
+      }
+
+      if (isChecked && index === 0) {
+        setShowBoba(true);
       }
 
       if (isChecked && index === 4) {
@@ -102,8 +104,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, se
     event.preventDefault();
     addOrder(formFields);
     setFormSubmitted(true);
-    onFormSubmitted(formSubmitted);
-    resetForm();
+    // resetForm();
   }
 
   // Reset form fields to default
@@ -111,7 +112,11 @@ const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, se
     document.getElementById("create-order-form").reset();
     setFormFields(EMPTY_FORM);
     setCheckedState(new Array(formOptions.toppings.length).fill(false));
-    setFormSubmitted(!formSubmitted);
+    setFormSubmitted(false);
+    setShowLiquid(false);
+    setShowBoba(false);
+    setShowJelly(false);
+    setShowChia(false);
   }
 
   // Create a random boba order
@@ -140,6 +145,10 @@ const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, se
       toppings: makeToppingsList(),
     });
   }, [checkedState]);
+
+  if (formFields.base !== "") {
+    setShowLiquid(true);
+  }
 
   console.log("formFields:", formFields);
 
@@ -226,7 +235,13 @@ const NewOrderForm = ({ addOrder, onFormSubmitted, formFields, setFormFields, se
 
 NewOrderForm.propTypes = {
   addOrder: PropTypes.func.isRequired,
-  onFormSubmitted: PropTypes.func.isRequired
+  setFormSubmitted: PropTypes.func.isRequired,
+  formFields: PropTypes.object.isRequired,
+  setFormFields: PropTypes.func.isRequired,
+  setShowJelly: PropTypes.func.isRequired,
+  setShowChia: PropTypes.func.isRequired,
+  setShowBoba: PropTypes.func.isRequired,
+  setShowLiquid: PropTypes.func.isRequired,
 };
 
 export default NewOrderForm;
