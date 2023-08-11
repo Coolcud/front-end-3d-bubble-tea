@@ -260,18 +260,41 @@ function IceCubes(props) {
   const { nodes, materials } = useGLTF('/cup-of-drink.glb');
 
   // Set transparency for cube material
+  materials['Ice'].transparent = true;
   materials['Ice.001'].transparent = true;
   materials['Ice.002'].transparent = true;
   materials['Ice.003'].transparent = true;
 
   return (
-    <group ref={group} {...props} dispose={null}>
-      <group scale={[2.257, 5.702, 1.711]}>
-        <mesh geometry={nodes.Ice_cube.geometry} material={materials.Ice} position={[-0.333, 0.452, 0]} rotation={[0, 0, 0.635]} scale={[0.105, 0.081, 0.163]} />
-        <mesh geometry={nodes.Ice_cube001.geometry} material={materials['Ice.001']} position={[-0.122, 0.356, -0.338]} rotation={[-0.265, -0.887, 0.419]} scale={[0.085, 0.065, 0.104]} />
-        <mesh geometry={nodes.Ice_cube002.geometry} material={materials['Ice.002']} position={[0.325, 0.452, 0.242]} rotation={[-0.047, -1.306, -0.384]} scale={[0.153, 0.054, 0.123]} />
-        <mesh geometry={nodes.Ice_cube003.geometry} material={materials['Ice.003']} position={[-0.332, 0.278, 0.298]} rotation={[2.217, -1.29, 2.876]} scale={[0.083, 0.062, 0.083]} />
-      </group>
+    <group ref={group} {...props} dispose={null} scale={1.5}>
+      <mesh
+        geometry={nodes.Ice_cube.geometry}
+        material={materials.Ice}
+        position={[-0.25, 0.65, 0]}
+        rotation={[0, 0, 0.635]}
+        scale={[0.085, 0.085, 0.085]}
+      />
+      <mesh
+        geometry={nodes.Ice_cube001.geometry}
+        material={materials['Ice.001']}
+        position={[-0.01, 0.5, -0.27]}
+        rotation={[-0.265, -0.887, 0.419]}
+        scale={[0.085, 0.085, 0.085]}
+      />
+      <mesh
+        geometry={nodes.Ice_cube002.geometry}
+        material={materials['Ice.002']}
+        position={[0.3, 0.75, 0.04]}
+        rotation={[-0.047, -1.306, -0.384]}
+        scale={[0.085, 0.085, 0.085]}
+      />
+      <mesh
+        geometry={nodes.Ice_cube003.geometry}
+        material={materials['Ice.003']}
+        position={[-0.05, 0.3, 0.25]}
+        rotation={[2.217, -1.29, 2.876]}
+        scale={[0.085, 0.085, 0.085]}
+      />
     </group>
   );
 };
