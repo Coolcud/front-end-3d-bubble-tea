@@ -192,7 +192,7 @@ function Pudding(props) {
             geometry={nodes.Pudding_lambert2_0.geometry}
             material={materials.lambert2}
             position={[0, 0.05, 0]}
-            scale={[0.003, 0.0055, 0.0045]}
+            scale={[0.0047, 0.0055, 0.0045]}
           />
         </group>
       </group>
@@ -267,6 +267,7 @@ const Scene = (props) => {
 
   useFrame((state, delta) => {
     if (props.clicked || props.formSubmitted) {
+      setRotation((prevRotation) => prevRotation + delta * 0.9);
       state.camera.position.lerp(vec.set(0, 0, 2), .01);
       state.camera.updateProjectionMatrix();
     } else {
