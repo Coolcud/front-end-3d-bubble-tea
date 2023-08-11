@@ -315,17 +315,17 @@ const Scene = (props) => {
   useFrame((state, delta) => {
     if (props.clicked || props.formSubmitted) {
       setRotation((prevRotation) => prevRotation + delta * 0.9);
-      state.camera.position.lerp(vec.set(0, 0, 2), .01);
+      state.camera.position.lerp(vec.set(0, 0, 3), .01);
       state.camera.updateProjectionMatrix();
     } else {
-      state.camera.position.lerp(vec.set(0, 0, 5), .01);
+      state.camera.position.lerp(vec.set(0, 0, 4.5), .01);
     }
   });
 
   return (
     <>
       <ambientLight />
-      <group rotation={[0, rotation, 0]}>
+      <group rotation={[0, rotation, 0]} position={[0, -0.9, 0]}>
         <Model/>
         <IceCubes />
         { props.showPudding && <Pudding /> }
