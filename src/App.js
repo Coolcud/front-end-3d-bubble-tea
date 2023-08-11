@@ -19,13 +19,15 @@ function App() {
   const [clicked, setClicked] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formFields, setFormFields] = useState(EMPTY_FORM);
+  const [showLiquid, setShowLiquid] = useState(false);
   const [showJelly, setShowJelly] = useState(false);
   const [showChia, setShowChia] = useState(false);
+  const [showBoba, setShowBoba] = useState(false);
   
   // useCallback to prevent unnecessary re-renders
-  const handleFormSubmitted = useCallback((isFormSubmitted) => {
-    setFormSubmitted(!isFormSubmitted);
-  }, []);
+  // const handleFormSubmitted = useCallback((isFormSubmitted) => {
+  //   setFormSubmitted(isFormSubmitted);
+  // }, []);
 
   // Add an order to the database
   const postOrder = (newOrder) => {
@@ -33,6 +35,7 @@ function App() {
       .post(`${API}/orders`, newOrder)
       .then(() => {
         alert("Form successfully submitted! ฅ^•ﻌ•^ฅ🧋");
+        setFormSubmitted(true);
       })
       .catch((error) => {
         console.log('Error while posting order:', error);
@@ -56,6 +59,8 @@ function App() {
                   <Scene
                     clicked={clicked}
                     formSubmitted={formSubmitted}
+                    showLiquid={showLiquid}
+                    showBoba={showBoba}
                     showJelly={showJelly}
                     showChia={showChia}
                   />
@@ -64,15 +69,16 @@ function App() {
             </div>
           </div>
           <div className='flex-form'>
-              <NewOrderForm
-                addOrder={postOrder}
-                onFormSubmitted={handleFormSubmitted}
-                formFields={formFields}
-                setFormFields={setFormFields}
-                setShowJelly={setShowJelly}
-                setShowChia={setShowChia}
-              />
-
+            <NewOrderForm
+              addOrder={postOrder}
+              setFormSubmitted={setFormSubmitted}
+              formFields={formFields}
+              setFormFields={setFormFields}
+              setShowLiquid={setShowLiquid}
+              setShowBoba={setShowBoba}
+              setShowJelly={setShowJelly}
+              setShowChia={setShowChia}
+            />
           </div>
         </div>
       </main>
