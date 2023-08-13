@@ -55,6 +55,7 @@ function App() {
                 <Suspense fallback={null}>
                   <Scene
                     clicked={clicked}
+                    formFields={formFields}
                     formSubmitted={formSubmitted}
                     showLiquid={showLiquid}
                     showIce={showIce}
