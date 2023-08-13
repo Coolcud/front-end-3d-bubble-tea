@@ -251,40 +251,61 @@ function IceCubes(props) {
 
   // Set transparency for cube material
   materials['Ice'].transparent = true;
-  materials['Ice.001'].transparent = true;
-  materials['Ice.002'].transparent = true;
-  materials['Ice.003'].transparent = true;
+
+  const cubes = {
+    cube1: <mesh
+              geometry={nodes.Ice_cube.geometry}
+              material={materials.Ice}
+              position={[-0.25, 0.65, 0]}
+              rotation={[0, 0, 0.635]}
+              scale={[0.085, 0.085, 0.085]}
+            />,
+    cube2: <mesh
+            geometry={nodes.Ice_cube.geometry}
+            material={materials['Ice']}
+            position={[-0.01, 0.5, -0.27]}
+            rotation={[-0.265, -0.887, 0.419]}
+            scale={[0.085, 0.085, 0.085]}
+          />,
+    cube3: <mesh
+            geometry={nodes.Ice_cube.geometry}
+            material={materials['Ice']}
+            position={[0.3, 0.75, 0.04]}
+            rotation={[-0.047, -1.306, -0.384]}
+            scale={[0.085, 0.085, 0.085]}
+          />,
+    cube4: <mesh
+            geometry={nodes.Ice_cube.geometry}
+            material={materials['Ice']}
+            position={[-0.05, 0.3, 0.25]}
+            rotation={[2.217, -1.29, 2.876]}
+            scale={[0.085, 0.085, 0.085]}
+          />
+  };
+
+  const iceLevel = props.formFields.temp;
+  console.log("my ice level:", iceLevel);
+  const numCubes = [];
+
+  if (iceLevel === "No ice") {
+    return numCubes;
+  } else if (iceLevel === "30% ice") {
+    numCubes.push(cubes.cube1);
+    numCubes.push(cubes.cube3);
+  } else if (iceLevel === "50% ice") {
+    numCubes.push(cubes.cube1);
+    numCubes.push(cubes.cube2);
+    numCubes.push(cubes.cube3);
+  } else if (iceLevel === "80% ice") {
+    numCubes.push(cubes.cube1);
+    numCubes.push(cubes.cube2);
+    numCubes.push(cubes.cube3);
+    numCubes.push(cubes.cube4);
+  }
 
   return (
     <group ref={group} {...props} dispose={null} scale={1.5}>
-      <mesh
-        geometry={nodes.Ice_cube.geometry}
-        material={materials.Ice}
-        position={[-0.25, 0.65, 0]}
-        rotation={[0, 0, 0.635]}
-        scale={[0.085, 0.085, 0.085]}
-      />
-      <mesh
-        geometry={nodes.Ice_cube001.geometry}
-        material={materials['Ice.001']}
-        position={[-0.01, 0.5, -0.27]}
-        rotation={[-0.265, -0.887, 0.419]}
-        scale={[0.085, 0.085, 0.085]}
-      />
-      <mesh
-        geometry={nodes.Ice_cube002.geometry}
-        material={materials['Ice.002']}
-        position={[0.3, 0.75, 0.04]}
-        rotation={[-0.047, -1.306, -0.384]}
-        scale={[0.085, 0.085, 0.085]}
-      />
-      <mesh
-        geometry={nodes.Ice_cube003.geometry}
-        material={materials['Ice.003']}
-        position={[-0.05, 0.3, 0.25]}
-        rotation={[2.217, -1.29, 2.876]}
-        scale={[0.085, 0.085, 0.085]}
-      />
+      {numCubes}
     </group>
   );
 };
@@ -317,8 +338,9 @@ const Scene = (props) => {
       <ambientLight />
       <group rotation={[0, rotation, 0]} position={[0, -0.9, 0]}>
         <Model/>
+        <IceCubes formFields={props.formFields}/>
         { props.showLiquid && <Liquid /> }
-        { props.showIce && <IceCubes /> }
+        {/* { props.showIce && <IceCubes formFields={props.formFields}/> } */}
         { props.showBoba && <Boba /> }
         { props.showJelly && <Jelly /> }
         { props.showChia && <ChiaSeeds /> }
