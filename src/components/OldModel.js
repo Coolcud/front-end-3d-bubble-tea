@@ -251,32 +251,34 @@ function IceCubes(props) {
 
   // Set transparency for cube material
   materials['Ice'].transparent = true;
+  const geometry = nodes.Ice_cube.geometry;
+  const material = materials.Ice;
 
   const cubes = {
     cube1: <mesh
-              geometry={nodes.Ice_cube.geometry}
-              material={materials.Ice}
+              geometry={geometry}
+              material={material}
               position={[-0.25, 0.65, 0]}
               rotation={[0, 0, 0.635]}
               scale={[0.085, 0.085, 0.085]}
             />,
     cube2: <mesh
-            geometry={nodes.Ice_cube.geometry}
-            material={materials['Ice']}
+            geometry={geometry}
+            material={material}
             position={[-0.01, 0.5, -0.27]}
             rotation={[-0.265, -0.887, 0.419]}
             scale={[0.085, 0.085, 0.085]}
           />,
     cube3: <mesh
-            geometry={nodes.Ice_cube.geometry}
-            material={materials['Ice']}
+            geometry={geometry}
+            material={material}
             position={[0.3, 0.75, 0.04]}
             rotation={[-0.047, -1.306, -0.384]}
             scale={[0.085, 0.085, 0.085]}
           />,
     cube4: <mesh
-            geometry={nodes.Ice_cube.geometry}
-            material={materials['Ice']}
+            geometry={geometry}
+            material={material}
             position={[-0.05, 0.3, 0.25]}
             rotation={[2.217, -1.29, 2.876]}
             scale={[0.085, 0.085, 0.085]}
@@ -338,9 +340,8 @@ const Scene = (props) => {
       <ambientLight />
       <group rotation={[0, rotation, 0]} position={[0, -0.9, 0]}>
         <Model/>
-        <IceCubes formFields={props.formFields}/>
         { props.showLiquid && <Liquid /> }
-        {/* { props.showIce && <IceCubes formFields={props.formFields}/> } */}
+        { props.showIce && <IceCubes formFields={props.formFields}/> }
         { props.showBoba && <Boba /> }
         { props.showJelly && <Jelly /> }
         { props.showChia && <ChiaSeeds /> }
