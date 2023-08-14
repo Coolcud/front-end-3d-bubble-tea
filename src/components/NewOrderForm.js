@@ -133,8 +133,7 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
     setCheckedState(randomBoolToppings);
   };
 
-  // Use useEffect to update toppings when checkedState changes
-  useCallback(() => {
+  useEffect(() => {
     setFormFields({
       ...formFields,
       toppings: makeToppingsList(),
@@ -147,7 +146,6 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
       setShowLiquid(true);
     }
 
-    // TODO: FIX BC BROKEN DOES NOT WORK
     if (formFields.temp !== "" || formFields.temp !== "No ice") {
       console.log('inside setShowIce');
       setShowIce(true);
