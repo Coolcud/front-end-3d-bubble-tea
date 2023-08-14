@@ -68,6 +68,38 @@ function Liquid(props) {
 
   // Liquid opacity
   materials.bifrostLiquidMaterial1.opacity = 0.7;
+  let baseColor = "white";
+  
+  const baseColors = {
+    "Signature": "pink",
+    // "Royal": "white",
+    // "Assam": "white",
+    "Red oolong": "red",
+    // "High mt. oolong": "white",
+    // "Rock": "white",
+    // "Jasmine": "white",
+    "Rose green": "red",
+    // "Iron buddha": "white",
+    // "Iron buddha plus": "white",
+    // "Earl grey": "white",
+    // "Mango green": "white",
+    // "Buckwheat green": "white",
+    // "Black sugar puerh": "white",
+    // "Chai latte": "white",
+    "Matcha latte": "aquamarine",
+    // "Hojicha latte": "white",
+    // "Genmaicha latte": "white",
+    "Rooibos": "goldenrod",
+    "Black sugar boba": "brown",
+    // "Coffee": "white",
+    "Lava boba": "brown"
+  };
+  
+  if (props.formFields.base in baseColors) {
+    baseColor = baseColors[props.formFields.base];
+  }
+
+  materials.bifrostLiquidMaterial1.color.set(baseColor);
 
   return (
     <group ref={group} {...props} dispose={null} scale={0.04}>
@@ -326,8 +358,8 @@ const Scene = (props) => {
       <ambientLight />
       <group rotation={[0, rotation, 0]} position={[0, -0.9, 0]}>
         <Model/>
-        { props.showLiquid && <Liquid /> }
-        { props.showIce && <IceCubes formFields={props.formFields}/> }
+        { props.showLiquid && <Liquid formFields={props.formFields} /> }
+        { props.showIce && <IceCubes formFields={props.formFields} /> }
         { props.showBoba && <Boba /> }
         { props.showJelly && <Jelly /> }
         { props.showChia && <ChiaSeeds /> }
