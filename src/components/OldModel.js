@@ -67,32 +67,32 @@ function Liquid(props) {
   const { nodes, materials } = useGLTF('/scene.gltf');
 
   // Liquid opacity
-  materials.bifrostLiquidMaterial1.opacity = 0.7;
-  let baseColor = "white";
+  // materials.bifrostLiquidMaterial1.opacity = 0.5;
+  let baseColor = "peachpuff";
   
   const baseColors = {
-    "Signature": "pink",
-    // "Royal": "white",
-    // "Assam": "white",
+    "Signature": "tan",
+    "Royal": "peachpuff",
+    "Assam": "burlywood",
     "Red oolong": "red",
-    // "High mt. oolong": "white",
-    // "Rock": "white",
-    // "Jasmine": "white",
-    "Rose green": "red",
-    // "Iron buddha": "white",
-    // "Iron buddha plus": "white",
-    // "Earl grey": "white",
-    // "Mango green": "white",
+    "High mt. oolong": "peachpuff",
+    "Rock": "sandybrown",
+    "Jasmine": "papayawhip",
+    "Rose green": "plum",
+    "Iron buddha": "peachpuff",
+    "Iron buddha plus": "peachpuff",
+    "Earl grey": "sandybrown",
+    "Mango green": "#fce588",
     // "Buckwheat green": "white",
     // "Black sugar puerh": "white",
-    // "Chai latte": "white",
-    "Matcha latte": "aquamarine",
-    // "Hojicha latte": "white",
-    // "Genmaicha latte": "white",
+    "Chai latte": "peru",
+    "Matcha latte": "darkseagreen",
+    "Hojicha latte": "burlywood",
+    "Genmaicha latte": "mediumseagreen",
     "Rooibos": "goldenrod",
     "Black sugar boba": "brown",
-    // "Coffee": "white",
-    "Lava boba": "brown"
+    "Coffee": "tan",
+    // "Lava boba": "brown"
   };
   
   if (props.formFields.base in baseColors) {
@@ -254,6 +254,7 @@ function Jelly(props) {
   // Cup transparency and opacity
   materials.Material.transparent = true;
   materials.Material.opacity = 0.2;
+  materials.Material.color.set("yellow");
 
   return (
     <group>
