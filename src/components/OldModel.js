@@ -115,7 +115,7 @@ function Boba(props) {
         </group>
       </group>
     </group>
-  )
+  );
 };
 
 //~~~~~~~~~~~~~~~~~~~~~~CHIA SEED FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
@@ -334,7 +334,7 @@ const Scene = (props) => {
         { props.showPudding && <Pudding /> }
       </group>
     </>
-  )
+  );
 };
 
 // useGLTF.preload('/scene.gltf');
