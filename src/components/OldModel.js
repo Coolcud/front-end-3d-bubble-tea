@@ -74,7 +74,7 @@ function Liquid(props) {
     "Signature": "tan",
     "Royal": "peachpuff",
     "Assam": "burlywood",
-    "Red oolong": "red",
+    // "Red oolong": "red",
     "High mt. oolong": "peachpuff",
     "Rock": "sandybrown",
     "Jasmine": "papayawhip",
@@ -90,7 +90,7 @@ function Liquid(props) {
     "Hojicha latte": "burlywood",
     "Genmaicha latte": "mediumseagreen",
     "Rooibos": "goldenrod",
-    "Black sugar boba": "brown",
+    // "Black sugar boba": "brown",
     "Coffee": "tan",
     // "Lava boba": "brown"
   };
@@ -175,24 +175,12 @@ function distributeChiaSeeds(liquidVolume, numSeeds) {
   return chiaSeedPositions;
 }
 
-function ChiaSeeds(props) {
+function ChiaSeeds({ chiaSeedPositions }, props) {
   const group = useRef();
   const { nodes, materials } = useGLTF('/scene.gltf');
 
-  const liquidVolume = {
-    xMin: -12,
-    xMax: 8,
-    yMin: -8,
-    yMax: 30,
-    zMin: -12,
-    zMax: 11
-  };
-
-  const chiaSeedsPositions = distributeChiaSeeds(liquidVolume, 200);
-  useRef(chiaSeedsPositions);
-
   const seeds = [];
-  for (let i = 0; i < chiaSeedsPositions.length; i++) {
+  for (let i = 0; i < chiaSeedPositions.length; i++) {
     const meshName = `polySurface1_lambert1_0`;
     if (nodes[meshName]) {
       seeds.push(
@@ -201,9 +189,9 @@ function ChiaSeeds(props) {
           geometry={nodes[meshName].geometry}
           material={materials.lambert1}
           position={[
-            chiaSeedsPositions[i].x,
-            chiaSeedsPositions[i].y,
-            chiaSeedsPositions[i].z
+            chiaSeedPositions[i].x,
+            chiaSeedPositions[i].y,
+            chiaSeedPositions[i].z
           ]}
           scale={0.048}
         />
@@ -336,6 +324,19 @@ function IceCubes(props) {
 const Scene = (props) => {
   const [rotation, setRotation] = useState(0);
 
+  const liquidVolume = {
+    xMin: -12,
+    xMax: 8,
+    yMin: -8,
+    yMax: 30,
+    zMin: -12,
+    zMax: 11
+  };
+
+  const [chiaSeedPositions, setChiaSeedPositions] = useState(
+    distributeChiaSeeds(liquidVolume, 200)
+  );
+
   useEffect(() => {
     if (props.formSubmitted) {
       setRotation(0);
@@ -363,7 +364,7 @@ const Scene = (props) => {
         { props.showIce && <IceCubes formFields={props.formFields} /> }
         { props.showBoba && <Boba /> }
         { props.showJelly && <Jelly /> }
-        { props.showChia && <ChiaSeeds /> }
+        { props.showChia && <ChiaSeeds chiaSeedPositions={chiaSeedPositions} /> }
         { props.showPudding && <Pudding /> }
       </group>
     </>
