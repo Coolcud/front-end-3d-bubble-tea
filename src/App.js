@@ -35,8 +35,8 @@ function App() {
         setFormSubmitted(true);
       })
       .catch((error) => {
-        console.log('Error while posting order:', error);
         alert('Unable to create a new order.');
+        console.log('Error while posting order:', error);
       });
   };
 
