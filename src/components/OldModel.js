@@ -248,6 +248,24 @@ function HoneyBear(props) {
   )
 }
 
+//~~~~~~~~~~~~~~~~~~~~~~BEE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+
+function Bee(props) {
+  const { nodes, materials } = useGLTF('/bee.gltf')
+  return (
+    <group {...props} dispose={null} position={[1, -1, 0]}>
+      <group scale={0.01}>
+        <group rotation={[-Math.PI / 2, 0, 0]} scale={10}>
+          <primitive object={nodes._rootJoint} />
+          <skinnedMesh geometry={nodes.Object_7.geometry} material={materials.AmeBee} skeleton={nodes.Object_7.skeleton} />
+          <skinnedMesh geometry={nodes.Object_9.geometry} material={materials.AmeBee} skeleton={nodes.Object_9.skeleton} />
+          <skinnedMesh geometry={nodes.Object_11.geometry} material={materials.AmeBeeNoShader} skeleton={nodes.Object_11.skeleton} />
+        </group>
+      </group>
+    </group>
+  )
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~RED BEAN PASTE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
 function RedBeanPaste(props) {
@@ -441,7 +459,8 @@ const Scene = (props) => {
         { props.showPudding && <Pudding /> }
         { props.showRedBean && <RedBeanPaste /> }
       </group>
-      { props.showHoney && <HoneyBear /> }
+      { props.showHoney && <HoneyBear />}
+      { props.showHoney && <Bee />}
     </>
   );
 };
