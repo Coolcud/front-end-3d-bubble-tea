@@ -242,7 +242,7 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
 
 NewOrderForm.propTypes = {
   addOrder: PropTypes.func.isRequired,
-  formSubmitted: PropTypes.object.isRequired,
+  formSubmitted: PropTypes.bool.isRequired,
   setFormSubmitted: PropTypes.func.isRequired,
   formFields: PropTypes.object.isRequired,
   setFormFields: PropTypes.func.isRequired,
