@@ -240,7 +240,7 @@ function Jelly({ jellyPositions, formFields }, props) {
   console.log("in jelly:", formFields.toppings);
 
   const jellyColors = {
-    "Lychee jelly": "green",
+    "Lychee jelly": "palegoldenrod",
     "Ai-yu jelly": "#e09a1f",
     "Coffee jelly": "saddlebrown",
     "Black sugar jelly": "#6e4d14",
