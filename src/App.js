@@ -31,7 +31,6 @@ function App() {
     axios
       .post(`${API}/orders`, newOrder)
       .then(() => {
-        alert("Form successfully submitted! ฅ^•ﻌ•^ฅ🧋");
         setFormSubmitted(true);
       })
       .catch((error) => {
@@ -71,6 +70,7 @@ function App() {
           <div className='flex-form'>
             <NewOrderForm
               addOrder={postOrder}
+              formSubmitted={formSubmitted}
               setFormSubmitted={setFormSubmitted}
               formFields={formFields}
               setFormFields={setFormFields}
