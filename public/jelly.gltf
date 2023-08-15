@@ -160,6 +160,7 @@
       }
     },
     {
+      "alphaMode": "OPAQUE",
       "doubleSided": true,
       "name": "Material",
       "pbrMetallicRoughness": {
