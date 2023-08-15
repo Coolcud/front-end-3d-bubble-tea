@@ -30,7 +30,7 @@ const FormField = ({ className, heading, label, name, options, value, onChange }
     </div>
 )};
 
-const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowIce, setShowBoba, setShowJelly, setShowChia, setShowPudding, setShowHoney }) => {
+const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowIce, setShowBoba, setShowJelly, setShowChia, setShowPudding, setShowHoney, setShowRedBean }) => {
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
@@ -62,6 +62,7 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
       setShowChia(newToppingsList.includes("Chia seeds"));
       setShowPudding(newToppingsList.includes("Pudding"));
       setShowHoney(newToppingsList.includes("Honey"));
+      setShowRedBean(newToppingsList.includes("Red bean"));
 
       return newToppingsList;
   };
@@ -118,6 +119,7 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
     setShowChia(false);
     setShowPudding(false);
     setShowHoney(false);
+    setShowRedBean(false);
   };
 
   // Create a random boba order

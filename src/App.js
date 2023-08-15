@@ -26,6 +26,7 @@ function App() {
   const [showChia, setShowChia] = useState(false);
   const [showPudding, setShowPudding] = useState(false);
   const [showHoney, setShowHoney] = useState(false);
+  const [showRedBean, setShowRedBean] = useState(false);
 
   // Add an order to the database
   const postOrder = (newOrder) => {
@@ -64,6 +65,7 @@ function App() {
                     showChia={showChia}
                     showPudding={showPudding}
                     showHoney={showHoney}
+                    showRedBean={showRedBean}
                   />
                 </Suspense>
               </Canvas>
@@ -83,6 +85,7 @@ function App() {
               setShowChia={setShowChia}
               setShowPudding={setShowPudding}
               setShowHoney={setShowHoney}
+              setShowRedBean={setShowRedBean}
             />
           </div>
         </div>

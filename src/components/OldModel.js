@@ -248,6 +248,19 @@ function HoneyBear(props) {
   )
 }
 
+//~~~~~~~~~~~~~~~~~~~~~~RED BEAN PASTE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+
+function RedBeanPaste(props) {
+  const { nodes, materials } = useGLTF('/redbean.gltf')
+  return (
+    <group {...props} dispose={null}>
+      <group scale={0.01}>
+        <mesh geometry={nodes['���������001_���������001_0'].geometry} material={materials['.001']} rotation={[0.472, 0.051, 0.126]} scale={300} />
+      </group>
+    </group>
+  )
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~JELLY CUBE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
 function Jelly({ jellyPositions, randomRotate, formFields }, props) {
@@ -426,6 +439,7 @@ const Scene = (props) => {
         { props.showJelly && <Jelly jellyPositions={jellyPositions} randomRotate={randomRotate} formFields={props.formFields}/> }
         { props.showChia && <ChiaSeeds chiaSeedPositions={chiaSeedPositions} /> }
         { props.showPudding && <Pudding /> }
+        { props.showRedBean && <RedBeanPaste /> }
       </group>
       { props.showHoney && <HoneyBear /> }
     </>
