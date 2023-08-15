@@ -30,7 +30,7 @@ const FormField = ({ className, heading, label, name, options, value, onChange }
     </div>
 )};
 
-const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowIce, setShowBoba, setShowJelly, setShowChia, setShowPudding }) => {
+const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowIce, setShowBoba, setShowJelly, setShowChia, setShowPudding }) => {
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
@@ -207,6 +207,7 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
         value={formFields.temp}
         onChange={handleChange}
       />
+      <p>{formSubmitted ? "Form successfully submitted! ฅ^•ﻌ•^ฅ🧋" : ""}</p>
       <div className="preview-section">
         <h4 className="receipt">
           <strong>RECEIPT</strong>
@@ -241,6 +242,7 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
 
 NewOrderForm.propTypes = {
   addOrder: PropTypes.func.isRequired,
+  formSubmitted: PropTypes.object.isRequired,
   setFormSubmitted: PropTypes.func.isRequired,
   formFields: PropTypes.object.isRequired,
   setFormFields: PropTypes.func.isRequired,
