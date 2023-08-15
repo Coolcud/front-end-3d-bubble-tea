@@ -281,13 +281,11 @@ function Jelly({ jellyPositions, randomRotate, formFields }, props) {
     const colorIndex = i % numColors;
     const jellyMaterial = new THREE.MeshBasicMaterial({ color: numJellyColors[colorIndex] });
     
-    
-    
     jellies.push(
       <mesh
-      key={i}
-      geometry={nodes.Object_4.geometry}
-      material={jellyMaterial}
+        key={i}
+        geometry={nodes.Object_4.geometry}
+        material={jellyMaterial}
         position={[
           jellyPositions[i].x + 16,
           jellyPositions[i].y,
@@ -391,16 +389,11 @@ const Scene = (props) => {
     distribute(liquidVolume, 100)
   );
 
-  const randomRotationArray = [];
-  for (let i = 0; i < 50; i++) {
-    const randomRotationSubarray = [
-      Math.random() * Math.PI * 2,
-      Math.random() * Math.PI * 2,
-      Math.random() * Math.PI * 2
-    ];
-  
-    randomRotationArray.push(randomRotationSubarray);
-  }
+  const randomRotationArray = Array.from({ length: 50 }, () => ([
+    Math.random() * Math.PI * 0.12,
+    Math.random() * Math.PI * 0.12,
+    Math.random() * Math.PI * 0.12
+  ]));
   const [randomRotate, setRandomRotate] = useState(randomRotationArray);
 
   useEffect(() => {
