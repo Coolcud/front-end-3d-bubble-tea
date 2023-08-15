@@ -232,7 +232,7 @@ function Pudding(props) {
 
 //~~~~~~~~~~~~~~~~~~~~~~JELLY CUBE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
-function Jelly({ jellyPositions, formFields }, props) {
+function Jelly({ jellyPositions, randomRotate, formFields }, props) {
   const group = useRef();
   const { nodes } = useGLTF('/jelly.gltf');
   const numJellyColors = [];
@@ -262,17 +262,20 @@ function Jelly({ jellyPositions, formFields }, props) {
   for (let i = 0; i < numJellies; i++) {
     const colorIndex = i % numColors;
     const jellyMaterial = new THREE.MeshBasicMaterial({ color: numJellyColors[colorIndex] });
-
+    
+    
+    
     jellies.push(
       <mesh
-        key={i}
-        geometry={nodes.Object_4.geometry}
-        material={jellyMaterial}
+      key={i}
+      geometry={nodes.Object_4.geometry}
+      material={jellyMaterial}
         position={[
           jellyPositions[i].x + 16,
           jellyPositions[i].y,
           jellyPositions[i].z + 5
         ]}
+        rotation={randomRotate[i]}
       />
     );
   }
@@ -370,6 +373,18 @@ const Scene = (props) => {
     distribute(liquidVolume, 100)
   );
 
+  const randomRotationArray = [];
+  for (let i = 0; i < 50; i++) {
+    const randomRotationSubarray = [
+      Math.random() * Math.PI * 2,
+      Math.random() * Math.PI * 2,
+      Math.random() * Math.PI * 2
+    ];
+  
+    randomRotationArray.push(randomRotationSubarray);
+  }
+  const [randomRotate, setRandomRotate] = useState(randomRotationArray);
+
   useEffect(() => {
     if (props.formSubmitted) {
       setRotation(0);
@@ -396,7 +411,7 @@ const Scene = (props) => {
         { props.showLiquid && <Liquid formFields={props.formFields} /> }
         { props.showIce && <IceCubes formFields={props.formFields} /> }
         { props.showBoba && <Boba /> }
-        { props.showJelly && <Jelly jellyPositions={jellyPositions} formFields={props.formFields}/> }
+        { props.showJelly && <Jelly jellyPositions={jellyPositions} randomRotate={randomRotate} formFields={props.formFields}/> }
         { props.showChia && <ChiaSeeds chiaSeedPositions={chiaSeedPositions} /> }
         { props.showPudding && <Pudding /> }
       </group>
