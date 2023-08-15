@@ -30,7 +30,7 @@ const FormField = ({ className, heading, label, name, options, value, onChange }
     </div>
 )};
 
-const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowIce, setShowBoba, setShowJelly, setShowChia, setShowPudding }) => {
+const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowIce, setShowBoba, setShowJelly, setShowChia, setShowPudding, setShowHoney }) => {
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
@@ -61,6 +61,7 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
       setShowJelly(containsJelly);
       setShowChia(newToppingsList.includes("Chia seeds"));
       setShowPudding(newToppingsList.includes("Pudding"));
+      setShowHoney(newToppingsList.includes("Honey"));
 
       return newToppingsList;
   };
@@ -116,6 +117,7 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
     setShowJelly(false);
     setShowChia(false);
     setShowPudding(false);
+    setShowHoney(false);
   };
 
   // Create a random boba order
@@ -251,7 +253,8 @@ NewOrderForm.propTypes = {
   setShowBoba: PropTypes.func.isRequired,
   setShowJelly: PropTypes.func.isRequired,
   setShowChia: PropTypes.func.isRequired,
-  setShowPudding: PropTypes.func.isRequired
+  setShowPudding: PropTypes.func.isRequired,
+  setShowHoney: PropTypes.func.isRequired
 };
 
 export default NewOrderForm;

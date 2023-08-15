@@ -25,7 +25,7 @@ function App() {
   const [showJelly, setShowJelly] = useState(false);
   const [showChia, setShowChia] = useState(false);
   const [showPudding, setShowPudding] = useState(false);
-  const [showHoney, setHoney] = useState(false);
+  const [showHoney, setShowHoney] = useState(false);
 
   // Add an order to the database
   const postOrder = (newOrder) => {
@@ -82,6 +82,7 @@ function App() {
               setShowJelly={setShowJelly}
               setShowChia={setShowChia}
               setShowPudding={setShowPudding}
+              setShowHoney={setShowHoney}
             />
           </div>
         </div>
