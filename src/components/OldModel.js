@@ -248,8 +248,10 @@ function Jelly({ jellyPositions, formFields }, props) {
   };
 
   for (const topping in jellyColors) {
-    if (formFields.toppings.includes(topping)) {
-      numJellyColors.push(jellyColors[topping]);
+    if (formFields.toppings) {
+      if (formFields.toppings.includes(topping)) {
+        numJellyColors.push(jellyColors[topping]);
+      }
     }
   }
 
