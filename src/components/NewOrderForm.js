@@ -47,18 +47,22 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
 
   // Add topping of checked boxes to list and update state with effect
   const makeToppingsList = () => {
-    return checkedState.reduce((toppingsList, isChecked, index) => {
+    const newToppingsList = checkedState.reduce((toppingsList, isChecked, index) => {
       if (isChecked) {
         toppingsList.push(formOptions.toppings[index]);
       }
 
-      toppingsList.includes("Boba") ? setShowBoba(true) : setShowBoba(false);
-      toppingsList.includes("Ai-yu jelly") ? setShowJelly(true) : setShowJelly(false);
-      toppingsList.includes("Chia seeds") ? setShowChia(true) : setShowChia(false);
-      toppingsList.includes("Pudding") ? setShowPudding(true) : setShowPudding(false);
-
       return toppingsList;
     }, []);
+
+      const containsJelly = newToppingsList.some(topping => topping.includes("jelly"));
+
+      setShowBoba(newToppingsList.includes("Boba"));
+      setShowJelly(containsJelly);
+      setShowChia(newToppingsList.includes("Chia seeds"));
+      setShowPudding(newToppingsList.includes("Pudding"));
+
+      return newToppingsList;
   };
 
 //~~~~~~~~~~~~~~~~~~~~~~PREVIEW FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
@@ -97,8 +101,8 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
     event.preventDefault();
     addOrder(formFields);
     setFormSubmitted(true);
-    // resetForm();
-  }
+    setTimeout(resetForm, 10000);
+  };
 
   // Reset form fields to default
   const resetForm = () => {
@@ -112,7 +116,7 @@ const NewOrderForm = ({ addOrder, setFormSubmitted, formFields, setFormFields, s
     setShowJelly(false);
     setShowChia(false);
     setShowPudding(false);
-  }
+  };
 
   // Create a random boba order
   const makeRandomOrder = () => {
