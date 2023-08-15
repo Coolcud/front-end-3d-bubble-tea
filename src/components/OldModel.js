@@ -33,7 +33,7 @@
 */
 
 import React, { useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
+import { Plane, useGLTF } from '@react-three/drei';
 import { useEffect, useState } from 'react';
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -230,6 +230,24 @@ function Pudding(props) {
   );
 };
 
+//~~~~~~~~~~~~~~~~~~~~~~HONEY BEAR FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+
+function HoneyBear(props) {
+  const { nodes, materials } = useGLTF('/honeybear.gltf')
+  const position=[2.5, -3.5, 0]
+
+  return (
+    <group {...props} dispose={null} scale={0.4}>
+      <group rotation={[-Math.PI / 2, 0, 0]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <mesh geometry={nodes.defaultMaterial.geometry} material={materials.Material_001} position={position} />
+          <mesh geometry={nodes.defaultMaterial_1.geometry} material={materials.Plane_002} position={position} />
+        </group>
+      </group>
+    </group>
+  )
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~JELLY CUBE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
 function Jelly({ jellyPositions, formFields }, props) {
@@ -391,6 +409,7 @@ const Scene = (props) => {
   return (
     <>
       <ambientLight />
+      <pointLight position={[30, 20, 20]} />
       <group rotation={[0, rotation, 0]} position={[0, -0.9, 0]}>
         <Model/>
         { props.showLiquid && <Liquid formFields={props.formFields} /> }
@@ -400,6 +419,7 @@ const Scene = (props) => {
         { props.showChia && <ChiaSeeds chiaSeedPositions={chiaSeedPositions} /> }
         { props.showPudding && <Pudding /> }
       </group>
+      { props.showHoney && <HoneyBear /> }
     </>
   );
 };
