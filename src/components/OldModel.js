@@ -60,6 +60,30 @@ function Model(props) {
   );
 };
 
+//~~~~~~~~~~~~~~~~~~~~~~OTHER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
+// TODO: Stretch goal: Fix distribution of seeds throughout shape
+// Pick a height (y pos), calculate radius of circle at that height
+// Generate random angle and radius, use trig to get x and y (SOH CAH TOA)
+function distribute(liquidVolume, numSeeds) {
+  const positions = [];
+
+  const sizes = {
+    xSize: liquidVolume.xMax - liquidVolume.xMin,
+    ySize: liquidVolume.yMax - liquidVolume.yMin,
+    zSize: liquidVolume.zMax - liquidVolume.zMin
+  };
+
+  for (let i = 0; i < numSeeds; i++) {
+    const randomX = Math.random() * sizes.xSize + liquidVolume.xMin;
+    const randomY = Math.random() * sizes.ySize + liquidVolume.yMin;
+    const randomZ = Math.random() * sizes.zSize + liquidVolume.zMin;
+
+    positions.push({ x: randomX, y: randomY, z: randomZ });
+  }
+
+  return positions;
+};
+
 //~~~~~~~~~~~~~~~~~~~~~~LIQUID FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
 function Liquid(props) {
@@ -67,7 +91,8 @@ function Liquid(props) {
   const { nodes, materials } = useGLTF('/scene.gltf');
 
   // Liquid opacity
-  // materials.bifrostLiquidMaterial1.opacity = 0.5;
+  // materials.bifrostLiquidMaterial1.transparent = 0.5;
+  materials.bifrostLiquidMaterial1.opacity = 0.8;
   let baseColor = "peachpuff";
   
   const baseColors = {
@@ -152,51 +177,25 @@ function Boba(props) {
 
 //~~~~~~~~~~~~~~~~~~~~~~CHIA SEED FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
-// TODO: Stretch goal: Fix distribution of seeds throughout shape
-// Pick a height (y pos), calculate radius of circle at that height
-// Generate random angle and radius, use trig to get x and y (SOH CAH TOA)
-function distributeChiaSeeds(liquidVolume, numSeeds) {
-  const chiaSeedPositions = [];
-
-  const sizes = {
-    xSize: liquidVolume.xMax - liquidVolume.xMin,
-    ySize: liquidVolume.yMax - liquidVolume.yMin,
-    zSize: liquidVolume.zMax - liquidVolume.zMin
-  };
-
-  for (let i = 0; i < numSeeds; i++) {
-    const randomX = Math.random() * sizes.xSize + liquidVolume.xMin;
-    const randomY = Math.random() * sizes.ySize + liquidVolume.yMin;
-    const randomZ = Math.random() * sizes.zSize + liquidVolume.zMin;
-
-    chiaSeedPositions.push({ x: randomX, y: randomY, z: randomZ });
-  }
-
-  return chiaSeedPositions;
-}
-
 function ChiaSeeds({ chiaSeedPositions }, props) {
   const group = useRef();
   const { nodes, materials } = useGLTF('/scene.gltf');
 
   const seeds = [];
   for (let i = 0; i < chiaSeedPositions.length; i++) {
-    const meshName = `polySurface1_lambert1_0`;
-    if (nodes[meshName]) {
-      seeds.push(
-        <mesh
-          key={i}
-          geometry={nodes[meshName].geometry}
-          material={materials.lambert1}
-          position={[
-            chiaSeedPositions[i].x,
-            chiaSeedPositions[i].y,
-            chiaSeedPositions[i].z
-          ]}
-          scale={0.048}
-        />
-      );
-    }
+    seeds.push(
+      <mesh
+        key={i}
+        geometry={nodes.polySurface1_lambert1_0.geometry}
+        material={materials.lambert1}
+        position={[
+          chiaSeedPositions[i].x,
+          chiaSeedPositions[i].y,
+          chiaSeedPositions[i].z
+        ]}
+        scale={0.048}
+      />
+    );
   }
 
   return (
@@ -233,27 +232,55 @@ function Pudding(props) {
 
 //~~~~~~~~~~~~~~~~~~~~~~JELLY CUBE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
 
-function Jelly(props) {
-  const { nodes, materials } = useGLTF('/jelly.gltf');
+function Jelly({ jellyPositions, formFields }, props) {
+  const group = useRef();
+  const { nodes } = useGLTF('/jelly.gltf');
+  const numJellyColors = [];
 
-  const geometry = nodes.Object_4.geometry;
-  const material = materials.Material;
+  console.log("in jelly:", formFields.toppings);
 
-  // Cup transparency and opacity
-  materials.Material.transparent = true;
-  materials.Material.opacity = 0.2;
-  materials.Material.color.set("yellow");
+  const jellyColors = {
+    "Lychee jelly": "green",
+    "Ai-yu jelly": "#e09a1f",
+    "Coffee jelly": "saddlebrown",
+    "Black sugar jelly": "#6e4d14",
+    "Grass jelly": "black",
+  };
+
+  for (const topping in jellyColors) {
+    if (formFields.toppings.includes(topping)) {
+      numJellyColors.push(jellyColors[topping]);
+    }
+  }
+
+  const jellies = [];
+  const numJellies = jellyPositions.length;
+  const numColors = numJellyColors.length;
+
+  for (let i = 0; i < numJellies; i++) {
+    const colorIndex = i % numColors;
+    const jellyMaterial = new THREE.MeshBasicMaterial({ color: numJellyColors[colorIndex] });
+
+    jellies.push(
+      <mesh
+        key={i}
+        geometry={nodes.Object_4.geometry}
+        material={jellyMaterial}
+        position={[
+          jellyPositions[i].x + 16,
+          jellyPositions[i].y,
+          jellyPositions[i].z + 5
+        ]}
+      />
+    );
+  }
 
   return (
-    <group>
-      <group {...props} dispose={null} scale={0.1}>
-        <mesh geometry={geometry} material={material} position={[-0.053, 15.811, 2.135]} rotation={[-0.277, 0.4, 1.47]} />
-      </group>
-      <group {...props} dispose={null} scale={0.08} >
-        <mesh geometry={geometry} material={material} position={[-8.553, 19.811, 2.135]} rotation={[-0.477, 0.4, 1.87]} />
-      </group>
-      <group {...props} dispose={null} scale={0.13} >
-        <mesh geometry={geometry} material={material} position={[-4.553, 17.311, 0.135]} rotation={[-0.077, -0.6, 1.87]} />
+    <group ref={group} {...props} dispose={null} scale={0.04}>
+      <group rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          {jellies}
+        </group>
       </group>
     </group>
   );
@@ -270,24 +297,25 @@ function IceCubes(props) {
   const scale = [0.075, 0.075, 0.075];
 
   // Ice cube transparency
-  materials['Ice'].transparent = true;
+  material.transparent = true;
+  material.opacity = 0.7;
 
   const cubes = {
-    cube1: <mesh geometry={geometry} material={material} position={[-0.25, 0.65, 0]} rotation={[0, 0, 0.635]} scale={scale} />,
-    cube2: <mesh geometry={geometry} material={material} position={[-0.01, 0.5, -0.27]} rotation={[-0.265, -0.887, 0.419]} scale={scale} />,
-    cube3: <mesh geometry={geometry} material={material} position={[0.3, 0.75, 0.04]} rotation={[-0.047, -1.306, -0.384]} scale={scale} />,
-    cube4: <mesh geometry={geometry} material={material} position={[-0.05, 0.42, 0.25]} rotation={[2.217, -1.29, 2.876]} scale={scale} />,
-    cube5: <mesh geometry={geometry} material={material} position={[0, 0.7, 0.32]} rotation={[2.217, 0.4, 2.876]} scale={scale} />,
-    cube6: <mesh geometry={geometry} material={material} position={[-0.15, 0.8, -0.29]} rotation={[2.217, 0.5, 2.876]} scale={scale} />,
-    cube7: <mesh geometry={geometry} material={material} position={[0.15, 0.8, -0.29]} rotation={[2.786, 0.5, 2]} scale={scale} />,
-    cube8: <mesh geometry={geometry} material={material} position={[0.3, 0.52, -0.01]} rotation={[-0.9374, -0.675, 0.564]} scale={scale} />,
-    cube9: <mesh geometry={geometry} material={material} position={[0.3, 0.52, -0.01]} rotation={[-0.9374, -0.675, 0.564]} scale={scale} />,
-    cube10: <mesh geometry={geometry} material={material} position={[0.2, 0.6, -0.2]} rotation={[-0.463, -0.32, 0.3478]} scale={scale} />,
-    cube11: <mesh geometry={geometry} material={material} position={[-0.24, 0.74, 0.25]} rotation={[-0.3456, -0.98, 0.45]} scale={scale} />,
-    cube12: <mesh geometry={geometry} material={material} position={[-0.27, 0.4, -0.07]} rotation={[-0.23784, -0.543, 0.7483]} scale={scale} />,
-    cube13: <mesh geometry={geometry} material={material} position={[0.1, 0.76, -0.01]} rotation={[-0.456, -0.97, 0.34]} scale={scale} />,
-    cube14: <mesh geometry={geometry} material={material} position={[-0.09, 0.6, -0.1]} rotation={[-0.4378, 0.9847, 0.13]} scale={scale} />,
-    cube15: <mesh geometry={geometry} material={material} position={[0.18, 0.52, 0.2]} rotation={[-0.3284, -0.2, 0.435]} scale={scale} />,
+    cube1: <mesh key={0} geometry={geometry} material={material} position={[-0.25, 0.65, 0]} rotation={[0, 0, 0.635]} scale={scale} />,
+    cube2: <mesh key={1} geometry={geometry} material={material} position={[-0.01, 0.5, -0.27]} rotation={[-0.265, -0.887, 0.419]} scale={scale} />,
+    cube3: <mesh key={2} geometry={geometry} material={material} position={[0.3, 0.75, 0.04]} rotation={[-0.047, -1.306, -0.384]} scale={scale} />,
+    cube4: <mesh key={3} geometry={geometry} material={material} position={[-0.05, 0.42, 0.25]} rotation={[2.217, -1.29, 2.876]} scale={scale} />,
+    cube5: <mesh key={4} geometry={geometry} material={material} position={[0, 0.7, 0.32]} rotation={[2.217, 0.4, 2.876]} scale={scale} />,
+    cube6: <mesh key={5} geometry={geometry} material={material} position={[-0.15, 0.8, -0.29]} rotation={[2.217, 0.5, 2.876]} scale={scale} />,
+    cube7: <mesh key={6} geometry={geometry} material={material} position={[0.15, 0.8, -0.29]} rotation={[2.786, 0.5, 2]} scale={scale} />,
+    cube8: <mesh key={7} geometry={geometry} material={material} position={[0.3, 0.52, -0.01]} rotation={[-0.9374, -0.675, 0.564]} scale={scale} />,
+    cube9: <mesh key={8} geometry={geometry} material={material} position={[0.3, 0.52, -0.01]} rotation={[-0.9374, -0.675, 0.564]} scale={scale} />,
+    cube10: <mesh key={9} geometry={geometry} material={material} position={[0.2, 0.6, -0.2]} rotation={[-0.463, -0.32, 0.3478]} scale={scale} />,
+    cube11: <mesh key={10} geometry={geometry} material={material} position={[-0.24, 0.74, 0.25]} rotation={[-0.3456, -0.98, 0.45]} scale={scale} />,
+    cube12: <mesh key={11} geometry={geometry} material={material} position={[-0.27, 0.4, -0.07]} rotation={[-0.23784, -0.543, 0.7483]} scale={scale} />,
+    cube13: <mesh key={12} geometry={geometry} material={material} position={[0.1, 0.76, -0.01]} rotation={[-0.456, -0.97, 0.34]} scale={scale} />,
+    cube14: <mesh key={13} geometry={geometry} material={material} position={[-0.09, 0.6, -0.1]} rotation={[-0.4378, 0.9847, 0.13]} scale={scale} />,
+    cube15: <mesh key={14} geometry={geometry} material={material} position={[0.18, 0.52, 0.2]} rotation={[-0.3284, -0.2, 0.435]} scale={scale} />,
   };
 
   const iceLevel = props.formFields.temp;
@@ -326,7 +354,7 @@ const Scene = (props) => {
 
   const liquidVolume = {
     xMin: -12,
-    xMax: 8,
+    xMax: 6,
     yMin: -8,
     yMax: 30,
     zMin: -12,
@@ -334,7 +362,10 @@ const Scene = (props) => {
   };
 
   const [chiaSeedPositions, setChiaSeedPositions] = useState(
-    distributeChiaSeeds(liquidVolume, 200)
+    distribute(liquidVolume, 200)
+  );
+  const [jellyPositions, setJellyPositions] = useState(
+    distribute(liquidVolume, 100)
   );
 
   useEffect(() => {
@@ -363,7 +394,7 @@ const Scene = (props) => {
         { props.showLiquid && <Liquid formFields={props.formFields} /> }
         { props.showIce && <IceCubes formFields={props.formFields} /> }
         { props.showBoba && <Boba /> }
-        { props.showJelly && <Jelly /> }
+        { props.showJelly && <Jelly jellyPositions={jellyPositions} formFields={props.formFields}/> }
         { props.showChia && <ChiaSeeds chiaSeedPositions={chiaSeedPositions} /> }
         { props.showPudding && <Pudding /> }
       </group>
