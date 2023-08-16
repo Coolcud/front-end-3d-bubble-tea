@@ -19,3 +19,15 @@
 a {
   padding-left: 2rem;
 }
+
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: green;
+}
+
+a:hover {
+  text-decoration: none;
+  color: darkgreen;
+}
