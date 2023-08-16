@@ -1,0 +1,21 @@
+.about-section {
+  width: 75%;
+  max-width: 75%;
+}
+
+.heading-styling {
+  padding: 0.5rem;
+}
+
+.paragraph-styling {
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+}
+
+.resources-section {
+  justify-content: space-between;
+}
+
+a {
+  padding-left: 2rem;
+}
