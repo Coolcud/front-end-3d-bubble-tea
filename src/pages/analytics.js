@@ -11,7 +11,7 @@ const Analytics = () => {
 
     const getMaxBase = () => {
         axios
-        .get(`bubble-tea-analytics-lb-38452084.us-east-2.elb.amazonaws.com/analytics/base`)
+        .get(`http://bubble-tea-analytics-lb-38452084.us-east-2.elb.amazonaws.com/analytics/base`)
         .then((response) => {
             // console.log("orders:", response.data);
             console.log('max_base:', response.data[0]['base'])
@@ -24,7 +24,7 @@ const Analytics = () => {
 
     const getMaxToppings = () => {
         axios
-        .get(`bubble-tea-analytics-lb-38452084.us-east-2.elb.amazonaws.com/analytics/toppings`)
+        .get(`http://bubble-tea-analytics-lb-38452084.us-east-2.elb.amazonaws.com/analytics/toppings`)
         .then((response) => {
             // console.log("orders:", response.data);
             console.log('max_toppings:', response.data[0]['toppings'])
@@ -37,7 +37,7 @@ const Analytics = () => {
 
     const getMaxSweetness = () => {
         axios
-        .get(`bubble-tea-analytics-lb-38452084.us-east-2.elb.amazonaws.com/analytics/sweetness`)
+        .get(`http://bubble-tea-analytics-lb-38452084.us-east-2.elb.amazonaws.com/analytics/sweetness`)
         .then((response) => {
             // console.log("orders:", response.data);
             console.log('max_sweetness:', response.data[0]['sweetness'])
@@ -50,7 +50,7 @@ const Analytics = () => {
 
     const getMaxTemp = () => {
         axios
-        .get(`bubble-tea-analytics-lb-38452084.us-east-2.elb.amazonaws.com/analytics/temp`)
+        .get(`http://bubble-tea-analytics-lb-38452084.us-east-2.elb.amazonaws.com/analytics/temp`)
         .then((response) => {
             // console.log("orders:", response.data);
             console.log('max_temp:', response.data[0]['temp'])
