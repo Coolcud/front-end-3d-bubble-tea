@@ -5,9 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import Scene from './components/OldModel';
 import NewOrderForm from './components/NewOrderForm';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route }
-    from 'react-router-dom';
-import Home from './pages';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import About from './pages/about';
 import Analytics from './pages/analytics';
 
