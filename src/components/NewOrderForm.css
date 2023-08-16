@@ -1,71 +1,66 @@
-.new_order_form {
-    display: grid;
-    gap: 0.5em;
-}
-/* 
-.base__container {
-    border: 5px solid rgb(217, 177, 91);
-} */
-
-.all_toppings__container {
-    /* border: 5px solid rgb(0, 255, 72); */
-    display: grid;
-    grid-template-columns: 1fr;
+.new-order-form {
+    padding: 15px;
+    border-radius: 10px;
+    margin-right: 20px;
 }
 
-.each_toppings__container {
-    border-right: 2px solid rgb(116, 91, 49);
-    border-left: 2px solid rgb(116, 91, 49);
-    display: inline-block;
-    margin: 0.25em 0.25em;
-    padding: 0.25em;
-    border-top-left-radius: 80px 80px;
-    border-top-right-radius: 80px 80px;
-    border-bottom-left-radius: 80px 80px;
-    border-bottom-right-radius: 80px 80px;
+.base-form-field,
+.sweet-form-field,
+.ice-form-field,
+.all-toppings__container {
+    margin-bottom: 15px;
 }
 
-.each_toppings__container label {
-    margin: 5px 8px 2px;
+.toppings-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-.each_toppings__container input[type="checkbox"] {
-    /* Add if not using autoprefixer */
-    /* -webkit-appearance: none; */
-    /* appearance: none; */
-    /* For iOS < 15 to remove gradient background */
-    /* background-color: #fff; */
-    /* Not removed via appearance */
-    margin: 0;
-    font: inherit;
-    color: pink;
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid pink;
-    border-radius: 0.15em;
-    transform: translateY(-0.075em);
-    vertical-align: middle;
-    position: relative;
-    margin: 0.25em 0.25em;
-    bottom: 1px;
+.each-toppings__container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    border: 1px solid rgb(116, 91, 49);
+    border-radius: 25px;
+    padding: 5px;
 }
 
-/* .sweetness__container {
-    border: 5px solid rgb(209, 152, 203);
+.each-toppings__container label{
+    margin-left: 10px;
 }
 
-.temp__container {
-    border: 5px solid rgb(148, 241, 233);
+.each-toppings__container input[type="checkbox"] {
+    margin-left: 5px;
+    margin-right: 10px;
+    transform: translateY(-3px);
 }
 
-.preview_text {
-    border: 5px solid rgb(187, 158, 162);
-} */
-
-.preview_text ul {
+.preview-section ul {
     list-style-type: none;
 }
 
-.preview_text span {
-    font-weight: 600
+.preview-section {
+    border: 2px solid green;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.receipt {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.button-container input[type="button"],
+.button-container input[type="submit"] {
+    margin: 5px;
 }

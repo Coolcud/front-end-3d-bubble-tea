@@ -1,15 +1,9 @@
 import './App.css';
 import axios from 'axios';
-import NewOrderForm from './components/NewOrderForm';
-import { useState, useEffect, Suspense } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { useState, useEffect, Suspense, useCallback } from "react";
+import { Canvas } from "@react-three/fiber";
 import Scene from './components/OldModel';
-import { formOptions } from "../src/data/FormOptions";
-// import { OrbitControls } from '@react-three/drei';
-// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-// import Model from './components/Model';
-
+import NewOrderForm from './components/NewOrderForm';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
@@ -19,90 +13,86 @@ import Analytics from './pages/analytics';
 
 const API = process.env.REACT_APP_TEA_API_URL;
 
-// Renders $2 model with mtl and obj files in public/
-// Requires <Scene /> not <Model /> in App to view
-// function Scene(props) {
-//   const materials = useLoader(MTLLoader, 'Cup of drink.mtl');
-//   const obj = useLoader(OBJLoader, 'Cup of drink.obj', (loader) => {
-//     materials.preload();
-//     loader.setMaterials(materials);
-//   });
-
-//   console.log(obj);
-//   return <primitive object={obj} scale={0.4} {...props}/>
-// };
-
+const EMPTY_FORM = {
+  base: "",
+  toppings: [],
+  sweetness: "",
+  temp: ""
+}
 
 function App() {
   const [orderData, setOrderData] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [baseValue, setBaseValue] = useState("default base");
-  const [toppingsValues, setToppingsValues] = useState([]);
-  const [sweetValue, setSweetValue] = useState("default sweet");
-  const [tempValue, setTempValue] = useState("default temp");
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formFields, setFormFields] = useState(EMPTY_FORM);
+  const [showLiquid, setShowLiquid] = useState(false);
+  const [showIce, setShowIce] = useState(false);
+  const [showBoba, setShowBoba] = useState(false);
+  const [showJelly, setShowJelly] = useState(false);
+  const [showChia, setShowChia] = useState(false);
+  const [showPudding, setShowPudding] = useState(false);
+  const [showHoney, setShowHoney] = useState(false);
+  const [showRedBean, setShowRedBean] = useState(false);
 
-  const getOrders = () => {
-    axios
-      .get(`${API}/orders`)
-      .then((response) => {
-        // console.log("orders:", response.data);
-        setOrderData(response.data);
-      })
-      .catch((error) => {
-        console.log('Error:', error);
-        alert('Unable to retrieve orders.');
-      });
-  };
-
-  useEffect(() => {
-    getOrders();
-  }, []);
-
+  // Add an order to the database
   const postOrder = (newOrder) => {
     axios
       .post(`${API}/orders`, newOrder)
       .then(() => {
-        getOrders();
+        setFormSubmitted(true);
       })
       .catch((error) => {
-        console.log('Error:', error);
         alert('Unable to create a new order.');
+        console.log('Error while posting order:', error);
       });
   };
 
+//~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
+
   return (
     <div className="App">
-      <header>3d Bubble Tea</header>
-      {/* <button onClick={() => {setClicked(!clicked)}}>Test Button</button> */}
-
+      <header className="bubble-tea-header">3D BUBBLE TEA</header>
+      <button onClick={() => {setClicked(!clicked)}}>Test Button</button>
       <main>
         <h1>Boba Order</h1>
-        <div className='flex-container'>
-          {/* <div className='flex-child-model'>
-            <div className='model-body' style={{ position: "relative", width: 950, height: 1000 }}>
+        <div className='flex-row'>
+          <div className='section-container'>
+            <div className='model-section'>
               <Canvas>
                 <Suspense fallback={null}>
-                  <Scene 
+                  <Scene
                     clicked={clicked}
+                    formFields={formFields}
+                    formSubmitted={formSubmitted}
+                    showLiquid={showLiquid}
+                    showIce={showIce}
+                    showBoba={showBoba}
+                    showJelly={showJelly}
+                    showChia={showChia}
+                    showPudding={showPudding}
+                    showHoney={showHoney}
+                    showRedBean={showRedBean}
                   />
                 </Suspense>
               </Canvas>
             </div>
-          </div> */}
-          <div className='flex-child form'>
-            <div className='form-body'>
-              <NewOrderForm
-                addOrder={postOrder}
-                baseVal={baseValue}
-                setBaseVal={setBaseValue}
-                toppingsVal={toppingsValues}
-                setToppingsVal={setToppingsValues}
-                sweetVal={sweetValue}
-                setSweetVal={setSweetValue}
-                tempVal={tempValue}
-                setTempVal={setTempValue}
-              />
-            </div>
+          </div>
+          <div className='flex-form'>
+            <NewOrderForm
+              addOrder={postOrder}
+              formSubmitted={formSubmitted}
+              setFormSubmitted={setFormSubmitted}
+              formFields={formFields}
+              setFormFields={setFormFields}
+              setShowLiquid={setShowLiquid}
+              setShowIce={setShowIce}
+              setShowBoba={setShowBoba}
+              setShowJelly={setShowJelly}
+              setShowChia={setShowChia}
+              setShowPudding={setShowPudding}
+              setShowHoney={setShowHoney}
+              setShowRedBean={setShowRedBean}
+            />
           </div>
         </div>
       </main>
