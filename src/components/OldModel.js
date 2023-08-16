@@ -88,7 +88,7 @@ function Model(props) {
             material={materials.blinn1}
             position={[0, 2.957, 0]}
             scale={0.148}
-            />
+          />
           <mesh
             geometry={nodes.paille_blinn2_0.geometry}
             material={materials.blinn2}
@@ -134,37 +134,33 @@ function distribute(liquidVolume, numSeeds) {
 function Liquid(props) {
   const group = useRef();
   const { nodes, materials } = useGLTF('/scene.gltf');
-
-  // Liquid opacity
-  // materials.bifrostLiquidMaterial1.transparent = 0.5;
-  materials.bifrostLiquidMaterial1.opacity = 0.8;
-  let baseColor = "peachpuff";
   
   const baseColors = {
-    "Signature": "tan",
-    "Royal": "peachpuff",
-    "Assam": "burlywood",
-    // "Red oolong": "red",
-    "High mt. oolong": "peachpuff",
-    "Rock": "sandybrown",
-    "Jasmine": "papayawhip",
-    "Rose green": "plum",
-    "Iron buddha": "peachpuff",
-    "Iron buddha plus": "peachpuff",
+    "Signature": "#edb982",
+    "Royal": "#c4ac94",
+    "Assam": "#dabd95",
+    "Red oolong": "#86583c",
+    "High mt. oolong": "#fed6a5",
+    "Rock": "#ccaa7e",
+    "Jasmine": "#fee6c4",
+    "Rose green": "#94708A",
+    "Iron buddha": "#f68313",
+    "Iron buddha plus": "#f68313",
     "Earl grey": "sandybrown",
-    "Mango green": "#fce588",
-    // "Buckwheat green": "white",
-    // "Black sugar puerh": "white",
-    "Chai latte": "peru",
-    "Matcha latte": "darkseagreen",
-    "Hojicha latte": "burlywood",
-    "Genmaicha latte": "mediumseagreen",
-    "Rooibos": "goldenrod",
-    // "Black sugar boba": "brown",
-    "Coffee": "tan",
-    // "Lava boba": "brown"
+    "Mango green": "#f5d067",
+    "Buckwheat green": "#e9dec1",
+    "Black sugar puerh": "#b08567",
+    "Chai latte": "#d38d5c",
+    "Matcha latte": "#85ae60",
+    "Hojicha latte": "#a47f4b",
+    "Genmaicha latte": "#9baa52",
+    "Rooibos": "#b17c36",
+    "Black sugar boba": "#fd8e37",
+    "Coffee": "#d2ad78",
+    "Lava boba": "#8f4d06"
   };
-  
+
+  let baseColor = "";
   if (props.formFields.base in baseColors) {
     baseColor = baseColors[props.formFields.base];
   }
