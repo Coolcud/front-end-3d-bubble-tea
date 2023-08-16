@@ -1,0 +1,11 @@
+Model Information:
+* title:	Smol Ame bee
+* source:	https://sketchfab.com/3d-models/smol-ame-bee-add6975128c24b5dabbf475b9fed797b
+* author:	Hasksoft (https://sketchfab.com/Hasksoft)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Smol Ame bee" (https://sketchfab.com/3d-models/smol-ame-bee-add6975128c24b5dabbf475b9fed797b) by Hasksoft (https://sketchfab.com/Hasksoft) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

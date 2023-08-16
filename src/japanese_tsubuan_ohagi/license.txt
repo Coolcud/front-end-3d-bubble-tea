@@ -1,0 +1,11 @@
+Model Information:
+* title:	Japanese Tsubuan Ohagi（つぶあんおはぎ）
+* source:	https://sketchfab.com/3d-models/japanese-tsubuan-ohagi-3c70d72479844a56801150ff50f63c0c
+* author:	3DSPICE (https://sketchfab.com/3DSPICE)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Japanese Tsubuan Ohagi（つぶあんおはぎ）" (https://sketchfab.com/3d-models/japanese-tsubuan-ohagi-3c70d72479844a56801150ff50f63c0c) by 3DSPICE (https://sketchfab.com/3DSPICE) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
