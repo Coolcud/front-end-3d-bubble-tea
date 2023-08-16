@@ -1,0 +1,11 @@
+Model Information:
+* title:	Coffee Beans- Autodesk Memento
+* source:	https://sketchfab.com/3d-models/coffee-beans-autodesk-memento-031fd22dc6b943c09906b0a9f65fd199
+* author:	John Fino (tauricity) (https://sketchfab.com/tauricity)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Coffee Beans- Autodesk Memento" (https://sketchfab.com/3d-models/coffee-beans-autodesk-memento-031fd22dc6b943c09906b0a9f65fd199) by John Fino (tauricity) (https://sketchfab.com/tauricity) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

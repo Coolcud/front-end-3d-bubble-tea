@@ -1,0 +1,11 @@
+Model Information:
+* title:	Jelly Cube
+* source:	https://sketchfab.com/3d-models/jelly-cube-7303e59a50b24950969baf4510cc5d46
+* author:	Blackout927 (https://sketchfab.com/Blackout927)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Jelly Cube" (https://sketchfab.com/3d-models/jelly-cube-7303e59a50b24950969baf4510cc5d46) by Blackout927 (https://sketchfab.com/Blackout927) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { formOptions } from "../data/FormOptions";
 import "./NewOrderForm.css";
 
@@ -30,9 +30,7 @@ const FormField = ({ className, heading, label, name, options, value, onChange }
     </div>
 )};
 
-const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
-  const [formFields, setFormFields] = useState(EMPTY_FORM);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, setFormFields, setShowLiquid, setShowIce, setShowBoba, setShowJelly, setShowChia, setShowPudding, setShowHoney, setShowRedBean }) => {
   const [checkedState, setCheckedState] = useState(
     new Array(formOptions.toppings.length).fill(false)
   );
@@ -49,12 +47,24 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
 
   // Add topping of checked boxes to list and update state with effect
   const makeToppingsList = () => {
-    return checkedState.reduce((toppingsList, isChecked, index) => {
+    const newToppingsList = checkedState.reduce((toppingsList, isChecked, index) => {
       if (isChecked) {
         toppingsList.push(formOptions.toppings[index]);
       }
+
       return toppingsList;
     }, []);
+
+    const containsJelly = newToppingsList.some(topping => topping.includes("jelly"));
+
+    setShowBoba(newToppingsList.includes("Boba"));
+    setShowJelly(containsJelly);
+    setShowChia(newToppingsList.includes("Chia seeds"));
+    setShowPudding(newToppingsList.includes("Pudding"));
+    setShowHoney(newToppingsList.includes("Honey"));
+    setShowRedBean(newToppingsList.includes("Red bean"));
+
+    return newToppingsList;
   };
 
 //~~~~~~~~~~~~~~~~~~~~~~PREVIEW FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
@@ -93,17 +103,24 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
     event.preventDefault();
     addOrder(formFields);
     setFormSubmitted(true);
-    onFormSubmitted(formSubmitted);
-    resetForm();
-  }
+    setTimeout(resetForm, 10000);
+  };
 
   // Reset form fields to default
   const resetForm = () => {
     document.getElementById("create-order-form").reset();
     setFormFields(EMPTY_FORM);
     setCheckedState(new Array(formOptions.toppings.length).fill(false));
-    setFormSubmitted(!formSubmitted);
-  }
+    setFormSubmitted(false);
+    setShowLiquid(false);
+    setShowIce(false);
+    setShowBoba(false);
+    setShowJelly(false);
+    setShowChia(false);
+    setShowPudding(false);
+    setShowHoney(false);
+    setShowRedBean(false);
+  };
 
   // Create a random boba order
   const makeRandomOrder = () => {
@@ -112,7 +129,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
     const randomBoolToppings = formOptions.toppings.map(() => Math.random() < 0.5);
     const randomSweetness = formOptions.sweetness[Math.floor(Math.random() * formOptions.sweetness.length)];
     const randomTemp = formOptions.temps[Math.floor(Math.random() * formOptions.temps.length)];
-    
+
     // Set form fields with random values
     setFormFields({
       base: randomBase,
@@ -124,7 +141,6 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
     setCheckedState(randomBoolToppings);
   };
 
-  // Use useEffect to update toppings when checkedState changes
   useEffect(() => {
     setFormFields({
       ...formFields,
@@ -132,7 +148,19 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
     });
   }, [checkedState]);
 
-  console.log("formFields:", formFields);
+  useMemo(() => {
+    if (formFields.base !== "") {
+      console.log('inside setShowLiquid');
+      setShowLiquid(true);
+    }
+
+    if (formFields.temp !== "" || formFields.temp !== "No ice") {
+      console.log('inside setShowIce');
+      setShowIce(true);
+    }
+  }, [formFields]);
+
+  // console.log("formFields:", formFields);
 
   // Check array of formFields's values for no "" to activate submit button
   const isFormIncomplete = Object.values(formFields).some((value) => value === "");
@@ -183,6 +211,7 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
         value={formFields.temp}
         onChange={handleChange}
       />
+      <p>{formSubmitted ? "Form successfully submitted! ฅ^•ﻌ•^ฅ🧋" : ""}</p>
       <div className="preview-section">
         <h4 className="receipt">
           <strong>RECEIPT</strong>
@@ -217,7 +246,17 @@ const NewOrderForm = ({ addOrder, onFormSubmitted }) => {
 
 NewOrderForm.propTypes = {
   addOrder: PropTypes.func.isRequired,
-  onFormSubmitted: PropTypes.func.isRequired
+  formSubmitted: PropTypes.bool.isRequired,
+  setFormSubmitted: PropTypes.func.isRequired,
+  formFields: PropTypes.object.isRequired,
+  setFormFields: PropTypes.func.isRequired,
+  setShowLiquid: PropTypes.func.isRequired,
+  setShowIce: PropTypes.func.isRequired,
+  setShowBoba: PropTypes.func.isRequired,
+  setShowJelly: PropTypes.func.isRequired,
+  setShowChia: PropTypes.func.isRequired,
+  setShowPudding: PropTypes.func.isRequired,
+  setShowHoney: PropTypes.func.isRequired
 };
 
 export default NewOrderForm;

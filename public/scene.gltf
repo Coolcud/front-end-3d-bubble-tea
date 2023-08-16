@@ -2613,7 +2613,6 @@
       }
     },
     {
-      "alphaMode": "BLEND",
       "doubleSided": true,
       "extensions": {
         "KHR_materials_transmission": {
@@ -2622,15 +2621,8 @@
       },
       "name": "bifrostLiquidMaterial1",
       "pbrMetallicRoughness": {
-        "baseColorFactor": [
-          0.8648245820318268,
-          0.3930673278510199,
-          0.3930673278510199,
-          0.43340234329873717
-        ],
-        "baseColorTexture": {
-          "index": 2
-        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.223636,
         "metallicRoughnessTexture": {
           "index": 3
         }
