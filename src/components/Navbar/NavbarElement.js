@@ -3,7 +3,6 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-    background: linear-gradient(to bottom right, #ffc8c4, #ffd9d1);
     height: 4em;
     display: flex;
     font-size: 1.25em;
