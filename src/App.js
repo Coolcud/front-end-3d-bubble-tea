@@ -1,6 +1,6 @@
 import './App.css';
 import axios from 'axios';
-import { useState, useEffect, Suspense, useCallback } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import Scene from './components/OldModel';
 import NewOrderForm from './components/NewOrderForm';
@@ -31,6 +31,7 @@ function App() {
   const [showPudding, setShowPudding] = useState(false);
   const [showHoney, setShowHoney] = useState(false);
   const [showRedBean, setShowRedBean] = useState(false);
+  const [showModel, setShowModel] = useState(true);
 
   // Add an order to the database
   const postOrder = (newOrder) => {
@@ -45,6 +46,19 @@ function App() {
       });
   };
 
+  useEffect(() => {
+    const handleResize =() => {
+      if (window.innerWidth < 400) {
+        setShowModel(false);
+      } else {
+        setShowModel(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 //~~~~~~~~~~~~~~~~~~~~~~RETURN~~~~~~~~~~~~~~~~~~~~~~
 
   return (
@@ -54,27 +68,29 @@ function App() {
       <main>
         {/* <h1>Boba Order</h1> */}
         <div className='flex-row'>
-          <div className='section-container'>
-            <div className='model-section'>
-              <Canvas>
-                <Suspense fallback={null}>
-                  <Scene
-                    clicked={clicked}
-                    formFields={formFields}
-                    formSubmitted={formSubmitted}
-                    showLiquid={showLiquid}
-                    showIce={showIce}
-                    showBoba={showBoba}
-                    showJelly={showJelly}
-                    showChia={showChia}
-                    showPudding={showPudding}
-                    showHoney={showHoney}
-                    showRedBean={showRedBean}
-                  />
-                </Suspense>
-              </Canvas>
+          { showModel &&
+            <div className='section-container'>
+              <div className='model-section'>
+                <Canvas>
+                  <Suspense fallback={null}>
+                    <Scene
+                      clicked={clicked}
+                      formFields={formFields}
+                      formSubmitted={formSubmitted}
+                      showLiquid={showLiquid}
+                      showIce={showIce}
+                      showBoba={showBoba}
+                      showJelly={showJelly}
+                      showChia={showChia}
+                      showPudding={showPudding}
+                      showHoney={showHoney}
+                      showRedBean={showRedBean}
+                    />
+                  </Suspense>
+                </Canvas>
+              </div>
             </div>
-          </div>
+          }
           <div className='flex-form'>
             <NewOrderForm
               addOrder={postOrder}
