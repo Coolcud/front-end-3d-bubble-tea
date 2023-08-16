@@ -211,7 +211,6 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
         value={formFields.temp}
         onChange={handleChange}
       />
-      <p>{formSubmitted ? "Form successfully submitted! ฅ^•ﻌ•^ฅ🧋" : ""}</p>
       <div className="preview-section">
         <h4 className="receipt">
           <strong>RECEIPT</strong>
@@ -223,6 +222,8 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
           <li><strong>Ice: </strong>{writeTempPreview()}</li>
         </ul>
       </div>
+      <p></p>
+      <p>{formSubmitted ? "Form successfully submitted! ฅ^•ﻌ•^ฅ🧋" : ""}</p>
       <div className="button-container">
         <input
           type="button"
