@@ -16,18 +16,18 @@
   justify-content: space-between;
 }
 
-a {
+.resources-section a {
   padding-left: 2rem;
 }
 
-a:link,
-a:visited,
-a:active {
+.resources-section a:link,
+.resources-section a:visited,
+.resources-section a:active {
   text-decoration: none;
   color: green;
 }
 
-a:hover {
+.resources-section a:hover {
   text-decoration: none;
   color: darkgreen;
 }
