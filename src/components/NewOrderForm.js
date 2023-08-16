@@ -55,16 +55,16 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
       return toppingsList;
     }, []);
 
-      const containsJelly = newToppingsList.some(topping => topping.includes("jelly"));
+    const containsJelly = newToppingsList.some(topping => topping.includes("jelly"));
 
-      setShowBoba(newToppingsList.includes("Boba"));
-      setShowJelly(containsJelly);
-      setShowChia(newToppingsList.includes("Chia seeds"));
-      setShowPudding(newToppingsList.includes("Pudding"));
-      setShowHoney(newToppingsList.includes("Honey"));
-      setShowRedBean(newToppingsList.includes("Red bean"));
+    setShowBoba(newToppingsList.includes("Boba"));
+    setShowJelly(containsJelly);
+    setShowChia(newToppingsList.includes("Chia seeds"));
+    setShowPudding(newToppingsList.includes("Pudding"));
+    setShowHoney(newToppingsList.includes("Honey"));
+    setShowRedBean(newToppingsList.includes("Red bean"));
 
-      return newToppingsList;
+    return newToppingsList;
   };
 
 //~~~~~~~~~~~~~~~~~~~~~~PREVIEW FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~
