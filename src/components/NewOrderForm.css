@@ -1,66 +1,67 @@
 .new-order-form {
-    padding: 15px;
-    border-radius: 10px;
-    margin-right: 20px;
+	padding: 1rem;
+	border-radius: 10px;
+	margin-right: 1rem;
 }
 
 .base-form-field,
 .sweet-form-field,
 .ice-form-field,
 .all-toppings__container {
-    margin-bottom: 15px;
+	margin-bottom: 1rem;
 }
 
 .toppings-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 1rem;
 }
 
 .each-toppings__container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    border: 1px solid rgb(116, 91, 49);
-    border-radius: 25px;
-    padding: 5px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.8rem;
+	border: 1px solid rgb(116, 91, 49);
+	border-radius: 25px;
+	padding: 0.5rem;
 }
 
 .each-toppings__container label{
-    margin-left: 10px;
+	margin-left: 0.5rem;
 }
 
 .each-toppings__container input[type="checkbox"] {
-    margin-left: 5px;
-    margin-right: 10px;
-    transform: translateY(-3px);
+	margin-left: 0.2rem;
+	margin-right: 0.5rem;
+	transform: translateY(-0.2rem);
 }
 
 .preview-section ul {
-    list-style-type: none;
+	list-style-type: none;
+	padding-left: 2rem;
 }
 
 .preview-section {
-    border: 2px solid green;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 20px;
+	border: 2px solid green;
+	padding: 1rem;
+	border-radius: 8px;
+	margin-top: 1rem;
 }
 
 .receipt {
-    font-size: 20px;
-    margin-bottom: 10px;
-    text-align: center;
+	font-size: 1.25 rem;
+	margin-bottom: 0.5rem;
+	text-align: center;
 }
 
 .button-container {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
+	margin-top: 1rem;
+	display: flex;
+	gap: 0.5rem;
 }
 
 .button-container input[type="button"],
 .button-container input[type="submit"] {
-    margin: 5px;
+	margin: 0.2rem;
 }
