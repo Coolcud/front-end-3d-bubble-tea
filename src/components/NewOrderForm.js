@@ -99,15 +99,19 @@ const NewOrderForm = ({ addOrder, formSubmitted, setFormSubmitted, formFields, s
   };
 
   // Submit user order to db and reset form
+  let resetTimeout;
   const handleSubmit = (event) => {
     event.preventDefault();
     addOrder(formFields);
     setFormSubmitted(true);
-    setTimeout(resetForm, 10000);
+    clearTimeout(resetTimeout);
+    resetTimeout = setTimeout(resetForm, 15000);
   };
 
   // Reset form fields to default
   const resetForm = () => {
+    clearTimeout(resetTimeout);
+
     document.getElementById("create-order-form").reset();
     setFormFields(EMPTY_FORM);
     setCheckedState(new Array(formOptions.toppings.length).fill(false));
