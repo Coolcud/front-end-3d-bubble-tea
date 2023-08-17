@@ -76,3 +76,8 @@
     font-size: 28px;
   }
 }
+
+footer {
+  margin-top: 2rem;
+  color: grey;
+}

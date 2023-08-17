@@ -117,6 +117,7 @@ function App() {
             <Route path='/analytics' element={<Analytics />} />
           </Routes>
       </Router>
+      <footer>&copy; 2023 3D Bubble Tea - Julie Loh & Sage Choi</footer>
     </div>
   );
 }
